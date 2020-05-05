@@ -40,7 +40,24 @@ repository [LICENSE](https://github.com/oasis-tcs/ubl-2.3-artefacts/blob/master/
 
 ## Further Description of this Repository
 
-*Any narrative content may be provided here by the TC, for example, if the Members wish to provide an extended statement of purpose.*
+Distributions for UBL 2.0 through 2.3 have comprised two main collections of information, the documentation and the artefacts.
+
+This repository is for the artefacts:
+- generation of document model information from UBL Google spreadsheets
+  - genericode serialization
+  - XSD schemas
+  - JSON schemas
+  - ODS and XLS spreadsheets
+- other pre-created content
+  - code lists
+- other maintained content
+  - validation examples
+  - sample XML instance documents
+- assembly of material into distributed arrangements
+- generation of certain documentation components needed for publishing
+
+See https://github.com/oasis-tcs/ubl-2.3-hub for the documentation.
+
 
 ## Contact
 
