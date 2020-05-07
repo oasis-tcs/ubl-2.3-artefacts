@@ -3,11 +3,12 @@
     $Id: produceUBLschemas.xml,v 1.10 2020/04/27 18:30:26 admin Exp $
 -->
 <target name="make">
-  <!--set ${skip-ss-and-html-generation} to any value for fewer outputs-->
-  <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
-  <property name="abieExtensions" value="yes"/>
   <property name="thisdir" value="${user.dir}"/>
   <property name="utilitydir" value="${thisdir}/utilities/"/>
+  <!--set ${skip-spreadsheet-and-html-generation} to true for no spreadsheets or HTML-->
+  <property name="skip-spreadsheet-and-html-generation" value="false"/>
+  <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
+  <property name="abieExtensions" value="yes"/>
   <!--software timestamps-->
   <property name="gc2obdndr" value="20200413-1840z"/>
   <property name="ods2obdgc" value="20200412-1320z"/>
@@ -104,8 +105,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   </antcall>
   <copy preservelastmodified="true" todir="${dir}/${stage}-${UBLversion}/mod/" file="UBL-Entities-${UBLversion}.gc"/>
 
-  <echo message="Parallel operation follows (messages may be mixed)"/>
-<parallel failonany="true">
+<!--  <echo message="Parallel operation follows (messages may be mixed)"/>-->
+<!--<parallel failonany="true">-->
   <!--create CVA/XSD/XSL files-->
   <sequential>
     <uptodate targetfile="${dir}/${stage}-${UBLversion}/val/UBL-DefaultDTQ-${UBLversion}.xsl"
@@ -123,9 +124,9 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <param name="title"
              value="Universal Business Language (UBL) ${UBLversion} ${stage} to ${UBLprevStageVersion} ${UBLprevStage}"/>
       <param name="dbcmn"
-          value="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-library.xml"/>
+          value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-library.xml"/>
       <param name="dbmain" 
-        value="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-documents.xml"/>
+        value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-documents.xml"/>
       <param name="dbhref"
              value="mod/summary/reports/All-UBL-${UBLversion}-Documents.html"/>
       <param name="report"  value="${dir}/check-ubl-${UBLversion}-${stage}-ubl-${UBLprevStageVersion}-${UBLprevStage}.html"/>
@@ -219,7 +220,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <condition property="display-okay">
       <or>
         <istrue value="${display-file-okay}"/>
-        <isset property="skip-ss-and-html-generation"/>
+        <istrue value="${skip-spreadsheet-and-html-generation}"/>
       </or>
     </condition>
 
@@ -240,7 +241,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <condition property="display-sig-okay">
       <or>
         <istrue value="${display-sig-file-okay}"/>
-        <isset property="skip-ss-and-html-generation"/>
+        <istrue value="${skip-spreadsheet-and-html-generation}"/>
       </or>
     </condition>
     <antcall target="-gc2ods">
@@ -259,7 +260,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <condition property="xls-sig-okay">
       <or>
         <istrue value="${xls-sig-file-okay}"/>
-        <isset property="skip-ss-and-html-generation"/>
+        <istrue value="${skip-spreadsheet-and-html-generation}"/>
       </or>
     </condition>
     <antcall target="-ods2xls">
@@ -277,7 +278,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <condition property="xls-okay">
       <or>
         <istrue value="${xls-file-okay}"/>
-        <isset property="skip-ss-and-html-generation"/>
+        <istrue value="${skip-spreadsheet-and-html-generation}"/>
       </or>
     </condition>
     <antcall target="-ods2xls">
@@ -287,8 +288,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     </antcall>
     
   </sequential>
-</parallel>
-  <echo message="Parallel operation ends"/>
+<!--</parallel>-->
+<!--  <echo message="Parallel operation ends"/>-->
 
   <!--create reports-->
   <uptodate targetfile="${dir}/${stage}-${UBLversion}/mod/summary/reports/UBL-WeightStatement-${UBLversion}.html"
@@ -300,7 +301,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="html-okay">
     <or>
       <istrue value="${html-file-okay}"/>
-      <isset property="skip-ss-and-html-generation"/>
+      <istrue value="${skip-spreadsheet-and-html-generation}"/>
     </or>
   </condition>
 <parallel>  
@@ -442,7 +443,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="html-sig-okay">
     <or>
       <istrue value="${html-sig-file-okay}"/>
-      <isset property="skip-ss-and-html-generation"/>
+      <istrue value="${skip-spreadsheet-and-html-generation}"/>
     </or>
   </condition>
   <antcall target="-gc2html">
@@ -514,6 +515,9 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 
 <target name="-gc2ndr-check-only" unless="${okay}">
   <echo message='Checking "${source}" GC file against NDR and old "${compare}" to create "${report}"...'/>
+  <!--prepare empty DocBook results in the event there is no content-->
+  <touch file="${dbcmn}"/>
+  <touch file="${dbmain}"/>
   <echo message="Fail setting = ${fatal}"/>
   <java failonerror="${fatal}" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-checkgc4obdndr.xsl"/>

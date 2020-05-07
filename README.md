@@ -59,39 +59,89 @@ This repository is for the artefacts:
 See https://github.com/oasis-tcs/ubl-2.3-hub for the hub documentation.
 
 The document models in ODF-ODS format being processed into results are downloaded from Google _(note that the ODF-ODS files from Microsoft Word or from OpenOffice are bloated and the generation process is slowed by a factor of sometimes up to 10; even if you have maintained the ODS files offline from Google, it will speed the generation process if you take the time to upload them to Google, convert them into a Google spreadsheet, and then download the Google spreadsheet as an ODS file)_:
-- UBL-Documents-Google.ods
-- UBL-Library-Google.ods
-- UBL-Signature-Google.ods
+- [`UBL-Documents-Google.ods`]( UBL-Documents-Google.ods )
+- [`UBL-Library-Google.ods`]( UBL-Library-Google.ods )
+- [`UBL-Signature-Google.ods`]( UBL-Signature-Google.ods )
+
+The document model genericode files are generated from the ODS files, preserved in this Git repository for archived reference, and copied to the results directory:
+- [`UBL-Entities-2.3.gc`]( UBL-Entities-2.3.gc )
+- [`UBL-Signature-Entities-2.3.gc`]( UBL-Signature-Entities-2.3.gc )
 
 Each revision is described by the following configuration files:
 - target identification when converting ODS to genericode
-  - `ident-UBL.xml` 
-  - `ident-UBL-Signature.xml`
+  - [`ident-UBL.xml`]( ident-UBL.xml ) 
+  - [`ident-UBL-Signature.xml`]( ident-UBL-Signature.xml )
 - XSD and JSON schema configuration
-  - `config-UBL.xml`
-  - `config-UBL-Signature.xml`
+  - [`config-UBL.xml`]( config-UBL.xml )
+  - [`config-UBL-Signature.xml`]( config-UBL-Signature.xml )
+- CVA master file for code list second-pass validation
+  - [`UBL-CVA-Skeleton.cva`]( UBL-CVA-Skeleton.cva )
 - shell wrapper for generated CVA Schematron pattern
-  - `UBL-DefaultDTQ-shell.sch`
+  - [`UBL-DefaultDTQ-shell.sch`]( UBL-DefaultDTQ-shell.sch )
 - spell-check word list (each line is a word not in the dictionary that is allowed to be in UBL, including misspellings from previous versions of UBL that cannot be repaired due to backward compatibility)
-  - `spellcheck-UBL.txt`
+  - [`spellcheck-UBL.txt`]( spellcheck-UBL.txt )
+- Google bug-avoidance model name massage directives
+  - [`massageModelName.xml`]( massageModelName.xml )
+- documentary ODS template skeleton for generating spreadsheet results
+  - [`skeletonDisplayEditSubset.ods`]( skeletonDisplayEditSubset.ods )
 
 Installed software requirements invoked from Ant script using `exec`:
 - `soffice` - LibreOffice, OpenOffice, or equivalent
 - `aspell` - spell checker
 - `sh`, `tee`, `wc`, `grep` - typical POSIX applications
 
+Subdirectories:
+- [`os-UBL-2.0`]( os-UBL-2.0 ) - code list subdirectory copied from released version of UBL 2.0
+- [`os-UBL-2.1`]( os-UBL-2.1 ) - code list subdirectory copied from released version of UBL 2.1
+- [`os-UBL-2.2`]( os-UBL-2.2 ) - code list subdirectory copied from released version of UBL 2.2
+- [`raw`]( raw ) - pre-populated content of the results directory with skeleton contents
+  - [`raw/cl`]( raw/cl ) - code list content from having run the code list tooling and results here:
+    - https://www.oasis-open.org/committees/document.php?document\_id=67039 - tooling
+    - https://www.oasis-open.org/committees/document.php?document\_id=67038 - results
+    - the `master-code-list-UBL-*.xml` file records the input information to the code list generation 
+  - [`raw/json`]( raw/json ) - sample JSON instances converted from the sample XML instances
+  - [`raw/json-schema`]( raw/json-schema ) - hand-authored JSON Schema fragments
+  - [`raw/mod`]( raw/mod ) - hand-authored model documentation fragments
+  - [`raw/val`]( raw/val ) - demonstration validation environment and validation of the XML samples
+  - [`raw/xml`]( raw/xml ) - sample XML instances
+  - [`raw/xsd`]( raw/xsd ) - hand-authored XML Schema fragments
+- [`utilities`]( utilities ) - tools used to generate outputs
+
 Comparisons to old versions of UBL are generated as DocBook files for inclusion in the hub document. These old versions are the final genericode models for the particular version being compared. So, for UBL 2.3 csprd03 the comparisons are to:
-- `UBL-Entities-2.3-csprd02.gc`
-- `UBL-Signature-Entities-2.3-csprd02.gc`
-- `UBL-Entities-2.2.gc`
-- `UBL-Signature-Entities-2.2.gc`
+- [`UBL-Entities-2.3-csprd02.gc`]( UBL-Entities-2.3-csprd02.gc )
+- [`UBL-Signature-Entities-2.3-csprd02.gc`]( UBL-Signature-Entities-2.3-csprd02.gc )
+- [`UBL-Entities-2.2.gc`]( UBL-Entities-2.2.gc )
+- [`UBL-Signature-Entities-2.2.gc`]( UBL-Signature-Entities-2.2.gc )
 
 Outputs:
+- model check of naming and design rules against previous release of 2.3 and against 2.2
+  - `check-ubl-2.3-*-ubl-2.3-csprd02.html`
+  - `check-ubl-2.3-*-ubl-2.2.html`
+- model check of naming and design rules for the signature extension
+  - `check-ubl-signature-2.3-*.html`
+- differences between versions of document models expressed as DocBook for inclusion in the hub document
+  - `old2newDocBook-UBL-2.3-*-UBL-2.3-csprd02-documents.xml`
+  - `old2newDocBook-UBL-2.3-*-UBL-2.2-library.xml`
 - summary use of words in Dictionary Entry Names (each line is the word followed by the version of UBL in which the word is used)
   - `wordlist-UBL.txt`
-- conversion of ODS
+- diagnostic list of DEN words not found in the dictionaries or spell check supplement (should be empty)
+  - `unexpectedWords.txt`
+- conversion of genericode to ODS and from ODS to XLS
+  - `mod/UBL-Entities-2.3.ods`
+  - `mod/UBL-Entities-2.3.xls`
+  - `mod/UBL-Signature-Entities-2.3.ods`
+  - `mod/UBL-Signature-Entities-2.3.xls`
+- generated documentation of all of the document models
+  - `mod/summary/reports/`
+- generated OASIS Context/Value Association expression of code list validation and its documentation
+  - `cva/UBL-DefaultDTQ-2.3.cva`
+  - `cva/UBL-DefaultDTQ-2.3.html`
+- generated complete suite of XML schemas (combined with authored fragments)
+  - `xsd/`
+- generated runtime copy of XML schemas (no annotations in the generated fragments)
+  - `xsdrt/`
 
-The build process is:
+The build process runs the [`produceUBLschemas.xml`]( produceUBLschemas.xml ) Ant script and is invoked as follows:
 - `sh produceUBLSchemas-2.3.sh ../results stage label`
   - pre-existing target directory (without trailing "/")
   - stage (e.g. "csd02wd03", "csprd01", "os", etc.)
