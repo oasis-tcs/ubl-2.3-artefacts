@@ -56,8 +56,46 @@ This repository is for the artefacts:
 - assembly of material into distributed arrangements
 - generation of certain documentation components needed for publishing
 
-See https://github.com/oasis-tcs/ubl-2.3-hub for the documentation.
+See https://github.com/oasis-tcs/ubl-2.3-hub for the hub documentation.
 
+The document models in ODF-ODS format being processed into results are downloaded from Google _(note that the ODF-ODS files from Microsoft Word or from OpenOffice are bloated and the generation process is slowed by a factor of sometimes up to 10; even if you have maintained the ODS files offline from Google, it will speed the generation process if you take the time to upload them to Google, convert them into a Google spreadsheet, and then download the Google spreadsheet as an ODS file)_:
+- UBL-Documents-Google.ods
+- UBL-Library-Google.ods
+- UBL-Signature-Google.ods
+
+Each revision is described by the following configuration files:
+- target identification when converting ODS to genericode
+  - `ident-UBL.xml` 
+  - `ident-UBL-Signature.xml`
+- XSD and JSON schema configuration
+  - `config-UBL.xml`
+  - `config-UBL-Signature.xml`
+- shell wrapper for generated CVA Schematron pattern
+  - `UBL-DefaultDTQ-shell.sch`
+- spell-check word list (each line is a word not in the dictionary that is allowed to be in UBL, including misspellings from previous versions of UBL that cannot be repaired due to backward compatibility)
+  - `spellcheck-UBL.txt`
+
+Installed software requirements invoked from Ant script using `exec`:
+- `soffice` - LibreOffice, OpenOffice, or equivalent
+- `aspell` - spell checker
+- `sh`, `tee`, `wc`, `grep` - typical POSIX applications
+
+Comparisons to old versions of UBL are generated as DocBook files for inclusion in the hub document. These old versions are the final genericode models for the particular version being compared. So, for UBL 2.3 csprd03 the comparisons are to:
+- `UBL-Entities-2.3-csprd02.gc`
+- `UBL-Signature-Entities-2.3-csprd02.gc`
+- `UBL-Entities-2.2.gc`
+- `UBL-Signature-Entities-2.2.gc`
+
+Outputs:
+- summary use of words in Dictionary Entry Names (each line is the word followed by the version of UBL in which the word is used)
+  - `wordlist-UBL.txt`
+- conversion of ODS
+
+The build process is:
+- `sh produceUBLSchemas-2.3.sh ../results stage label`
+  - pre-existing target directory (without trailing "/")
+  - stage (e.g. "csd02wd03", "csprd01", "os", etc.)
+  - label (e.g. "CCYYMMDD-hhmmz" UTC time as in "20200406-0250z", or any string for testing purposes)
 
 ## Contact
 
