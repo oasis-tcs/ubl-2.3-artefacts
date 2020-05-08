@@ -151,6 +151,10 @@ The build process runs the [`produceUBLschemas.xml`]( produceUBLschemas.xml ) An
   - stage (e.g. "csd02wd03", "csprd01", "os", etc.)
   - label (e.g. "CCYYMMDD-hhmmz" UTC time as in "20200406-0250z", or any string for testing purposes)
 
+The build result in the target directory:
+- `artefacts-UBL-2.3-{stage}-{label}.zip`
+- `artefacts-UBL-2.3-{stage}-{label}/`
+
 ## Contact
 
 Please send questions or comments about 

@@ -652,17 +652,17 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 </target>
 
 <target name="-package">
-  <delete dir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}"/>
-  <mkdir dir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}"/>
-  <copy preservelastmodified="true" todir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}">
+  <delete dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}"/>
+  <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}"/>
+  <copy preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}">
     <fileset dir="${dir}/${stage}-${UBLversion}">
      <include name="**"/>
     </fileset>
   </copy>
-  <mkdir dir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution"/>
-  <mkdir dir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json"/>
-  <mkdir dir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json/val"/>
-  <copy preservelastmodified="true" todir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution">
+  <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution"/>
+  <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json"/>
+  <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json/val"/>
+  <copy preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution">
     <fileset dir=".">
       <include name="UBL-Library-Google.ods"/> 
       <include name="UBL-Documents-Google.ods"/> 
@@ -693,29 +693,29 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="wordlist-UBL.txt"/>
     </fileset>
   </copy>
-  <move preservelastmodified="true" todir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json">
-    <fileset dir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}">
+  <move preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json">
+    <fileset dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}">
       <include name="json/**"/>
       <include name="json-schema/**"/>
     </fileset>
   </move>
-  <move preservelastmodified="true" todir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json/val">
-    <fileset dir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}/val">
+  <move preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json/val">
+    <fileset dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/val">
       <include name="*json*"/>
     </fileset>
   </move>
-  <move preservelastmodified="true" todir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution">
-    <fileset dir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}">
+  <move preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution">
+    <fileset dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}">
       <include name="master-code-list-*.xml"/>
     </fileset>
   </move>
 
-  <delete file="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}.zip"/>
+  <delete file="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}.zip"/>
 
-  <zip destfile="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}.zip"
-       basedir="${dir}" includes="artefacts-ubl-${UBLversion}-${stage}-${version}/**"/>
-  <delete dir="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}"/>
-  <unzip src="${dir}/artefacts-ubl-${UBLversion}-${stage}-${version}.zip" 
+  <zip destfile="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}.zip"
+       basedir="${dir}" includes="artefacts-UBL-${UBLversion}-${stage}-${version}/**"/>
+  <delete dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}"/>
+  <unzip src="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}.zip" 
          dest="${dir}" />
 
   <!--documentation-->
