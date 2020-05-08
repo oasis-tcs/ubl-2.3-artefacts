@@ -73,7 +73,7 @@ Each revision is described by the following configuration files:
   - [`ident-UBL-Signature.xml`]( ident-UBL-Signature.xml )
 - XSD and JSON schema configuration
   - [`config-UBL.xml`]( config-UBL.xml )
-    - IMPORTANT NOTE: there is version information in a comment at the top of this configuration file that, when changed, must be annually added to comments in the eight `UBL-*.xsd` XSD schema fragments found in the directory [`raw/xsd/common`]( raw/xsd/common )
+    - IMPORTANT NOTE: there is version information in a comment at the top of this configuration file that, when changed, must be manually added to comments in the eight `UBL-*.xsd` XSD schema fragments found in the directory [`raw/xsd/common`]( raw/xsd/common )
     - `  Library:           OASIS Universal Business Language (UBL) 2.3 *VERSION*`
     - `                     http://docs.oasis-open.org/ubl/*VERSION*-UBL-2.3/`
     - `  Release Date:      *DATE*`
