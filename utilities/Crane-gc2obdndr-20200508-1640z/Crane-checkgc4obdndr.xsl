@@ -7,7 +7,7 @@
                 exclude-result-prefixes="xs xsd gu"
                 version="2.0">
 
-<xs:doc info="$Id: Crane-checkgc4obdndr.xsl,v 1.35 2020/04/11 16:30:25 admin Exp $"
+<xs:doc info="$Id: Crane-checkgc4obdndr.xsl,v 1.36 2020/05/08 16:37:42 admin Exp $"
      filename="Crane-checkgc4obdndr.xsl" vocabulary="DocBook" internal-ns="gu">
   <xs:title>Compare new model against old using DocBook</xs:title>
   <para>
@@ -212,21 +212,24 @@
        <xsl:if test="$gu:xsd-check">
          <xsl:call-template name="gu:reportAllSchemaProblems"/>
        </xsl:if>
-       <xsl:apply-templates select="$gu:docbook-common[.//tbody/row],
-                                    $gu:docbook-maindoc[.//tbody/row],
-                                    $gu:docbook-common-detail[.//tbody/tr],
-                                    $gu:docbook-maindoc-detail[.//tbody/tr]"
-                            mode="gu:db2html"/>
+       <xsl:for-each select="$gu:docbook-common,
+                             $gu:docbook-maindoc,
+                             $gu:docbook-common-detail,
+                             $gu:docbook-maindoc-detail">
+         <table>
+           <xsl:apply-templates select="." mode="gu:db2html"/>
+         </table>
+       </xsl:for-each>
      </body>
     </html>
   </xsl:result-document>
-  <xsl:if test="$docbook-common-uri and $gu:docbook-common[.//tbody/row]">
+  <xsl:if test="$docbook-common-uri">
     <xsl:result-document href="{$docbook-common-uri}"
                          omit-xml-declaration="yes">
       <xsl:copy-of select="$gu:docbook-common"/>
     </xsl:result-document>
   </xsl:if>
-  <xsl:if test="$docbook-maindoc-uri and $gu:docbook-maindoc[.//tbody/row]">
+  <xsl:if test="$docbook-maindoc-uri">
     <xsl:result-document href="{$docbook-maindoc-uri}"
                          omit-xml-declaration="yes">
       <xsl:copy-of select="$gu:docbook-maindoc"/>
@@ -283,7 +286,6 @@
 <xsl:template name="gu:makeReport">
   <xsl:param name="common" as="xsd:boolean" required="yes"/>
   <xsl:param name="summary" as="xsd:boolean" required="yes"/>
-  <table>
   <title>
     <xsl:choose>
       <xsl:when test="$summary">Summary</xsl:when>
@@ -345,14 +347,25 @@
       </xsl:choose>
     </thead>
    <tbody>
-     <xsl:call-template name="gu:findChanges">
-       <xsl:with-param name="abies" select="if( $common ) 
+     <xsl:variable name="changes" as="element()*">
+       <xsl:call-template name="gu:findChanges">
+         <xsl:with-param name="abies" select="if( $common ) 
                     then $gu:subsetLibraryABIEs else $gu:subsetDocumentABIEs"/>
-       <xsl:with-param name="summary" select="$summary"/>
-     </xsl:call-template>
+         <xsl:with-param name="summary" select="$summary"/>
+       </xsl:call-template>
+     </xsl:variable>
+     <xsl:copy-of select="$changes"/>
+     <xsl:if test="empty($changes)">
+       <row>
+         <entry>
+           No changes detected.
+         </entry>
+         <entry/>
+         <entry/>
+       </row>
+     </xsl:if>
    </tbody>
   </tgroup>
-</table>
 </xsl:template>
 
 <xs:template>

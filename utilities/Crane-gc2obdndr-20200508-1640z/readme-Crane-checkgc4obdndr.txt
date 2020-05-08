@@ -1,4 +1,4 @@
-Crane-checkgc4obdndr.xsl 20200412-1330z
+Crane-checkgc4obdndr.xsl 20200508-1640z
 
 This is a stylesheet to analyze the genericode representation of a OASIS
 Business Document NDR 3.0 CCTS model, reporting on inconsistencies or 
@@ -14,7 +14,8 @@ a genericode-expressed CCTS model.
 
 When two models are supplied as arguments the stylesheet creates reports of
 the differences between the two, including an analysis of non-backward-
-compatible changes.  The difference reports can be exported as DocBook tables.
+compatible changes.  The difference reports can be exported as DocBook table
+entities to be included in a table element wrapper.
 
 Please see "CreatingExtensionsWithUBLNDR.html" for an illustration of using
 these stylesheets
@@ -62,8 +63,8 @@ Optional invocation arguments (where URI's are relative to the input):
 
 Optional invocation arguments (where URI's are relative to the output):
 
- - output DocBook file URI common        docbook-common-uri=file://{filename}
- - output DocBook file URI maindoc       docbook-maindoc-uri=file://{filename}
+ - output DocBook entity URI common      docbook-common-uri=file://{filename}
+ - output DocBook entity URI maindoc     docbook-maindoc-uri=file://{filename}
  - output text file URI of DEN words     den-word-list-uri=file://{filename}
  - URI to HTML report for diagnostics    all-documents-report-href={uri}
 

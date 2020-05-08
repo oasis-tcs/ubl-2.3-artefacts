@@ -10,7 +10,7 @@
   <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
   <property name="abieExtensions" value="yes"/>
   <!--software timestamps-->
-  <property name="gc2obdndr" value="20200413-1840z"/>
+  <property name="gc2obdndr" value="20200508-1640z"/>
   <property name="ods2obdgc" value="20200412-1320z"/>
   <property name="cvagcxsl"  value="20130416-0040z"/>
   <property name="cva2sch"   value="20130207-1940z"/>
@@ -124,9 +124,9 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <param name="title"
              value="Universal Business Language (UBL) ${UBLversion} ${stage} to ${UBLprevStageVersion} ${UBLprevStage}"/>
       <param name="dbcmn"
-          value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-library.xml"/>
+          value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-library-ent.xml"/>
       <param name="dbmain" 
-        value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-documents.xml"/>
+        value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-documents-ent.xml"/>
       <param name="dbhref"
              value="mod/summary/reports/All-UBL-${UBLversion}-Documents.html"/>
       <param name="report"  value="${dir}/check-ubl-${UBLversion}-${stage}-ubl-${UBLprevStageVersion}-${UBLprevStage}.html"/>
@@ -143,9 +143,9 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <param name="title"
              value="Universal Business Language (UBL) ${UBLversion} ${stage} to ${UBLprevVersion}"/>
       <param name="dbcmn"
-             value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-library.xml"/>
+             value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-library-ent.xml"/>
       <param name="dbmain" 
-             value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-documents.xml"/>
+             value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-documents-ent.xml"/>
       <param name="dbhref"
              value="mod/summary/reports/All-UBL-${UBLversion}-Documents.html"/>
       <param name="report"  value="${dir}/check-ubl-${UBLversion}-${stage}-ubl-${UBLprevVersion}.html"/>
@@ -200,8 +200,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <param name="basecf"  value="${thisdir}/config-UBL.xml"/>
       <param name="title"   value="Universal Business Language (UBL) Signature"/>
       <param name="change"  value="UBL Signature"/>
-      <param name="dbcmn"   value="old2newDocBook-UBL-Signature-library.xml"/>
-      <param name="dbmain"  value="old2newDocBook-UBL-Signature-documents.xml"/>
+      <param name="dbcmn"   value="old2newDocBook-UBL-Signature-library-ent.xml"/>
+      <param name="dbmain"  value="old2newDocBook-UBL-Signature-documents-ent.xml"/>
       <param name="words"   value="${dir}/wordlist-UBL-signature-${UBLversion}.txt"/>
       <param name="report"  value="${dir}/check-ubl-signature-${UBLversion}-${stage}.html"/>
       <param name="library"  value="UBL-SignatureLibrary-${UBLversion}"/>
@@ -515,9 +515,6 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 
 <target name="-gc2ndr-check-only" unless="${okay}">
   <echo message='Checking "${source}" GC file against NDR and old "${compare}" to create "${report}"...'/>
-  <!--prepare empty DocBook results in the event there is no content-->
-  <touch file="${dbcmn}"/>
-  <touch file="${dbmain}"/>
   <echo message="Fail setting = ${fatal}"/>
   <java failonerror="${fatal}" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-checkgc4obdndr.xsl"/>
@@ -685,13 +682,13 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <fileset dir="${dir}">
       <include name="wordlist-UBL-signature-${UBLversion}.txt"/>
       <include name="check-ubl-signature-${UBLversion}-${stage}.html"/>
-      <include name="old2newDocBook-UBL-Signature-library.xml"/>
-      <include name="old2newDocBook-UBL-Signature-documents.xml"/>
-      <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-library.xml"/>
-      <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-documents.xml"/>
+      <include name="old2newDocBook-UBL-Signature-library-ent.xml"/>
+      <include name="old2newDocBook-UBL-Signature-documents-ent.xml"/>
+      <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-library-ent.xml"/>
+      <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-documents-ent.xml"/>
       <include name="check-ubl-${UBLversion}-${stage}-ubl-${UBLprevStageVersion}-${UBLprevStage}.html"/>
-      <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-library.xml"/>
-      <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-documents.xml"/>
+      <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-library-ent.xml"/>
+      <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-documents-ent.xml"/>
       <include name="check-ubl-${UBLversion}-${stage}-ubl-${UBLprevVersion}.html"/>
       <include name="wordlist-UBL.txt"/>
     </fileset>
