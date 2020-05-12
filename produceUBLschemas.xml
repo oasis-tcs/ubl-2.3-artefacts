@@ -156,8 +156,6 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="returnProperty" value="returnVersion"/>
   </antcallback>
   
-  <echo message="DEBUG: ${returnStage}, ${returnVersion}"/>
-
   <condition property="ndrErrors">
     <and>
       <isset property="returnVersion"/>
@@ -557,14 +555,13 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="--suppressXsltNamespaceCheck:on"/>
      <arg value="errors-are-fatal=${fatal}"/>
   </java>
+  <touch file="${words}"/><!--in case it doesn't exist-->
   <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${thisdir}/spellcheck-UBL.txt check ${words} if abend)..."/>
   <exec executable="sh" failonerror="yes">
     <arg value="-e"/>
     <arg value="-c"/>
     <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWords.txt | wc -w | grep " 0$"'/>
   </exec>
-  
-  <echo message="DEBUG2: ${returnProperty} ${${returnProperty}} ${returnStage} ${returnVersion}"/>
 </target>
 
 <target name="-gc2ndr" unless="${okay}">
@@ -587,7 +584,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="common-library-singleton-model-name=${library}"/>
      <arg value="--suppressXsltNamespaceCheck:on"/>
   </java>
-  <echo message='Spell-checking the resulting word list (run "aspell -p ./spellcheck-UBL.txt check ${words}" if abend)...'/>
+  <echo message='Spell-checking the resulting word list ${words} (run "aspell -p ./spellcheck-UBL.txt check ${words}" if abend)...'/>
   <exec executable="sh" failonerror="yes">
     <arg value="-c"/>
     <arg value='aspell -p ./spellcheck-UBL.txt list &lt;${words} | wc -w | grep " 0$"'/>
