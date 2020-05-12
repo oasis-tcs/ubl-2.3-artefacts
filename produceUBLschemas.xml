@@ -560,7 +560,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <exec executable="sh" failonerror="yes">
     <arg value="-e"/>
     <arg value="-c"/>
-    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWords.txt | wc -w | grep " 0$"'/>
+    <arg value='${utilitydir}aspell/aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWords.txt | wc -w | grep " 0$"'/>
   </exec>
 </target>
 
