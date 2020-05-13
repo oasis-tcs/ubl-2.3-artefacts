@@ -518,14 +518,14 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <echo message="Need to rebuild ${dir}/${sourcefilenoext}.xls from ${sourcedir}/${sourcefilenoext}.ods..."/>
   <available property="ready" file="${sourcedir}/${sourcefilenoext}.ods"/>
   <fail unless="ready" message="Unable to find ODS file: ${sourcedir}/${sourcefilenoext}.ods"/>
-<!--  <exec executable="soffice">
-    <arg value="-\-headless"/>
-    <arg value="-\-convert-to"/>
+  <exec executable="soffice">
+    <arg value="--headless"/>
+    <arg value="--convert-to"/>
     <arg value="xls"/>
-    <arg value="-\-outdir"/>
+    <arg value="--outdir"/>
     <arg value="${sourcedir}"/>
     <arg value="${dir}/${sourcefilenoext}.ods"/>
-  </exec>-->
+  </exec>
   <copy file="${sourcedir}/${sourcefilenoext}.ods" tofile="${dir}/${sourcefilenoext}.xls"/>
   <available property="done" file="${dir}/${sourcefilenoext}.xls"/>
   <fail unless="done" message="Unable to create XLS file: ${dir}/${sourcefilenoext}.xls"/>
@@ -551,12 +551,12 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="--suppressXsltNamespaceCheck:on"/>
      <arg value="errors-are-fatal=${fatal}"/>
   </java>
-<!--  <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${thisdir}/spellcheck-UBL.txt check ${words} if abend)..."/>
+  <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${thisdir}/spellcheck-UBL.txt check ${words} if abend)..."/>
   <exec executable="sh" failonerror="yes">
     <arg value="-e"/>
     <arg value="-c"/>
     <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWords.txt | wc -w | grep " 0$"'/>
-  </exec>-->
+  </exec>
   
 </target>
 
@@ -592,11 +592,11 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="common-library-singleton-model-name=${library}"/>
      <arg value="--suppressXsltNamespaceCheck:on"/>
   </java>
-  <!--<echo message='Spell-checking the resulting word list (run "aspell -p ./spellcheck-UBL.txt check ${words}" if abend)...'/>
+  <echo message='Spell-checking the resulting word list (run "aspell -p ./spellcheck-UBL.txt check ${words}" if abend)...'/>
   <exec executable="sh" failonerror="yes">
     <arg value="-c"/>
     <arg value='aspell -p ./spellcheck-UBL.txt list &lt;${words} | wc -w | grep " 0$"'/>
-  </exec>-->
+  </exec>
   <echo message='Creating CVA/XSD extension from "${source}" GC file...'/>
   <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-gc2obdndr.xsl"/>
