@@ -213,21 +213,21 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
             property=  "xsd-sig-okay">
     <srcfiles dir=".">
       <include name="UBL-Signature-Entities-${UBLversion}.gc"/>
-      <include name="config-UBL-signature.xml"/>
+      <include name="config-UBL-Signature.xml"/>
     </srcfiles>
   </uptodate>
   <antcall target="-gc2ndrExt">
     <param name="okay"    value="xsd-sig-okay"/>
     <param name="source"  value="UBL-Signature-Entities-${UBLversion}.gc"/>
     <param name="compare" value="UBL-Signature-Entities-${UBLprevVersion}.gc"/>
-    <param name="config"  value="${thisdir}/config-UBL-signature.xml"/>
+    <param name="config"  value="${thisdir}/config-UBL-Signature.xml"/>
     <param name="basegc"  value="UBL-Entities-${UBLversion}.gc"/>
     <param name="basecf"  value="${thisdir}/config-UBL.xml"/>
     <param name="title"   value="Universal Business Language (UBL) Signature"/>
     <param name="change"  value="UBL Signature"/>
     <param name="dbcmn"   value="old2newDocBook-UBL-Signature-library-ent.xml"/>
     <param name="dbmain"  value="old2newDocBook-UBL-Signature-documents-ent.xml"/>
-    <param name="words"   value="${dir}/wordlist-UBL-signature-${UBLversion}.txt"/>
+    <param name="words"   value="${dir}/wordlist-UBL-Signature-${UBLversion}.txt"/>
     <param name="report"  value="${dir}/check-ubl-signature-${UBLversion}-${stage}.html"/>
     <param name="library"  value="UBL-SignatureLibrary-${UBLversion}"/>
   </antcall>    
@@ -691,7 +691,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="config-UBL.xml"/>
       <include name="UBL-Signature-Google.ods"/> 
       <include name="ident-UBL-Signature.xml"/>
-      <include name="config-UBL-signature.xml"/>
+      <include name="config-UBL-Signature.xml"/>
       <include name="massageModelName.xml"/>
       <include name="produceUBL23schemas-${UBLversion}.sh"/>
       <include name="produceUBLschemas.xml"/>
@@ -700,7 +700,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="UBL-CVA-Skeleton.cva"/>
     </fileset>
     <fileset dir="${dir}">
-      <include name="wordlist-UBL-signature-${UBLversion}.txt"/>
+      <include name="wordlist-UBL-Signature-${UBLversion}.txt"/>
       <include name="check-ubl-signature-${UBLversion}-${stage}.html"/>
       <include name="old2newDocBook-UBL-Signature-library-ent.xml"/>
       <include name="old2newDocBook-UBL-Signature-documents-ent.xml"/>
