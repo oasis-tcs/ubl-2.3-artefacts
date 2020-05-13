@@ -164,8 +164,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       </not>
     </and>
   </condition>
-    
-  <!--prepare artefacts-->
+
+  <!--prepare other artefacts-->
   <antcall target="-artefacts"/>
   
   <!--prepare reports-->
@@ -176,15 +176,10 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 </target>
 
 <target name="-artefacts" unless="ndrErrors">
-  <echo message='Creating CVA/XSD from "${source}" GC file...'/>
-  <java append="true" classname="net.sf.saxon.Transform">
-     <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-gc2obdndr.xsl"/>
-     <arg value="-s:${source}"/>
-     <arg value="-o:${dir}/${stage}-${UBLversion}/junk.out"/>
-     <arg value="config-uri=${config}"/>
-     <arg value="--suppressXsltNamespaceCheck:on"/>
-     <arg value="extensions-for-abies=${abieExtensions}"/>
-  </java>
+  <antcall target="-gc2cva">
+    <param name="source"  value="UBL-Entities-${UBLversion}.gc"/>
+    <param name="config"  value="${thisdir}/config-UBL.xml"/>
+  </antcall>
 
   <delete dir="${dir}/os-UBL-2.0"/>
   <copy preservelastmodified="true" todir="${dir}/os-UBL-2.0">
@@ -555,17 +550,29 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="--suppressXsltNamespaceCheck:on"/>
      <arg value="errors-are-fatal=${fatal}"/>
   </java>
-  <touch file="${words}"/><!--in case it doesn't exist-->
-<!--  <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${thisdir}/spellcheck-UBL.txt check ${words} if abend)..."/>
+  <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${thisdir}/spellcheck-UBL.txt check ${words} if abend)..."/>
   <exec executable="sh" failonerror="yes">
     <arg value="-e"/>
     <arg value="-c"/>
-    <arg value='${utilitydir}aspell/aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWords.txt | wc -w | grep " 0$"'/>
-  </exec>-->
+    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWords.txt | wc -w | grep " 0$"'/>
+  </exec>
+  
 </target>
 
 <target name="-gc2ndr" unless="${okay}">
   <antcallback target="-gc2ndr-check-only" return="${returnProperty}"/>
+</target>
+  
+<target name="-gc2cva" unless="${okay}">
+  <echo message='Creating CVA/XSD from "${source}" GC file...'/>
+  <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
+     <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-gc2obdndr.xsl"/>
+     <arg value="-s:${source}"/>
+     <arg value="-o:${dir}/${stage}-${UBLversion}/junk.out"/>
+     <arg value="config-uri=${config}"/>
+     <arg value="--suppressXsltNamespaceCheck:on"/>
+     <arg value="extensions-for-abies=${abieExtensions}"/>
+  </java>
 </target>
   
 <target name="-gc2ndrExt" unless="${okay}">
@@ -584,11 +591,11 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="common-library-singleton-model-name=${library}"/>
      <arg value="--suppressXsltNamespaceCheck:on"/>
   </java>
-<!--  <echo message='Spell-checking the resulting word list ${words} (run "aspell -p ./spellcheck-UBL.txt check ${words}" if abend)...'/>
+  <echo message='Spell-checking the resulting word list (run "aspell -p ./spellcheck-UBL.txt check ${words}" if abend)...'/>
   <exec executable="sh" failonerror="yes">
     <arg value="-c"/>
     <arg value='aspell -p ./spellcheck-UBL.txt list &lt;${words} | wc -w | grep " 0$"'/>
-  </exec>-->
+  </exec>
   <echo message='Creating CVA/XSD extension from "${source}" GC file...'/>
   <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-gc2obdndr.xsl"/>
