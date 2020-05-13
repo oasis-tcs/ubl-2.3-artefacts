@@ -514,8 +514,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 </target>
 
 <target name="-ods2xls" unless="${okay}">
-  <delete file="${dir}/${sourcefilenoext}.xls"/>
-  <echo message="Need to rebuild ${dir}/${sourcefilenoext}.xls from ${sourcedir}/${sourcefilenoext}.ods..."/>
+  <delete file="${sourcedir}/${sourcefilenoext}.xls"/>
+  <echo message="Need to rebuild ${sourcedir}/${sourcefilenoext}.xls from ${sourcedir}/${sourcefilenoext}.ods..."/>
   <available property="ready" file="${sourcedir}/${sourcefilenoext}.ods"/>
   <fail unless="ready" message="Unable to find ODS file: ${sourcedir}/${sourcefilenoext}.ods"/>
   <exec executable="soffice">
@@ -523,12 +523,11 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <arg value="--convert-to"/>
     <arg value="xls"/>
     <arg value="--outdir"/>
-    <arg value="${sourcedir}"/>
-    <arg value="${dir}/${sourcefilenoext}.ods"/>
+    <arg value="${sourcedir}/"/>
+    <arg value="${sourcedir}/${sourcefilenoext}.ods"/>
   </exec>
-  <copy file="${sourcedir}/${sourcefilenoext}.ods" tofile="${dir}/${sourcefilenoext}.xls"/>
-  <available property="done" file="${dir}/${sourcefilenoext}.xls"/>
-  <fail unless="done" message="Unable to create XLS file: ${dir}/${sourcefilenoext}.xls"/>
+  <available property="done" file="${sourcedir}/${sourcefilenoext}.xls"/>
+  <fail unless="done" message="Unable to create XLS file: ${sourcedir}/${sourcefilenoext}.xls"/>
 </target>
 
 <target name="-gc2ndr-check-only" unless="${okay}">

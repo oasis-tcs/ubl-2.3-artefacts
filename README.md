@@ -92,7 +92,7 @@ Each revision is described by the following configuration files:
 Installed software requirements invoked from Ant script using `exec`:
 - `soffice` - LibreOffice, OpenOffice, or equivalent
 - `aspell` - spell checker
-- `sh`, `tee`, `wc`, `grep` - typical POSIX applications
+- `sh`, `tee`, `wc`, `grep`, `sed` - typical POSIX applications
 
 Subdirectories:
 - [`os-UBL-2.0`]( os-UBL-2.0 ) - code list subdirectory copied from released version of UBL 2.0
