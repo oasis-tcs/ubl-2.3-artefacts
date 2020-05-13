@@ -556,7 +556,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <exec executable="sh" failonerror="yes">
     <arg value="-e"/>
     <arg value="-c"/>
-    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWords.txt | wc -w | grep "^ ?0$"'/>
+    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWords.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
   </exec>
   
 </target>
@@ -594,10 +594,10 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="common-library-singleton-model-name=${library}"/>
      <arg value="--suppressXsltNamespaceCheck:on"/>
   </java>
-  <echo message='Spell-checking the resulting word list (run "aspell -p ./spellcheck-UBL.txt check ${words}" if abend)...'/>
+  <echo message='Spell-checking the resulting word list into ${dir}/unexpectedWordsExt.txt (run "aspell -p ./spellcheck-UBL.txt check ${words}" if abend)...'/>
   <exec executable="sh" failonerror="yes">
     <arg value="-c"/>
-    <arg value='aspell -l EN -p ./spellcheck-UBL.txt list &lt;${words} | wc -w | grep "^ ?0$"'/>
+    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWordsExt.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
   </exec>
   <echo message='Creating CVA/XSD extension from "${source}" GC file...'/>
   <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
