@@ -17,7 +17,7 @@ content.
 
 
 The build process in this repository creates the suite of artefacts to be included with the hub document 
-in the creation of the UBL 2.3 deliveries. 
+in the creation of the UBL 2.3 deliveries. The build process is triggered on every commit.
 
 ## Contributions
 
@@ -145,15 +145,20 @@ Outputs:
 - generated runtime copy of XML schemas (no annotations in the generated fragments)
   - `xsdrt/`
 
-The build process runs the [`produceUBLschemas.xml`]( produceUBLschemas.xml ) Ant script and is invoked as follows:
+The build process runs the [`produceUBLschemas.xml`]( produceUBLschemas.xml ) Ant script and is invoked as follows when running offline and not on git:
 - `sh produceUBLSchemas-2.3.sh ../results stage label`
   - pre-existing target directory (without trailing "/")
   - stage (e.g. "csd02wd03", "csprd01", "os", etc.)
   - label (e.g. "CCYYMMDD-hhmmz" UTC time as in "20200406-0250z", or any string for testing purposes)
 
+When git runs the build process these invocation arguments are used:
+- `sh produceUBLSchemas-2.3.sh target git CCYYmmdd-HHMMz`
+
 The build result in the target directory:
-- `artefacts-UBL-2.3-{stage}-{label}.zip`
-- `artefacts-UBL-2.3-{stage}-{label}/`
+- `artefacts-UBL-2.3-{stage}-{label}/` - distribution artefacts
+- `artefacts-UBL-2.3-{stage}-{label}/archive-only-not-in-final-distribution/` - archive artefacts
+
+Note that in the archive directory is the file `console.{label}.txt` with the console log of the execution of the Ant build script.
 
 ## Contact
 

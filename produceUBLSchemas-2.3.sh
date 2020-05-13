@@ -9,4 +9,4 @@ set -e # exit on any failed process
 echo Building package...
 java -Dant.home=utilities/ant -classpath utilities/saxon/saxon.jar:utilities/ant/lib/ant-launcher.jar:utilities/saxon9he/saxon9he.jar:. org.apache.tools.ant.launch.Launcher -buildfile produceUBLschemas.xml "-Dpackage=2.3" -DUBLversion=2.3 -DUBLprevStageVersion=2.3 -DUBLprevStage=csprd02 -DUBLprevVersion=2.2 -Drawdir=raw -Ddir=$1 -Dstage=$2 -Dversion=$3 $4  | tee console.$3.txt
 
-copy console.$3.txt artefacts-UBL-2.3-$2-$3/archive-only-not-in-final-distribution/
+cp console.$3.txt artefacts-UBL-2.3-$2-$3/archive-only-not-in-final-distribution/
