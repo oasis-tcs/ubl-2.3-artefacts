@@ -156,11 +156,13 @@ When git runs the build process these invocation arguments are used to build eve
 
 Note that because the stage variable is used in the naming of files, the final work product cannot be built using git. Only interim test work products can be built using git. The final work product must be made offline using the appropriate stage string value.
 
-The build result in the target directory:
+The build result (after about 25 minutes on GitHub) in the target directory:
 - `artefacts-UBL-2.3-{stage}-{label}/` - distribution artefacts
 - `artefacts-UBL-2.3-{stage}-{label}/archive-only-not-in-final-distribution/` - archive artefacts
 
-Note that in the archive directory is the file `console.{label}.txt` with the console log of the execution of the Ant build script.
+Note that in the archive directory are the files:
+- `artefacts.console.{label}.txt` - console log of the execution of the Ant build script
+- `artefacts.exitcode.{label}.txt` - exit code from the execution of the Ant build script
 
 ## Contact
 
