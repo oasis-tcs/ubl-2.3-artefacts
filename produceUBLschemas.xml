@@ -70,13 +70,21 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 
   <!--create GC files for business and signature-->
   <uptodate targetfile="UBL-Signature-Entities-${UBLversion}.gc"
-            property=  "gc-sig-okay">
+            property=  "gc-sig-files-okay">
     <srcfiles dir=".">
       <include name="UBL-Signature-Google.ods"/>
       <include name="ident-UBL-Signature.xml"/>
       <include name="massageModelName.xml"/>
     </srcfiles>
   </uptodate>
+  <condition property="gc-sig-okay">
+    <and>
+      <not>
+        <equals arg1="${stage}" arg2="github"/>
+      </not>
+      <isset property="gc-sig-files-okay"/>
+    </and>
+  </condition>
   <antcall target="-ods2gc">
     <param name="okay"   value="gc-sig-okay"/>
     <param name="source" value="UBL-Signature-Google.ods"/>
@@ -87,7 +95,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <copy preservelastmodified="true" todir="${dir}/${stage}-${UBLversion}/mod/" file="UBL-Signature-Entities-${UBLversion}.gc"/>
 
   <uptodate targetfile="UBL-Entities-${UBLversion}.gc"
-            property=  "gc-okay">
+            property=  "gc-files-okay">
     <srcfiles dir=".">
       <include name="UBL-Library-Google.ods"/>
       <include name="UBL-Documents-Google.ods"/>
@@ -95,6 +103,14 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="massageModelName.xml"/>
     </srcfiles>
   </uptodate>
+  <condition property="gc-okay">
+    <and>
+      <not>
+        <equals arg1="${stage}" arg2="github"/>
+      </not>
+      <isset property="gc-files-okay"/>
+    </and>
+  </condition>
   <antcall target="-ods2gc">
     <param name="okay"   value="gc-okay"/>
     <param name="source" value="UBL-Library-Google.ods,UBL-Documents-Google.ods"/>

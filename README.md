@@ -145,14 +145,16 @@ Outputs:
 - generated runtime copy of XML schemas (no annotations in the generated fragments)
   - `xsdrt/`
 
-The build process runs the [`produceUBLschemas.xml`]( produceUBLschemas.xml ) Ant script and is invoked as follows when running offline and not on git:
+The build process runs the [`produceUBLschemas.xml`]( produceUBLschemas.xml ) Ant script and is invoked as follows when running offline (using timestamp checking for selective building) and not on git:
 - `sh produceUBLSchemas-2.3.sh ../results stage label`
   - pre-existing target directory (without trailing "/")
-  - stage (e.g. "csd02wd03", "csprd01", "os", etc.)
-  - label (e.g. "CCYYMMDD-hhmmz" UTC time as in "20200406-0250z", or any string for testing purposes)
+  - stage (e.g. "csd02wd03", "csprd01", "os", etc.; note that the stage "github" is for interim use and triggers on GitHub a build of everything without checking timestamps)
+  - label (e.g. "CCyymmdd-HHMMz" UTC time as in "20200406-1450z")
 
-When git runs the build process these invocation arguments are used:
-- `sh produceUBLSchemas-2.3.sh target git CCYYmmdd-HHMMz`
+When git runs the build process these invocation arguments are used to build everything (no timestamp checking on github):
+- `sh produceUBLSchemas-2.3.sh target github CCyymmdd-HHMMz`
+
+Note that because the stage variable is used in the naming of files, the final work product cannot be built using git. Only interim test work products can be built using git. The final work product must be made offline using the appropriate stage string value.
 
 The build result in the target directory:
 - `artefacts-UBL-2.3-{stage}-{label}/` - distribution artefacts
