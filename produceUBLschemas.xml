@@ -515,9 +515,9 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 
 <target name="-ods2xls" unless="${okay}">
   <delete file="${dir}/${sourcefilenoext}.xls"/>
-  <echo message="Need to rebuild ${dir}/${sourcefilenoext}.xls from ${dir}/${sourcefilenoext}.ods..."/>
-  <available property="ready" file="${dir}/${sourcefilenoext}.ods"/>
-  <fail unless="ready" message="Unable to find ODS file: ${dir}/${sourcefilenoext}.ods"/>
+  <echo message="Need to rebuild ${dir}/${sourcefilenoext}.xls from ${sourcedir}/${sourcefilenoext}.ods..."/>
+  <available property="ready" file="${sourcedir}/${sourcefilenoext}.ods"/>
+  <fail unless="ready" message="Unable to find ODS file: ${sourcedir}/${sourcefilenoext}.ods"/>
 <!--  <exec executable="soffice">
     <arg value="-\-headless"/>
     <arg value="-\-convert-to"/>
@@ -526,7 +526,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <arg value="${sourcedir}"/>
     <arg value="${dir}/${sourcefilenoext}.ods"/>
   </exec>-->
-  <copy file="${dir}/${sourcefilenoext}.ods" tofile="${dir}/${sourcefilenoext}.xls"/>
+  <copy file="${sourcedir}/${sourcefilenoext}.ods" tofile="${dir}/${sourcefilenoext}.xls"/>
   <available property="done" file="${dir}/${sourcefilenoext}.xls"/>
   <fail unless="done" message="Unable to create XLS file: ${dir}/${sourcefilenoext}.xls"/>
 </target>
