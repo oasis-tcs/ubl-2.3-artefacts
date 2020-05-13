@@ -731,7 +731,9 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="master-code-list-*.xml"/>
     </fileset>
   </move>
-
+<!--
+    No need to create a ZIP since the result is being returned from git action as a zip. 
+    
   <delete file="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}.zip"/>
 
   <zip destfile="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}.zip"
@@ -739,7 +741,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <delete dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}"/>
   <unzip src="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}.zip" 
          dest="${dir}" />
-
+-->
   <!--documentation-->
   <echo message="stage=${stage}"/>
   <echo message="version=${version}"/>
