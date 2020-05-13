@@ -534,6 +534,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 <target name="-gc2ndr-check-only" unless="${okay}">
   <echo message='Checking "${source}" GC file against NDR and old "${compare}" to create "${report}"...'/>
   <echo message="Fail setting = ${fatal}"/>
+  <touch file="${words}"/>
   <java resultproperty="${returnProperty}" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-checkgc4obdndr.xsl"/>
      <arg value="-o:${report}"/>
@@ -552,11 +553,6 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="errors-are-fatal=${fatal}"/>
   </java>
   <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${thisdir}/spellcheck-UBL.txt check ${words} if abend)..."/>
-  <exec executable="sh" failonerror="yes">
-    <arg value="-e"/>
-    <arg value="-c"/>
-    <arg value='which aspell'/>
-  </exec>
   <exec executable="sh" failonerror="yes">
     <arg value="-e"/>
     <arg value="-c"/>
@@ -583,6 +579,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   
 <target name="-gc2ndrExt" unless="${okay}">
   <echo message='Checking "${source}" GC file against NDR...'/>
+  <touch file="${words}"/>
   <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-checkgc4obdndr.xsl"/>
      <arg value="-o:${report}"/>
