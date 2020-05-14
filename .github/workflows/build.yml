@@ -28,6 +28,8 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: artefacts-UBL-2.3-github-${{ env.TIMESTAMP }}z
-        path: target/artefacts-UBL-2.3-github-${{ env.TIMESTAMP }}z/*
+        #name: artefacts-UBL-2.3-github-${{ env.TIMESTAMP }}z
+        #path: target/artefacts-UBL-2.3-github-${{ env.TIMESTAMP }}z/*
         #path: target/*
+        name: all-UBL-2.3-github-${{ env.TIMESTAMP }}z
+        path:  *

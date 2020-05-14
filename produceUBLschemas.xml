@@ -7,8 +7,10 @@
   <property name="utilitydir" value="${thisdir}/utilities/"/>
   <!--set ${skip-gc} to true to preserve the old genericode model file-->
   <property name="skip-gc" value="true"/>
-  <!--set ${skip-spreadsheet-and-html-generation} to true for no spreadsheets or HTML-->
-  <property name="skip-spreadsheet-and-html-generation" value="false"/>
+  <!--set ${skip-spreadsheet-generation} to true for no spreadsheets-->
+  <property name="skip-spreadsheet-generation" value="true"/>
+  <!--set ${skip-html-generation} to true for no HTML-->
+  <property name="skip-html-generation" value="true"/>
   <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
   <property name="abieExtensions" value="yes"/>
   <!--software timestamps-->
