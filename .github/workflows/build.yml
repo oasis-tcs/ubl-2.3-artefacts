@@ -32,4 +32,4 @@ jobs:
         #path: target/artefacts-UBL-2.3-github-${{ env.TIMESTAMP }}z/*
         #path: target/*
         name: all-UBL-2.3-github-${{ env.TIMESTAMP }}z
-        path:  *
+        path: ./*
