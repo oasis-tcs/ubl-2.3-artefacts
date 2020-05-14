@@ -164,6 +164,10 @@ Note that in the archive directory are the files:
 - `artefacts.console.{label}.txt` - console log of the execution of the Ant build script
 - `artefacts.exitcode.{label}.txt` - exit code from the execution of the Ant build script
 
+Diagnostic execution triggered by the creating text files (contents are irrelevant; delete the file to restore normal operation):
+- `skip-gc.txt` - use the UBL-Entities-2.3.gc file as given without regenerating it (saves 12 minutes)
+- `skip-html.txt` - skip the creation of the HTML reports (saves 240Mb and 10 minutes)
+
 ## Contact
 
 Please send questions or comments about 

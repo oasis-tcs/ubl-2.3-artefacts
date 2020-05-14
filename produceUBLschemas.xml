@@ -5,12 +5,15 @@
 <target name="make">
   <property name="thisdir" value="${user.dir}"/>
   <property name="utilitydir" value="${thisdir}/utilities/"/>
-  <!--set ${skip-gc} to true to preserve the old genericode model file-->
-  <property name="skip-gc" value="true"/>
-  <!--set ${skip-spreadsheet-generation} to true for no spreadsheets-->
-  <property name="skip-spreadsheet-generation" value="true"/>
-  <!--set ${skip-html-generation} to true for no HTML-->
-  <property name="skip-html-generation" value="true"/>
+  <!--create skip-gc.txt to preserve the old genericode model file-->
+  <available property="skip-gc" file="skip-gc.txt"/>
+  <echo if:set="skip-gc" message="!!!!!!!!!!!!!! Incomplete execution requested: UBL-Entities-2.3.gc not being generated from the given spreadsheets; delete skip-gc.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
+  <!--create skip-spreadsheet.txt for no spreadsheets-->
+  <available property="skip-spreadsheet-generation" file="skip-spreadsheets.txt"/>
+  <echo if:set="skip-spreadsheet-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: ODS and XLS spreadsheets not being generated from UBL-Entities-2.3.gc ; delete skip-spreadsheets.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
+  <!--create skip-html.txt for no HTML-->
+  <available property="skip-html-generation" fie="skip-html.txt"/>
+  <echo if:set="skip-html-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: HTML reports not being generated from UBL-Entities-2.3.gc; delete skip-html.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
   <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
   <property name="abieExtensions" value="yes"/>
   <!--software timestamps-->
