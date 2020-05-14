@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ "$3" = "" ]
 then 
 echo Missing results directory, stage and dateZ arguments
