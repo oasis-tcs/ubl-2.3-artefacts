@@ -241,8 +241,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="basecf"  value="${thisdir}/config-UBL.xml"/>
     <param name="title"   value="Universal Business Language (UBL) Signature"/>
     <param name="change"  value="UBL Signature"/>
-    <param name="dbcmn"   value="old2newDocBook-UBL-Signature-library-ent.xml"/>
-    <param name="dbmain"  value="old2newDocBook-UBL-Signature-documents-ent.xml"/>
+    <param name="dbcmn"   value="${dir}/old2newDocBook-UBL-Signature-library-ent.xml"/>
+    <param name="dbmain"  value="${dir}/old2newDocBook-UBL-Signature-documents-ent.xml"/>
     <param name="words"   value="${dir}/wordlist-UBL-Signature-${UBLversion}.txt"/>
     <param name="report"  value="${dir}/check-ubl-signature-${UBLversion}-${stage}.html"/>
     <param name="library"  value="UBL-SignatureLibrary-${UBLversion}"/>
@@ -728,7 +728,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-library-ent.xml"/>
       <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-documents-ent.xml"/>
       <include name="check-ubl-${UBLversion}-${stage}-ubl-${UBLprevVersion}.html"/>
-      <include name="wordlist-UBL.txt"/>
+      <include name="wordlist-UBL-${UBLversion}.txt"/>
     </fileset>
   </copy>
   <move preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json">
