@@ -711,6 +711,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <include name="**"/>
     </fileset>
   </copy>
+  <touch if:set="skip-gc" file="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/GC-FILE-NOT-REGENERATED.txt"/>
+  <touch if:set="skip-html-generation" file="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/HTML-FILES-NOT-GENERATED.txt"/>
   <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution"/>
   <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json"/>
   <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json/val"/>
