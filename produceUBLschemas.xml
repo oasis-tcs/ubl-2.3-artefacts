@@ -81,7 +81,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   </uptodate>
   <condition property="gc-sig-okay">
     <or>
-      <equals arg1="${skip-gc}" arg2="false"/>
+      <equals arg1="${skip-gc}" arg2="true"/>
       <and>
         <not>
           <equals arg1="${stage}" arg2="github"/>
@@ -110,7 +110,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   </uptodate>
   <condition property="gc-okay">
     <or>
-      <equals arg1="${skip-gc}" arg2="false"/>
+      <equals arg1="${skip-gc}" arg2="true"/>
       <and>
         <not>
           <equals arg1="${stage}" arg2="github"/>
@@ -711,7 +711,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <copy preservelastmodified="true" 
        todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution">
     <fileset dir=".">
-      <include name="UBL-Library-Google.ods"/> 
+      <include name="*"/>
+      <!--<include name="UBL-Library-Google.ods"/> 
       <include name="UBL-Documents-Google.ods"/> 
       <include name="spellcheck-UBL.txt"/>
       <include name="ident-UBL.xml"/>
@@ -724,8 +725,10 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="produceUBLschemas.xml"/>
       <include name="UBL-DefaultDTQ-shell.sch"/>
       <include name="skeletonDisplayEditSubset.ods"/>
-      <include name="UBL-CVA-Skeleton.cva"/>
+      <include name="UBL-CVA-Skeleton.cva"/>-->
     </fileset>
+  </copy>
+  <move preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution">
     <fileset dir="${dir}">
       <include name="*"/>
 <!--      <include name="wordlist-UBL-Signature-${UBLversion}.txt"/>
@@ -740,7 +743,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="check-ubl-${UBLversion}-${stage}-ubl-${UBLprevVersion}.html"/>
       <include name="wordlist-UBL-${UBLversion}.txt"/>-->
     </fileset>
-  </copy>
+  </move>
   <move preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json">
     <fileset dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}">
       <include name="json/**"/>
