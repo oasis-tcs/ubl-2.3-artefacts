@@ -158,7 +158,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="change"  value="UBL"/>
     <param name="source"  value="UBL-Entities-${UBLversion}.gc"/>
     <param name="config"  value="${thisdir}/config-UBL.xml"/>
-    <param name="words"   value="${dir}/wordlist-UBL-${UBLversion}.txt"/>
+    <param name="words"   value="wordlist-UBL-${UBLversion}.txt"/>
     <param name="library" value="UBL-CommonLibrary-${UBLversion}"/>
     <param name="fatal"   value="no"/>
     <param name="returnProperty" value="returnStage"/>
@@ -178,7 +178,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="change"  value="UBL"/>
     <param name="source"  value="UBL-Entities-${UBLversion}.gc"/>
     <param name="config"  value="${thisdir}/config-UBL.xml"/>
-    <param name="words"   value="${dir}/wordlist-UBL-${UBLversion}.txt"/>
+    <param name="words"   value="wordlist-UBL-${UBLversion}.txt"/>
     <param name="library"  value="UBL-CommonLibrary-${UBLversion}"/>
     <param name="fatal"   value="yes"/>
     <param name="returnProperty" value="returnVersion"/>
@@ -255,7 +255,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="change"  value="UBL Signature"/>
     <param name="dbcmn"   value="old2newDocBook-UBL-Signature-library-ent.xml"/>
     <param name="dbmain"  value="old2newDocBook-UBL-Signature-documents-ent.xml"/>
-    <param name="words"   value="${dir}/wordlist-UBL-Signature-${UBLversion}.txt"/>
+    <param name="words"   value="wordlist-UBL-Signature-${UBLversion}.txt"/>
     <param name="report"  value="${dir}/check-ubl-signature-${UBLversion}-${stage}.html"/>
     <param name="library"  value="UBL-SignatureLibrary-${UBLversion}"/>
   </antcall>    
@@ -562,6 +562,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <echo message='Checking "${source}" GC file against NDR and old "${compare}" to create "${report}"...'/>
   <echo message="Fail setting = ${fatal}"/>
   <touch file="${dir}/${words}"/>
+  <property name="words-uri" location="${dir}/${words}"/>
   <java resultproperty="${returnProperty}" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-checkgc4obdndr.xsl"/>
      <arg value="-o:${report}"/>
@@ -573,17 +574,17 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="docbook-common-uri=${dbcmn}"/>
      <arg value="docbook-maindoc-uri=${dbmain}"/>
      <arg value="all-documents-report-href=${dbhref}"/>
-     <arg value="den-word-list-uri=${words}"/>
+     <arg value="den-word-list-uri=${words-uri}"/>
      <arg value="common-library-singleton-model-name=${library}"/>
      <arg value="version-column-name=CurrentVersion"/>
      <arg value="--suppressXsltNamespaceCheck:on"/>
      <arg value="errors-are-fatal=${fatal}"/>
   </java>
-  <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${thisdir}/spellcheck-UBL.txt check ${words} if abend)..."/>
+  <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${thisdir}/spellcheck-UBL.txt check ${words-uri} if abend)..."/>
   <exec executable="sh" failonerror="yes">
     <arg value="-e"/>
     <arg value="-c"/>
-    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWords.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
+    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words-uri} | tee ${dir}/unexpectedWords.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
   </exec>
   
 </target>
@@ -607,6 +608,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 <target name="-gc2ndrExt" unless="${okay}">
   <echo message='Checking "${source}" GC file against NDR...'/>
   <touch file="${dir}/${words}"/>
+  <property name="words-uri" location="${dir}/${words}"/>
   <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-checkgc4obdndr.xsl"/>
      <arg value="-o:${report}"/>
@@ -617,14 +619,14 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="old-uri=${compare}"/>
      <arg value="docbook-common-uri=${dbcmn}"/>
      <arg value="docbook-maindoc-uri=${dbmain}"/>
-     <arg value="den-word-list-uri=${words}"/>
+     <arg value="den-word-list-uri=${words-uri}"/>
      <arg value="common-library-singleton-model-name=${library}"/>
      <arg value="--suppressXsltNamespaceCheck:on"/>
   </java>
-  <echo message='Spell-checking the resulting word list into ${dir}/unexpectedWordsExt.txt (run "aspell -p ./spellcheck-UBL.txt check ${words}" if abend)...'/>
+  <echo message='Spell-checking the resulting word list into ${dir}/unexpectedWordsExt.txt (run "aspell -p ./spellcheck-UBL.txt check ${words-uri}" if abend)...'/>
   <exec executable="sh" failonerror="yes">
     <arg value="-c"/>
-    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWordsExt.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
+    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words-uri} | tee ${dir}/unexpectedWordsExt.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
   </exec>
   <echo message='Creating CVA/XSD extension from "${source}" GC file...'/>
   <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
