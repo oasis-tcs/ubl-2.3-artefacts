@@ -6,11 +6,11 @@
   <property name="thisdir" value="${user.dir}"/>
   <property name="utilitydir" value="${thisdir}/utilities/"/>
   <!--set ${skip-gc} to true to preserve the old genericode model file-->
-  <property name="skip-gc" value="false"/>
+  <property name="skip-gc" value="true"/>
   <!--set ${skip-spreadsheet-generation} to true for no spreadsheets-->
-  <property name="skip-spreadsheet-generation" value="false"/>
+  <property name="skip-spreadsheet-generation" value="true"/>
   <!--set ${skip-html-generation} to true for no HTML-->
-  <property name="skip-html-generation" value="false"/>
+  <property name="skip-html-generation" value="true"/>
   <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
   <property name="abieExtensions" value="yes"/>
   <!--software timestamps-->
@@ -63,7 +63,6 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <copy preservelastmodified="true" todir="${dir}/${stage}-${UBLversion}">
     <fileset dir="${rawdir}">
       <include name="**"/>
-      <exclude name="master-code-list-UBL-${UBLversion}-*.xml"/>
     </fileset>
   </copy>
   <copy preservelastmodified="true" todir="${dir}/${stage}-${UBLversion}/xsdrt">
@@ -156,7 +155,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="change"  value="UBL"/>
     <param name="source"  value="UBL-Entities-${UBLversion}.gc"/>
     <param name="config"  value="${thisdir}/config-UBL.xml"/>
-    <param name="words"   value="wordlist-UBL-${UBLversion}.txt"/>
+    <param name="words"   value="${dir}/wordlist-UBL-${UBLversion}.txt"/>
     <param name="library" value="UBL-CommonLibrary-${UBLversion}"/>
     <param name="fatal"   value="no"/>
     <param name="returnProperty" value="returnStage"/>
@@ -176,7 +175,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="change"  value="UBL"/>
     <param name="source"  value="UBL-Entities-${UBLversion}.gc"/>
     <param name="config"  value="${thisdir}/config-UBL.xml"/>
-    <param name="words"   value="wordlist-UBL-${UBLversion}.txt"/>
+    <param name="words"   value="${dir}/wordlist-UBL-${UBLversion}.txt"/>
     <param name="library"  value="UBL-CommonLibrary-${UBLversion}"/>
     <param name="fatal"   value="yes"/>
     <param name="returnProperty" value="returnVersion"/>
@@ -253,7 +252,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="change"  value="UBL Signature"/>
     <param name="dbcmn"   value="old2newDocBook-UBL-Signature-library-ent.xml"/>
     <param name="dbmain"  value="old2newDocBook-UBL-Signature-documents-ent.xml"/>
-    <param name="words"   value="wordlist-UBL-Signature-${UBLversion}.txt"/>
+    <param name="words"   value="${dir}/wordlist-UBL-Signature-${UBLversion}.txt"/>
     <param name="report"  value="${dir}/check-ubl-signature-${UBLversion}-${stage}.html"/>
     <param name="library"  value="UBL-SignatureLibrary-${UBLversion}"/>
   </antcall>    
@@ -268,7 +267,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="display-okay">
     <or>
       <istrue value="${display-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-spreadsheet-generation}"/>
     </or>
   </condition>
 
@@ -289,7 +288,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="display-sig-okay">
     <or>
       <istrue value="${display-sig-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-spreadsheet-generation}"/>
     </or>
   </condition>
   <antcall target="-gc2ods">
@@ -308,7 +307,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="xls-sig-okay">
     <or>
       <istrue value="${xls-sig-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-spreadsheet-generation}"/>
     </or>
   </condition>
   <antcall target="-ods2xls">
@@ -326,7 +325,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="xls-okay">
     <or>
       <istrue value="${xls-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-spreadsheet-generation}"/>
     </or>
   </condition>
   <antcall target="-ods2xls">
@@ -347,7 +346,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="html-okay">
     <or>
       <istrue value="${html-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-html-generation}"/>
     </or>
   </condition>
 <parallel>  
@@ -489,7 +488,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="html-sig-okay">
     <or>
       <istrue value="${html-sig-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-html-generation}"/>
     </or>
   </condition>
   <antcall target="-gc2html">
@@ -559,7 +558,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 <target name="-gc2ndr-check-only" unless="${okay}">
   <echo message='Checking "${source}" GC file against NDR and old "${compare}" to create "${report}"...'/>
   <echo message="Fail setting = ${fatal}"/>
-  <touch file="${words}"/>
+  <touch file="${dir}/${words}"/>
   <java resultproperty="${returnProperty}" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-checkgc4obdndr.xsl"/>
      <arg value="-o:${report}"/>
@@ -604,7 +603,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   
 <target name="-gc2ndrExt" unless="${okay}">
   <echo message='Checking "${source}" GC file against NDR...'/>
-  <touch file="${words}"/>
+  <touch file="${dir}/${words}"/>
   <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-checkgc4obdndr.xsl"/>
      <arg value="-o:${report}"/>
