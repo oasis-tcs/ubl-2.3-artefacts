@@ -12,7 +12,7 @@
   <available property="skip-spreadsheet-generation" file="skip-spreadsheets.txt"/>
   <echo if:set="skip-spreadsheet-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: ODS and XLS spreadsheets not being generated from UBL-Entities-2.3.gc ; delete skip-spreadsheets.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
   <!--create skip-html.txt for no HTML-->
-  <available property="skip-html-generation" fie="skip-html.txt"/>
+  <available property="skip-html-generation" file="skip-html.txt"/>
   <echo if:set="skip-html-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: HTML reports not being generated from UBL-Entities-2.3.gc; delete skip-html.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
   <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
   <property name="abieExtensions" value="yes"/>
