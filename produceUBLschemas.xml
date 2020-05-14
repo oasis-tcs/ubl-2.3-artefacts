@@ -147,16 +147,16 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="title"
            value="Universal Business Language (UBL) ${UBLversion} ${stage} to ${UBLprevStageVersion} ${UBLprevStage}"/>
     <param name="dbcmn"
-        value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-library-ent.xml"/>
+        value="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-library-ent.xml"/>
     <param name="dbmain" 
-      value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-documents-ent.xml"/>
+      value="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-documents-ent.xml"/>
     <param name="dbhref"
            value="mod/summary/reports/All-UBL-${UBLversion}-Documents.html"/>
     <param name="report"  value="${dir}/check-ubl-${UBLversion}-${stage}-ubl-${UBLprevStageVersion}-${UBLprevStage}.html"/>
     <param name="change"  value="UBL"/>
     <param name="source"  value="UBL-Entities-${UBLversion}.gc"/>
     <param name="config"  value="${thisdir}/config-UBL.xml"/>
-    <param name="words"   value="${dir}/wordlist-UBL-${UBLversion}.txt"/>
+    <param name="words"   value="wordlist-UBL-${UBLversion}.txt"/>
     <param name="library" value="UBL-CommonLibrary-${UBLversion}"/>
     <param name="fatal"   value="no"/>
     <param name="returnProperty" value="returnStage"/>
@@ -167,16 +167,16 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="title"
            value="Universal Business Language (UBL) ${UBLversion} ${stage} to ${UBLprevVersion}"/>
     <param name="dbcmn"
-           value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-library-ent.xml"/>
+           value="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-library-ent.xml"/>
     <param name="dbmain" 
-           value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-documents-ent.xml"/>
+           value="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-documents-ent.xml"/>
     <param name="dbhref"
            value="mod/summary/reports/All-UBL-${UBLversion}-Documents.html"/>
     <param name="report"  value="${dir}/check-ubl-${UBLversion}-${stage}-ubl-${UBLprevVersion}.html"/>
     <param name="change"  value="UBL"/>
     <param name="source"  value="UBL-Entities-${UBLversion}.gc"/>
     <param name="config"  value="${thisdir}/config-UBL.xml"/>
-    <param name="words"   value="${dir}/wordlist-UBL-${UBLversion}.txt"/>
+    <param name="words"   value="wordlist-UBL-${UBLversion}.txt"/>
     <param name="library"  value="UBL-CommonLibrary-${UBLversion}"/>
     <param name="fatal"   value="yes"/>
     <param name="returnProperty" value="returnVersion"/>
@@ -251,9 +251,9 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="basecf"  value="${thisdir}/config-UBL.xml"/>
     <param name="title"   value="Universal Business Language (UBL) Signature"/>
     <param name="change"  value="UBL Signature"/>
-    <param name="dbcmn"   value="${dir}/old2newDocBook-UBL-Signature-library-ent.xml"/>
-    <param name="dbmain"  value="${dir}/old2newDocBook-UBL-Signature-documents-ent.xml"/>
-    <param name="words"   value="${dir}/wordlist-UBL-Signature-${UBLversion}.txt"/>
+    <param name="dbcmn"   value="old2newDocBook-UBL-Signature-library-ent.xml"/>
+    <param name="dbmain"  value="old2newDocBook-UBL-Signature-documents-ent.xml"/>
+    <param name="words"   value="wordlist-UBL-Signature-${UBLversion}.txt"/>
     <param name="report"  value="${dir}/check-ubl-signature-${UBLversion}-${stage}.html"/>
     <param name="library"  value="UBL-SignatureLibrary-${UBLversion}"/>
   </antcall>    
