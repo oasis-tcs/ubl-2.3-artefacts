@@ -5,6 +5,8 @@
 <target name="make">
   <property name="thisdir" value="${user.dir}"/>
   <property name="utilitydir" value="${thisdir}/utilities/"/>
+  <!--set ${skip-gc} to true to preserve the old genericode model file-->
+  <property name="skip-gc" value="true"/>
   <!--set ${skip-spreadsheet-and-html-generation} to true for no spreadsheets or HTML-->
   <property name="skip-spreadsheet-and-html-generation" value="false"/>
   <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
@@ -78,12 +80,15 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     </srcfiles>
   </uptodate>
   <condition property="gc-sig-okay">
-    <and>
-      <not>
-        <equals arg1="${stage}" arg2="github"/>
-      </not>
-      <isset property="gc-sig-files-okay"/>
-    </and>
+    <or>
+      <equals arg1="${skip-gc}" arg2="false"/>
+      <and>
+        <not>
+          <equals arg1="${stage}" arg2="github"/>
+        </not>
+        <isset property="gc-sig-files-okay"/>
+      </and>
+    </or>
   </condition>
   <antcall target="-ods2gc">
     <param name="okay"   value="gc-sig-okay"/>
@@ -104,12 +109,15 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     </srcfiles>
   </uptodate>
   <condition property="gc-okay">
-    <and>
-      <not>
-        <equals arg1="${stage}" arg2="github"/>
-      </not>
-      <isset property="gc-files-okay"/>
-    </and>
+    <or>
+      <equals arg1="${skip-gc}" arg2="false"/>
+      <and>
+        <not>
+          <equals arg1="${stage}" arg2="github"/>
+        </not>
+        <isset property="gc-files-okay"/>
+      </and>
+    </or>
   </condition>
   <antcall target="-ods2gc">
     <param name="okay"   value="gc-okay"/>
@@ -700,7 +708,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution"/>
   <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json"/>
   <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json/val"/>
-  <copy preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution">
+  <copy preservelastmodified="true" 
+       todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution">
     <fileset dir=".">
       <include name="UBL-Library-Google.ods"/> 
       <include name="UBL-Documents-Google.ods"/> 
@@ -718,7 +727,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="UBL-CVA-Skeleton.cva"/>
     </fileset>
     <fileset dir="${dir}">
-      <include name="wordlist-UBL-Signature-${UBLversion}.txt"/>
+      <include name="*"/>
+<!--      <include name="wordlist-UBL-Signature-${UBLversion}.txt"/>
       <include name="check-ubl-signature-${UBLversion}-${stage}.html"/>
       <include name="old2newDocBook-UBL-Signature-library-ent.xml"/>
       <include name="old2newDocBook-UBL-Signature-documents-ent.xml"/>
@@ -728,7 +738,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-library-ent.xml"/>
       <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-documents-ent.xml"/>
       <include name="check-ubl-${UBLversion}-${stage}-ubl-${UBLprevVersion}.html"/>
-      <include name="wordlist-UBL-${UBLversion}.txt"/>
+      <include name="wordlist-UBL-${UBLversion}.txt"/>-->
     </fileset>
   </copy>
   <move preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json">

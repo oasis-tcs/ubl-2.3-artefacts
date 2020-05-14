@@ -29,5 +29,5 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: artefacts-UBL-2.3-github-${{ env.TIMESTAMP }}z
-        #path: target/artefacts-UBL-2.3-github-${{ env.TIMESTAMP }}z/*
-        path: target/*
+        path: target/artefacts-UBL-2.3-github-${{ env.TIMESTAMP }}z/*
+        #path: target/*
