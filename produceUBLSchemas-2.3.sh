@@ -14,4 +14,8 @@ if [ ! -d $1/artefacts-UBL-2.3-$2-$3/archive-only-not-in-final-distribution/ ]; 
 mv artefacts.console.$3.txt $1/artefacts-UBL-2.3-$2-$3/archive-only-not-in-final-distribution/
 echo $serverReturn >$1/artefacts-UBL-2.3-$2-$3/archive-only-not-in-final-distribution/artefacts.exitcode.$3.txt
 
+# reduce storage costs by zipping results and deleting intermediate files
+7z a $1/artefacts-UBL-2.3-$2-$3.zip $1/artefacts-UBL-2.3-$2-$3
+rm -r -f $1/artefacts-UBL-2.3-$2-$3
+
 exit 0 # always be successful so that github returns ZIP of results
