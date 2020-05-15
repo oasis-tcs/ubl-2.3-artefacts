@@ -17,7 +17,7 @@ content.
 
 
 The build process in this repository creates the suite of artefacts to be included with the hub document 
-in the creation of the UBL 2.3 deliveries. 
+in the creation of the UBL 2.3 deliveries. The build process is triggered on every commit.
 
 ## Contributions
 
@@ -145,15 +145,28 @@ Outputs:
 - generated runtime copy of XML schemas (no annotations in the generated fragments)
   - `xsdrt/`
 
-The build process runs the [`produceUBLschemas.xml`]( produceUBLschemas.xml ) Ant script and is invoked as follows:
+The build process runs the [`produceUBLschemas.xml`]( produceUBLschemas.xml ) Ant script and is invoked as follows when running offline (using timestamp checking for selective building) and not on git:
 - `sh produceUBLSchemas-2.3.sh ../results stage label`
   - pre-existing target directory (without trailing "/")
-  - stage (e.g. "csd02wd03", "csprd01", "os", etc.)
-  - label (e.g. "CCYYMMDD-hhmmz" UTC time as in "20200406-0250z", or any string for testing purposes)
+  - stage (e.g. "csd02wd03", "csprd01", "os", etc.; note that the stage "github" is for interim use and triggers on GitHub a build of everything without checking timestamps)
+  - label (e.g. "CCyymmdd-HHMMz" UTC time as in "20200406-1450z")
 
-The build result in the target directory:
-- `artefacts-UBL-2.3-{stage}-{label}.zip`
-- `artefacts-UBL-2.3-{stage}-{label}/`
+When git runs the build process these invocation arguments are used to build everything (no timestamp checking on github):
+- `sh produceUBLSchemas-2.3.sh target github CCyymmdd-HHMMz`
+
+Note that because the stage variable is used in the naming of files, the final work product cannot be built using git. Only interim test work products can be built using git. The final work product must be made offline using the appropriate stage string value.
+
+The build result (after about 25 minutes on GitHub) in the target directory:
+- `artefacts-UBL-2.3-{stage}-{label}/` - distribution artefacts
+- `artefacts-UBL-2.3-{stage}-{label}/archive-only-not-in-final-distribution/` - archive artefacts
+
+Note that in the archive directory are the files:
+- `artefacts.console.{label}.txt` - console log of the execution of the Ant build script
+- `artefacts.exitcode.{label}.txt` - exit code from the execution of the Ant build script
+
+Diagnostic execution triggered by the creating text files (contents are irrelevant; delete the file to restore normal operation):
+- `skip-gc.txt` - use the UBL-Entities-2.3.gc file as given without regenerating it (saves 12 minutes)
+- `skip-html.txt` - skip the creation of the HTML reports (saves 240Mb and 10 minutes)
 
 ## Contact
 

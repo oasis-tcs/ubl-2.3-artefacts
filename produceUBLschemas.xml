@@ -5,8 +5,15 @@
 <target name="make">
   <property name="thisdir" value="${user.dir}"/>
   <property name="utilitydir" value="${thisdir}/utilities/"/>
-  <!--set ${skip-spreadsheet-and-html-generation} to true for no spreadsheets or HTML-->
-  <property name="skip-spreadsheet-and-html-generation" value="false"/>
+  <!--create skip-gc.txt to preserve the old genericode model file-->
+  <available property="skip-gc" file="skip-gc.txt"/>
+  <echo if:set="skip-gc" message="!!!!!!!!!!!!!! Incomplete execution requested: UBL-Entities-2.3.gc not being generated from the given spreadsheets; delete skip-gc.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
+  <!--create skip-spreadsheet.txt for no spreadsheets-->
+  <available property="skip-spreadsheet-generation" file="skip-spreadsheets.txt"/>
+  <echo if:set="skip-spreadsheet-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: ODS and XLS spreadsheets not being generated from UBL-Entities-2.3.gc ; delete skip-spreadsheets.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
+  <!--create skip-html.txt for no HTML-->
+  <available property="skip-html-generation" file="skip-html.txt"/>
+  <echo if:set="skip-html-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: HTML reports not being generated from UBL-Entities-2.3.gc; delete skip-html.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
   <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
   <property name="abieExtensions" value="yes"/>
   <!--software timestamps-->
@@ -59,7 +66,6 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <copy preservelastmodified="true" todir="${dir}/${stage}-${UBLversion}">
     <fileset dir="${rawdir}">
       <include name="**"/>
-      <exclude name="master-code-list-UBL-${UBLversion}-*.xml"/>
     </fileset>
   </copy>
   <copy preservelastmodified="true" todir="${dir}/${stage}-${UBLversion}/xsdrt">
@@ -70,13 +76,24 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 
   <!--create GC files for business and signature-->
   <uptodate targetfile="UBL-Signature-Entities-${UBLversion}.gc"
-            property=  "gc-sig-okay">
+            property=  "gc-sig-files-okay">
     <srcfiles dir=".">
       <include name="UBL-Signature-Google.ods"/>
       <include name="ident-UBL-Signature.xml"/>
       <include name="massageModelName.xml"/>
     </srcfiles>
   </uptodate>
+  <condition property="gc-sig-okay">
+    <or>
+      <equals arg1="${skip-gc}" arg2="true"/>
+      <and>
+        <not>
+          <equals arg1="${stage}" arg2="github"/>
+        </not>
+        <isset property="gc-sig-files-okay"/>
+      </and>
+    </or>
+  </condition>
   <antcall target="-ods2gc">
     <param name="okay"   value="gc-sig-okay"/>
     <param name="source" value="UBL-Signature-Google.ods"/>
@@ -87,7 +104,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <copy preservelastmodified="true" todir="${dir}/${stage}-${UBLversion}/mod/" file="UBL-Signature-Entities-${UBLversion}.gc"/>
 
   <uptodate targetfile="UBL-Entities-${UBLversion}.gc"
-            property=  "gc-okay">
+            property=  "gc-files-okay">
     <srcfiles dir=".">
       <include name="UBL-Library-Google.ods"/>
       <include name="UBL-Documents-Google.ods"/>
@@ -95,6 +112,17 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="massageModelName.xml"/>
     </srcfiles>
   </uptodate>
+  <condition property="gc-okay">
+    <or>
+      <equals arg1="${skip-gc}" arg2="true"/>
+      <and>
+        <not>
+          <equals arg1="${stage}" arg2="github"/>
+        </not>
+        <isset property="gc-files-okay"/>
+      </and>
+    </or>
+  </condition>
   <antcall target="-ods2gc">
     <param name="okay"   value="gc-okay"/>
     <param name="source" value="UBL-Library-Google.ods,UBL-Documents-Google.ods"/>
@@ -121,16 +149,16 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="title"
            value="Universal Business Language (UBL) ${UBLversion} ${stage} to ${UBLprevStageVersion} ${UBLprevStage}"/>
     <param name="dbcmn"
-        value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-library-ent.xml"/>
+        value="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-library-ent.xml"/>
     <param name="dbmain" 
-      value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-documents-ent.xml"/>
+      value="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevStageVersion}-${UBLprevStage}-documents-ent.xml"/>
     <param name="dbhref"
            value="mod/summary/reports/All-UBL-${UBLversion}-Documents.html"/>
     <param name="report"  value="${dir}/check-ubl-${UBLversion}-${stage}-ubl-${UBLprevStageVersion}-${UBLprevStage}.html"/>
     <param name="change"  value="UBL"/>
     <param name="source"  value="UBL-Entities-${UBLversion}.gc"/>
     <param name="config"  value="${thisdir}/config-UBL.xml"/>
-    <param name="words"   value="${dir}/wordlist-UBL-${UBLversion}.txt"/>
+    <param name="words"   value="wordlist-UBL-${UBLversion}.txt"/>
     <param name="library" value="UBL-CommonLibrary-${UBLversion}"/>
     <param name="fatal"   value="no"/>
     <param name="returnProperty" value="returnStage"/>
@@ -141,16 +169,16 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="title"
            value="Universal Business Language (UBL) ${UBLversion} ${stage} to ${UBLprevVersion}"/>
     <param name="dbcmn"
-           value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-library-ent.xml"/>
+           value="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-library-ent.xml"/>
     <param name="dbmain" 
-           value="${dir}/old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-documents-ent.xml"/>
+           value="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-documents-ent.xml"/>
     <param name="dbhref"
            value="mod/summary/reports/All-UBL-${UBLversion}-Documents.html"/>
     <param name="report"  value="${dir}/check-ubl-${UBLversion}-${stage}-ubl-${UBLprevVersion}.html"/>
     <param name="change"  value="UBL"/>
     <param name="source"  value="UBL-Entities-${UBLversion}.gc"/>
     <param name="config"  value="${thisdir}/config-UBL.xml"/>
-    <param name="words"   value="${dir}/wordlist-UBL-${UBLversion}.txt"/>
+    <param name="words"   value="wordlist-UBL-${UBLversion}.txt"/>
     <param name="library"  value="UBL-CommonLibrary-${UBLversion}"/>
     <param name="fatal"   value="yes"/>
     <param name="returnProperty" value="returnVersion"/>
@@ -227,7 +255,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="change"  value="UBL Signature"/>
     <param name="dbcmn"   value="old2newDocBook-UBL-Signature-library-ent.xml"/>
     <param name="dbmain"  value="old2newDocBook-UBL-Signature-documents-ent.xml"/>
-    <param name="words"   value="${dir}/wordlist-UBL-Signature-${UBLversion}.txt"/>
+    <param name="words"   value="wordlist-UBL-Signature-${UBLversion}.txt"/>
     <param name="report"  value="${dir}/check-ubl-signature-${UBLversion}-${stage}.html"/>
     <param name="library"  value="UBL-SignatureLibrary-${UBLversion}"/>
   </antcall>    
@@ -242,7 +270,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="display-okay">
     <or>
       <istrue value="${display-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-spreadsheet-generation}"/>
     </or>
   </condition>
 
@@ -263,7 +291,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="display-sig-okay">
     <or>
       <istrue value="${display-sig-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-spreadsheet-generation}"/>
     </or>
   </condition>
   <antcall target="-gc2ods">
@@ -282,7 +310,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="xls-sig-okay">
     <or>
       <istrue value="${xls-sig-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-spreadsheet-generation}"/>
     </or>
   </condition>
   <antcall target="-ods2xls">
@@ -300,7 +328,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="xls-okay">
     <or>
       <istrue value="${xls-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-spreadsheet-generation}"/>
     </or>
   </condition>
   <antcall target="-ods2xls">
@@ -321,7 +349,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="html-okay">
     <or>
       <istrue value="${html-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-html-generation}"/>
     </or>
   </condition>
 <parallel>  
@@ -463,7 +491,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="html-sig-okay">
     <or>
       <istrue value="${html-sig-file-okay}"/>
-      <istrue value="${skip-spreadsheet-and-html-generation}"/>
+      <istrue value="${skip-html-generation}"/>
     </or>
   </condition>
   <antcall target="-gc2html">
@@ -533,7 +561,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 <target name="-gc2ndr-check-only" unless="${okay}">
   <echo message='Checking "${source}" GC file against NDR and old "${compare}" to create "${report}"...'/>
   <echo message="Fail setting = ${fatal}"/>
-  <touch file="${words}"/>
+  <touch file="${dir}/${words}"/>
+  <property name="words-uri" location="${dir}/${words}"/>
   <java resultproperty="${returnProperty}" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-checkgc4obdndr.xsl"/>
      <arg value="-o:${report}"/>
@@ -545,17 +574,17 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="docbook-common-uri=${dbcmn}"/>
      <arg value="docbook-maindoc-uri=${dbmain}"/>
      <arg value="all-documents-report-href=${dbhref}"/>
-     <arg value="den-word-list-uri=${words}"/>
+     <arg value="den-word-list-uri=${words-uri}"/>
      <arg value="common-library-singleton-model-name=${library}"/>
      <arg value="version-column-name=CurrentVersion"/>
      <arg value="--suppressXsltNamespaceCheck:on"/>
      <arg value="errors-are-fatal=${fatal}"/>
   </java>
-  <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${thisdir}/spellcheck-UBL.txt check ${words} if abend)..."/>
+  <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${thisdir}/spellcheck-UBL.txt check ${words-uri} if abend)..."/>
   <exec executable="sh" failonerror="yes">
     <arg value="-e"/>
     <arg value="-c"/>
-    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWords.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
+    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words-uri} | tee ${dir}/unexpectedWords.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
   </exec>
   
 </target>
@@ -578,7 +607,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   
 <target name="-gc2ndrExt" unless="${okay}">
   <echo message='Checking "${source}" GC file against NDR...'/>
-  <touch file="${words}"/>
+  <touch file="${dir}/${words}"/>
+  <property name="words-uri" location="${dir}/${words}"/>
   <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-checkgc4obdndr.xsl"/>
      <arg value="-o:${report}"/>
@@ -589,14 +619,14 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="old-uri=${compare}"/>
      <arg value="docbook-common-uri=${dbcmn}"/>
      <arg value="docbook-maindoc-uri=${dbmain}"/>
-     <arg value="den-word-list-uri=${words}"/>
+     <arg value="den-word-list-uri=${words-uri}"/>
      <arg value="common-library-singleton-model-name=${library}"/>
      <arg value="--suppressXsltNamespaceCheck:on"/>
   </java>
-  <echo message='Spell-checking the resulting word list into ${dir}/unexpectedWordsExt.txt (run "aspell -p ./spellcheck-UBL.txt check ${words}" if abend)...'/>
+  <echo message='Spell-checking the resulting word list into ${dir}/unexpectedWordsExt.txt (run "aspell -p ./spellcheck-UBL.txt check ${words-uri}" if abend)...'/>
   <exec executable="sh" failonerror="yes">
     <arg value="-c"/>
-    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words} | tee ${dir}/unexpectedWordsExt.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
+    <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words-uri} | tee ${dir}/unexpectedWordsExt.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
   </exec>
   <echo message='Creating CVA/XSD extension from "${source}" GC file...'/>
   <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
@@ -681,12 +711,16 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <include name="**"/>
     </fileset>
   </copy>
+  <touch if:set="skip-gc" file="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/GC-FILE-NOT-REGENERATED.txt"/>
+  <touch if:set="skip-html-generation" file="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/HTML-FILES-NOT-GENERATED.txt"/>
   <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution"/>
   <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json"/>
   <mkdir dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json/val"/>
-  <copy preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution">
+  <copy preservelastmodified="true" 
+       todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution">
     <fileset dir=".">
-      <include name="UBL-Library-Google.ods"/> 
+      <include name="*"/>
+      <!--<include name="UBL-Library-Google.ods"/> 
       <include name="UBL-Documents-Google.ods"/> 
       <include name="spellcheck-UBL.txt"/>
       <include name="ident-UBL.xml"/>
@@ -699,10 +733,13 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="produceUBLschemas.xml"/>
       <include name="UBL-DefaultDTQ-shell.sch"/>
       <include name="skeletonDisplayEditSubset.ods"/>
-      <include name="UBL-CVA-Skeleton.cva"/>
+      <include name="UBL-CVA-Skeleton.cva"/>-->
     </fileset>
+  </copy>
+  <move preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution">
     <fileset dir="${dir}">
-      <include name="wordlist-UBL-Signature-${UBLversion}.txt"/>
+      <include name="*"/>
+<!--      <include name="wordlist-UBL-Signature-${UBLversion}.txt"/>
       <include name="check-ubl-signature-${UBLversion}-${stage}.html"/>
       <include name="old2newDocBook-UBL-Signature-library-ent.xml"/>
       <include name="old2newDocBook-UBL-Signature-documents-ent.xml"/>
@@ -712,9 +749,9 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-library-ent.xml"/>
       <include name="old2newDocBook-UBL-${UBLversion}-${stage}-UBL-${UBLprevVersion}-documents-ent.xml"/>
       <include name="check-ubl-${UBLversion}-${stage}-ubl-${UBLprevVersion}.html"/>
-      <include name="wordlist-UBL.txt"/>
+      <include name="wordlist-UBL-${UBLversion}.txt"/>-->
     </fileset>
-  </copy>
+  </move>
   <move preservelastmodified="true" todir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}/archive-only-not-in-final-distribution/json">
     <fileset dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}">
       <include name="json/**"/>
@@ -731,7 +768,9 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="master-code-list-*.xml"/>
     </fileset>
   </move>
-
+<!--
+    No need to create a ZIP since the result is being returned from git action as a zip. 
+    
   <delete file="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}.zip"/>
 
   <zip destfile="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}.zip"
@@ -739,7 +778,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <delete dir="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}"/>
   <unzip src="${dir}/artefacts-UBL-${UBLversion}-${stage}-${version}.zip" 
          dest="${dir}" />
-
+-->
   <!--documentation-->
   <echo message="stage=${stage}"/>
   <echo message="version=${version}"/>
