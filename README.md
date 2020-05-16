@@ -58,7 +58,7 @@ This repository is for the artefacts:
 
 See https://github.com/oasis-tcs/ubl-2.3-hub for the hub documentation.
 
-The document models in ODF-ODS format being processed into results are downloaded from Google _(note that the ODF-ODS files from Microsoft Word or from OpenOffice are bloated and the generation process is slowed by a factor of sometimes up to 10; even if you have maintained the ODS files offline from Google, it will speed the generation process if you take the time to upload them to Google, convert them into a Google spreadsheet, and then download the Google spreadsheet as an ODS file)_:
+The document models in ODF-ODS format being processed into results are downloaded from Google _*(Important note: the ODF-ODS files from Microsoft Word or from OpenOffice are bloated and the generation process is slowed by a factor of sometimes up to 10; even if you have maintained the ODS files offline from Google, it will speed the generation process if you take the time to upload your ODS files to Google, convert them into a Google spreadsheet, and then download the Google spreadsheets as the ODS files to put into this repository)*_:
 - [`UBL-Documents-Google.ods`]( UBL-Documents-Google.ods )
 - [`UBL-Library-Google.ods`]( UBL-Library-Google.ods )
 - [`UBL-Signature-Google.ods`]( UBL-Signature-Google.ods )
@@ -168,11 +168,9 @@ Diagnostic execution triggered by the creating text files (contents are irreleva
 - `skip-gc.txt` - use the UBL-Entities-2.3.gc file as given without regenerating it (saves 12 minutes)
 - `skip-html.txt` - skip the creation of the HTML reports (saves 240Mb and 10 minutes)
 
-## Housekeeping and WARNING
+## Housekeeping
 
 The return ZIP file is doubly-zipped, once on the web site to reduce storage costs (300Mb down to 30Mb), and once by GitHub to return the artefacts from the server. Once downloaded, please delete the download artefact off of GitHub to reduce storage costs.
-
-The server-reserved invocation arguments of "target" and "github" will trigger a delete of all repository files that were copied to the server. IF YOU RUN THESE ARGUMENTS LOCALLY YOU WILL LOSE YOUR REPOSITORY AND GIT HISTORY!
 
 ## Contact
 
