@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -f $1 ]; then rm artefacts.console.$3.txt ; fi
+if [ -f artefacts.console.$3.txt ]; then rm artefacts.console.$3.txt ; fi
 
 if [ "$3" = "" ]; then echo Missing results directory, stage and dateZ arguments ; exit 1 ; fi
 
@@ -14,8 +14,24 @@ if [ ! -d $1/artefacts-UBL-2.3-$2-$3/archive-only-not-in-final-distribution/ ]; 
 mv artefacts.console.$3.txt $1/artefacts-UBL-2.3-$2-$3/archive-only-not-in-final-distribution/
 echo $serverReturn >$1/artefacts-UBL-2.3-$2-$3/archive-only-not-in-final-distribution/artefacts.exitcode.$3.txt
 
-# reduce storage costs by zipping results and deleting intermediate files
+# reduce GitHub storage costs by zipping results and deleting intermediate files
 7z a $1/artefacts-UBL-2.3-$2-$3.zip $1/artefacts-UBL-2.3-$2-$3
 rm -r -f $1/artefacts-UBL-2.3-$2-$3
+
+if [ "$1" = "target" ]
+then
+if [ "$2" = "github" ]
+then
+if [ "$4" = "DELETE-REPOSITORY-FILES-AS-WELL" ] #secret undocumented failsafe
+then
+# further reduce GitHub storage costs by deleting repository files
+
+find . -not -name target -not -name .github -depth 1 -exec rm -r -f {} \;
+mv $1/artefacts-UBL-2.3-$2-$3.zip .
+rm -r -f $1
+
+fi
+fi
+fi
 
 exit 0 # always be successful so that github returns ZIP of results

@@ -24,7 +24,7 @@ jobs:
         mkdir target
         timestamp=$(date -u +%Y%m%d-%H%M)
         echo "::set-env name=TIMESTAMP::${timestamp}"
-        bash produceUBLSchemas-2.3.sh target github ${timestamp}z
+        bash produceUBLSchemas-2.3.sh target github ${timestamp}z DELETE-REPOSITORY-FILES-AS-WELL
 
     - uses: actions/upload-artifact@v2
       with:
