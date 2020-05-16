@@ -15,8 +15,9 @@ mv artefacts.console.$3.txt $1/artefacts-UBL-2.3-$2-$3/archive-only-not-in-final
 echo $serverReturn >$1/artefacts-UBL-2.3-$2-$3/archive-only-not-in-final-distribution/artefacts.exitcode.$3.txt
 
 # reduce GitHub storage costs by zipping results and deleting intermediate files
-7z a $1/artefacts-UBL-2.3-$2-$3.zip $1/artefacts-UBL-2.3-$2-$3
-rm -r -f $1/artefacts-UBL-2.3-$2-$3
+pushd $1
+7z a artefacts-UBL-2.3-$2-$3.zip artefacts-UBL-2.3-$2-$3
+popd
 
 if [ "$1" = "target" ]
 then
