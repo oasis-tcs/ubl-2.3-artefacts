@@ -58,10 +58,10 @@ This repository is for the artefacts:
 
 See https://github.com/oasis-tcs/ubl-2.3-hub for the hub documentation.
 
-The document models in ODF-ODS format being processed into results are downloaded from Google _*(Important note: the ODF-ODS files from Microsoft Word or from OpenOffice are bloated and the generation process is slowed by a factor of sometimes up to 10; even if you have maintained the ODS files offline from Google, it will speed the generation process if you take the time to upload your ODS files to Google, convert them into a Google spreadsheet, and then download the Google spreadsheets as the ODS files to put into this repository)*_:
-- [`UBL-Documents-Google.ods`]( UBL-Documents-Google.ods )
-- [`UBL-Library-Google.ods`]( UBL-Library-Google.ods )
-- [`UBL-Signature-Google.ods`]( UBL-Signature-Google.ods )
+The document models in ODF-ODS format being processed into results are downloaded from Google _(Important note: the ODF-ODS files from Microsoft Word or from OpenOffice are bloated and the generation process is slowed by a factor of sometimes up to 10; even if you have maintained the ODS files offline from Google, it will speed the generation process if you take the time to upload your ODS files to Google, convert them into a Google spreadsheet, and then download the Google spreadsheets as the ODS files to put into this repository)_:
+- [`UBL-Documents-Google.ods`]( UBL-Documents-Google.ods ) _(Please see important note above)_
+- [`UBL-Library-Google.ods`]( UBL-Library-Google.ods ) _(Please see important note above)_
+- [`UBL-Signature-Google.ods`]( UBL-Signature-Google.ods ) _(Please see important note above)_
 
 The document model genericode files are generated from the ODS files, preserved in this Git repository for archived reference, and copied to the results directory:
 - [`UBL-Entities-2.3.gc`]( UBL-Entities-2.3.gc )
