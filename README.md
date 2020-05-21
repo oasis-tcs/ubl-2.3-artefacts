@@ -59,9 +59,45 @@ This repository is for the artefacts:
 See https://github.com/oasis-tcs/ubl-2.3-hub for the hub documentation.
 
 The document models in ODF-ODS format being processed into results are downloaded from Google _(Important note: the ODF-ODS files from Microsoft Word or from OpenOffice are bloated and the generation process is slowed by a factor of sometimes up to 10; even if you have maintained the ODS files offline from Google, it will speed the generation process if you take the time to upload your ODS files to Google, convert them into a Google spreadsheet, and then download the Google spreadsheets as the ODS files to put into this repository)_:
-- [`UBL-Documents-Google.ods`]( UBL-Documents-Google.ods ) _(Please see important note above)_
-- [`UBL-Library-Google.ods`]( UBL-Library-Google.ods ) _(Please see important note above)_
-- [`UBL-Signature-Google.ods`]( UBL-Signature-Google.ods ) _(Please see important note above)_
+- `UBL-Documents-Google.ods` _(Please see important note above)_
+- `UBL-Library-Google.ods` _(Please see important note above)_
+- `UBL-Signature-Google.ods` _(Please see important note above)_
+
+The sample XML instances are found/placed in the [`raw/xml`]( raw/xml ) directory
+
+## Online GitHub use for development purposes by committee members
+
+It is easy for committee members to contribute to the improvement of the hub document following these steps:
+
+1. Fork this repository to be one of your own private repositories.
+1. Enable the running of workflows: click on 'Actions' tab at the top and press button "I understand my workflows, go ahead and run them"
+1. From the repository home page click the green "clone or download" button for the repository name of your private repository to clone to your local machine: `git clone {repository}`
+1. Modify locally any of the input ODS and XML files described above
+1. Review the list of changed files: `git status`
+1. Stage your changes: `git add .`
+1. Review the list of staged files: `git status`
+1. Commit your changes: `git commit -m "Description of your change"`
+1. Submit your changes: `git push`
+1. The push triggers a "GitHub action" on the GitHub server: at the top of the GitHub screen, go to the "Actions" tab and you will see a workflow whose title is the same as the description you used for the commit message; click on the bold-face title string (it is a hyperlink); from the "Artifacts" box download the ZIP file to view your results when they are completed (the box remains empty while the job is being run and may need to be refreshed after)
+1. Repeat from step 4 until your submission is ready (see the ready criteria below)
+1. From the repository home page press the "New pull request" button to generate a request for the editors to pull your work into the main repository
+1. On the "Comparing changes" page that comes up, review the work that is being submitted
+1. Press the "Create pull request" button
+1. Title the pull request (default is your last commit message) and outline the changes made in the description
+1. Press the "Crane pull request" below and to the right of the description
+1. The pull request now is in the hands of the editors for action
+
+To determine if the files are ready for sending to the project editors, look in the `archive-only-not-in-final-distribution` directory for these files summarizing any problems with the ODS submissions:
+- `artefacts.exitcode.{label}.txt` - exit code from the execution of the Ant build script
+- `artefacts.console.{label}.txt` - console log of the execution of the Ant build script
+- `check-ubl-2.3-github-ubl-2.3-csprd02.html` - report of differences UBL 2.3 CSPRD03 to CSPRD02
+- `check-ubl-2.3-github-ubl-2.2.html` - report of differences UBL 2.3 CSPRD03 to UBL 2.2
+
+If there are no errors then the XSD schemas, JSON schemas, and HTML reports all will be generated and found in the ZIP file for your use in testing.
+
+---
+
+## Offline use for production purposes by project editors
 
 The document model genericode files are generated from the ODS files, preserved in this Git repository for archived reference, and copied to the results directory:
 - [`UBL-Entities-2.3.gc`]( UBL-Entities-2.3.gc )
@@ -124,8 +160,12 @@ Outputs:
 - model check of naming and design rules for the signature extension
   - `check-ubl-signature-2.3-*.html`
 - differences between versions of document models expressed as DocBook for inclusion in the hub document
-  - `old2newDocBook-UBL-2.3-*-UBL-2.3-csprd02-documents.xml`
-  - `old2newDocBook-UBL-2.3-*-UBL-2.2-library.xml`
+  - `old2newDocBook-UBL-2.3-*-UBL-2.3-csprd02-documents-ent.xml`
+  - `old2newDocBook-UBL-2.3-*-UBL-2.3-csprd02-library-ent.xml`
+  - `old2newDocBook-UBL-2.3-*-UBL-2.2-documents-ent.xml`
+  - `old2newDocBook-UBL-2.3-*-UBL-2.2-library-ent.xml`
+  - `old2newDocBook-UBL-Signature-documents-ent.xml`
+  - `old2newDocBook-UBL-Signature-library-ent.xml`
 - summary use of words in Dictionary Entry Names (each line is the word followed by the version of UBL in which the word is used)
   - `wordlist-UBL.txt`
 - diagnostic list of DEN words not found in the dictionaries or spell check supplement (should be empty)
