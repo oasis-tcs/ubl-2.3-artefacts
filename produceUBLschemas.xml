@@ -40,23 +40,23 @@
   
   <available property="gc2obdndr-exists"
          file="${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-gc2obdndr.xsl"/>
-  <fail unless="gc2obdndr-exists" 
+  <echo unless:set="gc2obdndr-exists" 
         message="Cannot find gc2obdndr=${gc2obdndr}"/>
   <available property="ods2obdgc-exists"
 file="${utilitydir}Crane-ods2obdgc-${ods2obdgc}/Crane-ods2obdgc.xsl"/>
-  <fail unless="ods2obdgc-exists" 
+  <echo unless:set="ods2obdgc-exists" 
         message="Cannot find ods2obdgc=${ods2obdgc}"/>
   <available property="gc2odsxml-exists"
 file="${utilitydir}Crane-gc2odsxml-${gc2odsxml}/Crane-gc2odsxml.xsl"/>
-  <fail unless="gc2odsxml-exists" 
+  <echo unless:set="gc2odsxml-exists" 
         message="Cannot find gc2odsxml=${gc2odsxml}"/>
   <available property="cvagcxsl-exists"
 file="${utilitydir}Crane-cva-gc-xsl-${cvagcxsl}/Crane-cva2html.xsl"/>
-  <fail unless="cvagcxsl-exists" 
+  <echo unless:set="cvagcxsl-exists" 
         message="Cannot find cvagcxsl=${cvagcxsl}"/>
   <available property="cva2sch-exists"
 file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"/>
-  <fail unless="cva2sch-exists" 
+  <echo unless:set="cva2sch-exists" 
         message="Cannot find cva2sch=${cva2sch}"/>
   
   <echo message="stage=${stage}"/>
@@ -510,7 +510,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <delete file="${dir}/${stage}-${UBLversion}"/>
   <delete file="${target}"/>
   <echo message='Rebuilding "${target}" GC file...'/>
-  <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
+  <java append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-ods2obdgc-${ods2obdgc}/Crane-ods2obdgc.xsl"/>
      <arg value="-o:${target}"/>
      <arg value="-it:ods-uri"/>
@@ -519,13 +519,13 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="lengthen-model-name-uri=${lengthen-model-name-uri}"/>
   </java>
   <available property="done" file="${target}"/>
-  <fail unless="done" message="Unable to create GC file: ${target}"/>
+  <echo unless:set="done" message="Unable to create GC file: ${target}"/>
 </target>
 
 <target name="-gc2ods" unless="${okay}">
   <delete file="${target}"/>
   <echo message='Rebuilding "${target}" ODS file...'/>
-  <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
+  <java append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2odsxml-${gc2odsxml}/Crane-gc2odsxml.xsl"/>
      <arg value="-o:${target}-dir/dummy"/>
      <arg value="-s:${source}"/>
@@ -533,19 +533,19 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="--suppressXsltNamespaceCheck:on"/>
   </java>
   <available property="files" file="${target}-dir/content.xml"/>
-  <fail unless="files" 
+  <echo unless:set="files" 
         message="Unable to create ODS XML file: ${target}-dir/"/>
   <zip destfile="${target}" basedir="${target}-dir" includes="**"/>
   <delete dir="${target}-dir"/>
   <available property="done" file="${target}"/>
-  <fail unless="done" message="Unable to create ODS file: ${target}"/>
+  <echo unless:set="done" message="Unable to create ODS file: ${target}"/>
 </target>
 
 <target name="-ods2xls" unless="${okay}">
   <delete file="${sourcedir}/${sourcefilenoext}.xls"/>
   <echo message="Need to rebuild ${sourcedir}/${sourcefilenoext}.xls from ${sourcedir}/${sourcefilenoext}.ods..."/>
   <available property="ready" file="${sourcedir}/${sourcefilenoext}.ods"/>
-  <fail unless="ready" message="Unable to find ODS file: ${sourcedir}/${sourcefilenoext}.ods"/>
+  <echo unless:set="ready" message="Unable to find ODS file: ${sourcedir}/${sourcefilenoext}.ods"/>
   <exec executable="soffice">
     <arg value="--headless"/>
     <arg value="--convert-to"/>
@@ -555,7 +555,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <arg value="${sourcedir}/${sourcefilenoext}.ods"/>
   </exec>
   <available property="done" file="${sourcedir}/${sourcefilenoext}.xls"/>
-  <fail unless="done" message="Unable to create XLS file: ${sourcedir}/${sourcefilenoext}.xls"/>
+  <echo unless:set="done" message="Unable to create XLS file: ${sourcedir}/${sourcefilenoext}.xls"/>
 </target>
 
 <target name="-gc2ndr-check-only" unless="${okay}">
@@ -581,7 +581,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="errors-are-fatal=${fatal}"/>
   </java>
   <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${thisdir}/spellcheck-UBL.txt check ${words-uri} if abend)..."/>
-  <exec executable="sh" failonerror="yes">
+  <exec executable="sh">
     <arg value="-e"/>
     <arg value="-c"/>
     <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words-uri} | tee ${dir}/unexpectedWords.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
@@ -595,7 +595,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   
 <target name="-gc2cva" unless="${okay}">
   <echo message='Creating CVA/XSD from "${source}" GC file...'/>
-  <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
+  <java append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-gc2obdndr.xsl"/>
      <arg value="-s:${source}"/>
      <arg value="-o:${dir}/${stage}-${UBLversion}/junk.out"/>
@@ -609,7 +609,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <echo message='Checking "${source}" GC file against NDR...'/>
   <touch file="${dir}/${words}"/>
   <property name="words-uri" location="${dir}/${words}"/>
-  <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
+  <java append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-checkgc4obdndr.xsl"/>
      <arg value="-o:${report}"/>
      <arg value="-s:${source}"/>
@@ -624,12 +624,12 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="--suppressXsltNamespaceCheck:on"/>
   </java>
   <echo message='Spell-checking the resulting word list into ${dir}/unexpectedWordsExt.txt (run "aspell -p ./spellcheck-UBL.txt check ${words-uri}" if abend)...'/>
-  <exec executable="sh" failonerror="yes">
+  <exec executable="sh">
     <arg value="-c"/>
     <arg value='aspell -l EN -p ${thisdir}/spellcheck-UBL.txt list &lt;${words-uri} | tee ${dir}/unexpectedWordsExt.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
   </exec>
   <echo message='Creating CVA/XSD extension from "${source}" GC file...'/>
-  <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
+  <java append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-gc2obdndr.xsl"/>
      <arg value="-s:${source}"/>
      <arg value="-o:${dir}/${stage}-${UBLversion}/junk.out"/>
@@ -646,32 +646,32 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <delete file="${xslout}"/>
   <copy preservelastmodified="true" file="${schin}" todir="${dir}/${stage}-${UBLversion}/cva"/>
   <echo message='Creating CVA documentation from "${cvain}" CVA file...'/>
-  <java failonerror="yes" append="true" classname="com.icl.saxon.StyleSheet">
+  <java append="true" classname="com.icl.saxon.StyleSheet">
      <arg value="-o"/>
      <arg value="${cvaout}"/>
      <arg value="${cvain}"/>
      <arg value="${utilitydir}Crane-cva-gc-xsl-${cvagcxsl}/Crane-cva2html.xsl"/>
   </java>
   <echo message='Creating XSL validation from "${cvain}" CVA file...'/>
-  <java failonerror="yes" append="true" classname="com.icl.saxon.StyleSheet">
+  <java append="true" classname="com.icl.saxon.StyleSheet">
      <arg value="-o"/>
      <arg value="${cvain}.temp.xsl"/>
      <arg value="${cvain}"/>
      <arg value="${utilitydir}Crane-cva2sch-${cva2sch}/utility/Crane-cva2schXSLT.xsl"/>
   </java>
-  <java failonerror="yes" append="true" classname="com.icl.saxon.StyleSheet">
+  <java append="true" classname="com.icl.saxon.StyleSheet">
      <arg value="-o"/>
      <arg value="${schadd}"/>
      <arg value="${cvain}.temp.xsl"/>
      <arg value="${cvain}.temp.xsl"/>
   </java>
-  <java failonerror="yes" append="true" classname="com.icl.saxon.StyleSheet">
+  <java append="true" classname="com.icl.saxon.StyleSheet">
      <arg value="-o"/>
      <arg value="${dir}/${stage}-${UBLversion}/cva/${schin}.temp.sch"/>
      <arg value="${dir}/${stage}-${UBLversion}/cva/${schin}"/>
      <arg value="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"/>
   </java>
-  <java failonerror="yes" append="true" classname="com.icl.saxon.StyleSheet">
+  <java append="true" classname="com.icl.saxon.StyleSheet">
      <arg value="-o"/>
      <arg value="${xslout}"/>
      <arg value="${dir}/${stage}-${UBLversion}/cva/${schin}.temp.sch"/>
@@ -688,7 +688,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <delete file="${dir}/${stage}-${UBLversion}/mod/summary/reports"/>
   <property name="alldocsname" value="All-UBL-${UBLversion}-Documents"/>
   <echo message='Creating HTML reports (group ${group}) from "${source}" GC file...'/>
-  <java failonerror="yes" append="true" classname="net.sf.saxon.Transform">
+  <java append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-gc2obdsummary.xsl"/>
      <arg value="-s:${source}"/>
      <arg value="-o:${dir}/${stage}-${UBLversion}/mod/summary/reports/junk.out"/>
