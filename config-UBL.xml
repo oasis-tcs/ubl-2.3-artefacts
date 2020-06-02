@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration
-[
-<!--
+<!DOCTYPE configuration [
+	<!--
   This is the configuration of the base schema fragments for UBL 2.3
  
   Library:           OASIS Universal Business Language (UBL) 2.3 CSPRD03
@@ -9,85 +8,93 @@
   Release Date:      10 April 2020
   
 -->
-<!ENTITY copyrightYear        "2020">
-<!ENTITY versionDate "10 April 2020">
-<!ENTITY versionDisplay "2.3 CSPRD03">
-<!ENTITY versionDirectory   "csprd03-UBL-2.3">
+	<!ENTITY copyrightYear "2020">
+	<!ENTITY versionDate "10 April 2020">
+	<!ENTITY versionDisplay "2.3 CSPRD03">
+	<!ENTITY versionDirectory "csprd03-UBL-2.3">
 ]>
 <configuration xmlns:xsd="http://www.w3.org/2001/XMLSchema">
- <ndr>
-  <name-abbreviations>
-    <abbreviation short="CV2">Card Verification Value</abbreviation>
-    <abbreviation short="ID">Identifier</abbreviation>
-    <abbreviation short="OID">Object Identifier</abbreviation>
-    <abbreviation short="SME">Micro-, Small-, and Medium-sized Enterprise</abbreviation>
-    <abbreviation short="URI">Uniform Resource Identifier</abbreviation>
-    <abbreviation short="UNDG">United Nations Development Group</abbreviation>
-    <abbreviation short="UBL">Universal Business Language</abbreviation>
-    <abbreviation short="UUID">Universally Unique Identifier</abbreviation>
-    <abbreviation short="XPath">XML Path Language</abbreviation>
-  </name-abbreviations>
-  <den-abbreviations>
-    <abbreviation short="CV2">Card Verification Value</abbreviation>
-    <abbreviation short="OID">Object Identifier</abbreviation>
-    <abbreviation short="SME">Micro-, Small-, and Medium-sized Enterprise</abbreviation>
-    <abbreviation short="URI">Uniform Resource Identifier</abbreviation>
-    <abbreviation short="UNDG">United Nations Development Group</abbreviation>
-    <abbreviation short="UBL">Universal Business Language</abbreviation>
-    <abbreviation short="UUID">Universally Unique Identifier</abbreviation>
-    <abbreviation short="XPath">XML Path Language</abbreviation>
-  </den-abbreviations>
-  <equivalences>
-    <equivalence>
-      <primary-noun>OID</primary-noun>
-      <representation-term>Identifier</representation-term>
-    </equivalence>
-    <equivalence>
-      <primary-noun>URI</primary-noun>
-      <representation-term>Identifier</representation-term>
-    </equivalence>
-    <equivalence>
-      <primary-noun>UUID</primary-noun>
-      <representation-term>Identifier</representation-term>
-    </equivalence>
-  </equivalences>
-  <expected-maindoc-BIEs>
-    <property-term type="BBIE" cardinality="0..1" order="1"
-                                  >UBL Version Identifier</property-term>
-    <property-term type="BBIE" cardinality="0..1" order="2"
-                                  >Customization Identifier</property-term>
-    <property-term type="BBIE" cardinality="0..1" order="3"
-                                  >Profile Identifier</property-term>
-    <property-term type="BBIE" cardinality="0..1" order="4"
-                                  >Profile Execution Identifier</property-term>
-    <property-term type="ASBIE" cardinality="0..n"
-                                  >Signature</property-term>
-  </expected-maindoc-BIEs>
-  <types>
-    <type>Amount</type>
-    <type>Binary Object</type>
-    <type>Code</type>
-    <type>Date Time</type>
-    <type>Date</type>
-    <type>Graphic</type>
-    <type>Identifier</type>
-    <type>Indicator</type>
-    <type>Measure</type>
-    <type>Name</type>
-    <type>Numeric</type>
-    <type>Percent</type>
-    <type>Picture</type>
-    <type>Quantity</type>
-    <type>Rate</type>
-    <type>Sound</type>
-    <type>Text</type>
-    <type>Time</type>
-    <type>Value</type>
-    <type>Video</type>
-  </types>
- </ndr>
- <schema version="2.3">
-  <comment>
+	<ndr>
+		<name-abbreviations>
+			<abbreviation short="CV2">Card Verification Value</abbreviation>
+			<abbreviation short="ID">Identifier</abbreviation>
+			<abbreviation short="INF">Irradiated Nuclear Fuel</abbreviation>
+			<abbreviation short="ISPS">International Ship and Port Facility Security</abbreviation>
+			<abbreviation short="ISSC">IInternational Ship Security Certificate</abbreviation>
+			<abbreviation short="ISSC">IInternational Ship Security Certificate</abbreviation>
+			<abbreviation short="MMSI">Maritime Mobile Service Identity</abbreviation>
+			<abbreviation short="SME">Micro-, Small-, and Medium-sized Enterprise</abbreviation>
+			<abbreviation short="SSP">Ship Security Plan</abbreviation>
+			<abbreviation short="URI">Uniform Resource Identifier</abbreviation>
+			<abbreviation short="UNDG">United Nations Development Group</abbreviation>
+			<abbreviation short="UBL">Universal Business Language</abbreviation>
+			<abbreviation short="UUID">Universally Unique Identifier</abbreviation>
+			<abbreviation short="WHO">World Health Organisation</abbreviation>
+			<abbreviation short="XPath">XML Path Language</abbreviation>
+		</name-abbreviations>
+		<den-abbreviations>
+			<abbreviation short="CV2">Card Verification Value</abbreviation>
+			<abbreviation short="ID">Identifier</abbreviation>
+			<abbreviation short="INF">Irradiated Nuclear Fuel</abbreviation>
+			<abbreviation short="ISPS">International Ship and Port Facility Security</abbreviation>
+			<abbreviation short="ISSC">IInternational Ship Security Certificate</abbreviation>
+			<abbreviation short="ISSC">IInternational Ship Security Certificate</abbreviation>
+			<abbreviation short="MMSI">Maritime Mobile Service Identity</abbreviation>
+			<abbreviation short="SME">Micro-, Small-, and Medium-sized Enterprise</abbreviation>
+			<abbreviation short="SSP">Ship Security Plan</abbreviation>
+			<abbreviation short="URI">Uniform Resource Identifier</abbreviation>
+			<abbreviation short="UNDG">United Nations Development Group</abbreviation>
+			<abbreviation short="UBL">Universal Business Language</abbreviation>
+			<abbreviation short="UUID">Universally Unique Identifier</abbreviation>
+			<abbreviation short="WHO">World Health Organisation</abbreviation>
+			<abbreviation short="XPath">XML Path Language</abbreviation>
+		</den-abbreviations>
+		<equivalences>
+			<equivalence>
+				<primary-noun>OID</primary-noun>
+				<representation-term>Identifier</representation-term>
+			</equivalence>
+			<equivalence>
+				<primary-noun>URI</primary-noun>
+				<representation-term>Identifier</representation-term>
+			</equivalence>
+			<equivalence>
+				<primary-noun>UUID</primary-noun>
+				<representation-term>Identifier</representation-term>
+			</equivalence>
+		</equivalences>
+		<expected-maindoc-BIEs>
+			<property-term type="BBIE" cardinality="0..1" order="1">UBL Version Identifier</property-term>
+			<property-term type="BBIE" cardinality="0..1" order="2">Customization Identifier</property-term>
+			<property-term type="BBIE" cardinality="0..1" order="3">Profile Identifier</property-term>
+			<property-term type="BBIE" cardinality="0..1" order="4">Profile Execution Identifier</property-term>
+			<property-term type="ASBIE" cardinality="0..n">Signature</property-term>
+		</expected-maindoc-BIEs>
+		<types>
+			<type>Amount</type>
+			<type>Binary Object</type>
+			<type>Code</type>
+			<type>Date Time</type>
+			<type>Date</type>
+			<type>Graphic</type>
+			<type>Identifier</type>
+			<type>Indicator</type>
+			<type>Measure</type>
+			<type>Name</type>
+			<type>Numeric</type>
+			<type>Percent</type>
+			<type>Picture</type>
+			<type>Quantity</type>
+			<type>Rate</type>
+			<type>Sound</type>
+			<type>Text</type>
+			<type>Time</type>
+			<type>Value</type>
+			<type>Video</type>
+		</types>
+	</ndr>
+	<schema version="2.3">
+		<comment>
   Library:           OASIS Universal Business Language (UBL) &versionDisplay;
                      http://docs.oasis-open.org/ubl/&versionDirectory;/
   Release Date:      &versionDate;
@@ -95,7 +102,7 @@
   Generated on:      %z
   Copyright (c) OASIS Open &copyrightYear;. All Rights Reserved.
 </comment>
-    <copyright position="end">
+		<copyright position="end">
   OASIS takes no position regarding the validity or scope of any 
   intellectual property or other rights that might be claimed to pertain 
   to the implementation or use of the technology described in this 
@@ -141,80 +148,58 @@
   WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A 
   PARTICULAR PURPOSE.    
 </copyright>
-  <type-documentation>
-    <ccts:Component xmlns:ccts="urn:un:unece:uncefact:documentation:2">
-       <ccts:ComponentType>ComponentType</ccts:ComponentType>
-       <ccts:DictionaryEntryName>DictionaryEntryName</ccts:DictionaryEntryName>
-       <ccts:Version>Version</ccts:Version>
-       <ccts:Definition>Definition</ccts:Definition>
-       <ccts:Cardinality>Cardinality</ccts:Cardinality>
-       <ccts:ObjectClassQualifier>ObjectClassQualifier</ccts:ObjectClassQualifier>
-       <ccts:ObjectClass>ObjectClass</ccts:ObjectClass>
-       <ccts:PropertyTermQualifier>PropertyTermQualifier</ccts:PropertyTermQualifier>
-       <ccts:PropertyTerm>PropertyTerm</ccts:PropertyTerm>
-       <ccts:AssociatedObjectClass>AssociatedObjectClass</ccts:AssociatedObjectClass>
-       <ccts:RepresentationTerm>RepresentationTerm</ccts:RepresentationTerm>
-       <ccts:DataTypeQualifier>DataTypeQualifier</ccts:DataTypeQualifier>
-       <ccts:DataType>DataType</ccts:DataType>
-       <ccts:AlternativeBusinessTerms>AlternativeBusinessTerms</ccts:AlternativeBusinessTerms>
-       <ccts:Examples>Examples</ccts:Examples>
-    </ccts:Component>
-  </type-documentation>
-  <dir name="cva">
-    <file type="CVA" name="UBL-DefaultDTQ-2.3.cva"
-          skeleton-uri="UBL-CVA-Skeleton.cva"/>
-  </dir>
-  <dir name="xsd" runtime-name="xsdrt">
-    <dir name="common">
-      <file type="CABIE" name="UBL-CommonAggregateComponents-2.3.xsd"
-            prefix="cac"
-namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"/>
-      <file type="CBBIE" name="UBL-CommonBasicComponents-2.3.xsd"
-            prefix="cbc"
-namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"/>
-      <file type="QDT" name="UBL-QualifiedDataTypes-2.3.xsd"
-            prefix="qdt"
-namespace="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2"/>
-      <file type="UDT" name="BDNDR-UnqualifiedDataTypes-1.1.xsd"
-            prefix="udt"
-namespace="urn:oasis:names:specification:bdndr:schema:xsd:UnqualifiedDataTypes-1"/>
-      <file type="EXT" name="UBL-CommonExtensionComponents-2.3.xsd"
-            prefix="ext"
-namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
-        <elements>
-         <xsd:element ref="ext:UBLExtensions" minOccurs="0" maxOccurs="1">
-            <xsd:annotation>
-               <xsd:documentation>A container for extensions foreign to the document.</xsd:documentation>
-            </xsd:annotation>
-         </xsd:element>
-        </elements>
-      </file>
-    </dir>
-    <dir name="maindoc">
-      <files type="DABIE" name="UBL-%n-2.3.xsd"
-             namespace="urn:oasis:names:specification:ubl:schema:xsd:%n-2">
-        <element-documentation>This element MUST be conveyed as the root element in any instance document based on this Schema expression</element-documentation>
-      </files>
-    </dir>
-  </dir>
-   <dir name="json-schema">
-    <dir name="common">
-      <file type="CABIE" name="UBL-CommonAggregateComponents-2.3.json"
-            syntax="JSON"
-namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"/>
-      <file type="CBBIE" name="UBL-CommonBasicComponents-2.3.json"
-            syntax="JSON"
-namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"/>
-      <file type="QDT" name="UBL-QualifiedDataTypes-2.3.json"
-            syntax="JSON"
-namespace="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2"/>
-      <file type="UDT" name="BDNDR-UnqualifiedDataTypes-1.1.json"
-            syntax="JSON"
-namespace="urn:oasis:names:specification:bdndr:schema:xsd:UnqualifiedDataTypes-1"/>
-      <file type="EXT" name="UBL-CommonExtensionComponents-2.3.json"
-            syntax="JSON"
-namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
-        <declaration>
+		<type-documentation>
+			<ccts:Component xmlns:ccts="urn:un:unece:uncefact:documentation:2">
+				<ccts:ComponentType>ComponentType</ccts:ComponentType>
+				<ccts:DictionaryEntryName>DictionaryEntryName</ccts:DictionaryEntryName>
+				<ccts:Version>Version</ccts:Version>
+				<ccts:Definition>Definition</ccts:Definition>
+				<ccts:Cardinality>Cardinality</ccts:Cardinality>
+				<ccts:ObjectClassQualifier>ObjectClassQualifier</ccts:ObjectClassQualifier>
+				<ccts:ObjectClass>ObjectClass</ccts:ObjectClass>
+				<ccts:PropertyTermQualifier>PropertyTermQualifier</ccts:PropertyTermQualifier>
+				<ccts:PropertyTerm>PropertyTerm</ccts:PropertyTerm>
+				<ccts:AssociatedObjectClass>AssociatedObjectClass</ccts:AssociatedObjectClass>
+				<ccts:RepresentationTerm>RepresentationTerm</ccts:RepresentationTerm>
+				<ccts:DataTypeQualifier>DataTypeQualifier</ccts:DataTypeQualifier>
+				<ccts:DataType>DataType</ccts:DataType>
+				<ccts:AlternativeBusinessTerms>AlternativeBusinessTerms</ccts:AlternativeBusinessTerms>
+				<ccts:Examples>Examples</ccts:Examples>
+			</ccts:Component>
+		</type-documentation>
+		<dir name="cva">
+			<file type="CVA" name="UBL-DefaultDTQ-2.3.cva" skeleton-uri="UBL-CVA-Skeleton.cva"/>
+		</dir>
+		<dir name="xsd" runtime-name="xsdrt">
+			<dir name="common">
+				<file type="CABIE" name="UBL-CommonAggregateComponents-2.3.xsd" prefix="cac" namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"/>
+				<file type="CBBIE" name="UBL-CommonBasicComponents-2.3.xsd" prefix="cbc" namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"/>
+				<file type="QDT" name="UBL-QualifiedDataTypes-2.3.xsd" prefix="qdt" namespace="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2"/>
+				<file type="UDT" name="BDNDR-UnqualifiedDataTypes-1.1.xsd" prefix="udt" namespace="urn:oasis:names:specification:bdndr:schema:xsd:UnqualifiedDataTypes-1"/>
+				<file type="EXT" name="UBL-CommonExtensionComponents-2.3.xsd" prefix="ext" namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+					<elements>
+						<xsd:element ref="ext:UBLExtensions" minOccurs="0" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation>A container for extensions foreign to the document.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</elements>
+				</file>
+			</dir>
+			<dir name="maindoc">
+				<files type="DABIE" name="UBL-%n-2.3.xsd" namespace="urn:oasis:names:specification:ubl:schema:xsd:%n-2">
+					<element-documentation>This element MUST be conveyed as the root element in any instance document based on this Schema expression</element-documentation>
+				</files>
+			</dir>
+		</dir>
+		<dir name="json-schema">
+			<dir name="common">
+				<file type="CABIE" name="UBL-CommonAggregateComponents-2.3.json" syntax="JSON" namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"/>
+				<file type="CBBIE" name="UBL-CommonBasicComponents-2.3.json" syntax="JSON" namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"/>
+				<file type="QDT" name="UBL-QualifiedDataTypes-2.3.json" syntax="JSON" namespace="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2"/>
+				<file type="UDT" name="BDNDR-UnqualifiedDataTypes-1.1.json" syntax="JSON" namespace="urn:oasis:names:specification:bdndr:schema:xsd:UnqualifiedDataTypes-1"/>
+				<file type="EXT" name="UBL-CommonExtensionComponents-2.3.json" syntax="JSON" namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+					<declaration>
         "UBLExtensions": {
           "title": "UBLExtensions",
           "description": "An optional set of extensions to the committee model",
@@ -226,13 +211,11 @@ namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponent
           },
 
 </declaration>
-      </file>
-    </dir>
-     <dir name="maindoc">
-       <files type="DABIE" name="UBL-%n-2.3.json"
-              syntax="JSON"
-              namespace="urn:oasis:names:specification:ubl:schema:xsd:%n-2"/>
-    </dir>
-   </dir>
- </schema>
+				</file>
+			</dir>
+			<dir name="maindoc">
+				<files type="DABIE" name="UBL-%n-2.3.json" syntax="JSON" namespace="urn:oasis:names:specification:ubl:schema:xsd:%n-2"/>
+			</dir>
+		</dir>
+	</schema>
 </configuration>
