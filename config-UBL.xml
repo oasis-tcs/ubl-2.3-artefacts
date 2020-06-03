@@ -18,6 +18,7 @@
 		<name-abbreviations>
 			<abbreviation short="CV2">Card Verification Value</abbreviation>
 			<abbreviation short="ID">Identifier</abbreviation>
+			<abbreviation short="IMO">International Maritime Organisation</abbreviation>
 			<abbreviation short="INF">Irradiated Nuclear Fuel</abbreviation>
 			<abbreviation short="ISPS">International Ship and Port Facility Security</abbreviation>
 			<abbreviation short="ISSC">IInternational Ship Security Certificate</abbreviation>
@@ -35,6 +36,7 @@
 		<den-abbreviations>
 			<abbreviation short="CV2">Card Verification Value</abbreviation>
 			<abbreviation short="ID">Identifier</abbreviation>
+			<abbreviation short="IMO">International Maritime Organisation</abbreviation>
 			<abbreviation short="INF">Irradiated Nuclear Fuel</abbreviation>
 			<abbreviation short="ISPS">International Ship and Port Facility Security</abbreviation>
 			<abbreviation short="ISSC">IInternational Ship Security Certificate</abbreviation>
