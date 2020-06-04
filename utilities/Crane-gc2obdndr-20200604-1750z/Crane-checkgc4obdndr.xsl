@@ -7,7 +7,7 @@
                 exclude-result-prefixes="xs xsd gu"
                 version="2.0">
 
-<xs:doc info="$Id: Crane-checkgc4obdndr.xsl,v 1.36 2020/05/08 16:37:42 admin Exp $"
+<xs:doc info="$Id: Crane-checkgc4obdndr.xsl,v 1.39 2020/06/04 17:50:35 admin Exp $"
      filename="Crane-checkgc4obdndr.xsl" vocabulary="DocBook" internal-ns="gu">
   <xs:title>Compare new model against old using DocBook</xs:title>
   <para>
@@ -414,6 +414,13 @@
                                   $gu:abieName,' ',
                                   gu:col(.,'ComponentType'))"/>
     <xsl:choose>
+      <xsl:when test="not($gu:abieDEN)">
+        <xsl:call-template name="gu:row">
+          <xsl:with-param name="gu:col1" select="$gu:abieName"/>
+          <xsl:with-param name="gu:col3">ERROR NO DEN</xsl:with-param>
+          <xsl:with-param name="summary" select="true()"/>
+        </xsl:call-template>
+      </xsl:when>
       <xsl:when test="not(key('gu:abie-by-name',$gu:abieName,$new))">
         <xsl:call-template name="gu:row">
           <xsl:with-param name="gu:col1" select="$gu:abieName"/>

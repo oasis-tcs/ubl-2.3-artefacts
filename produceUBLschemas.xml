@@ -5,19 +5,19 @@
 <target name="make">
   <property name="thisdir" value="${user.dir}"/>
   <property name="utilitydir" value="${thisdir}/utilities/"/>
-  <!--create skip-gc.txt to preserve the old genericode model file-->
+  <!--test skip-gc.txt to preserve the old genericode model file-->
   <available property="skip-gc" file="skip-gc.txt"/>
   <echo if:set="skip-gc" message="!!!!!!!!!!!!!! Incomplete execution requested: UBL-Entities-2.3.gc not being generated from the given spreadsheets; delete skip-gc.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
-  <!--create skip-spreadsheet.txt for no spreadsheets-->
+  <!--test skip-spreadsheet.txt for no spreadsheets-->
   <available property="skip-spreadsheet-generation" file="skip-spreadsheets.txt"/>
   <echo if:set="skip-spreadsheet-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: ODS and XLS spreadsheets not being generated from UBL-Entities-2.3.gc ; delete skip-spreadsheets.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
-  <!--create skip-html.txt for no HTML-->
+  <!--test skip-html.txt for no HTML-->
   <available property="skip-html-generation" file="skip-html.txt"/>
   <echo if:set="skip-html-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: HTML reports not being generated from UBL-Entities-2.3.gc; delete skip-html.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
   <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
   <property name="abieExtensions" value="yes"/>
   <!--software timestamps-->
-  <property name="gc2obdndr" value="20200508-1640z"/>
+  <property name="gc2obdndr" value="20200604-1750z"/>
   <property name="ods2obdgc" value="20200412-1320z"/>
   <property name="cvagcxsl"  value="20130416-0040z"/>
   <property name="cva2sch"   value="20130207-1940z"/>
