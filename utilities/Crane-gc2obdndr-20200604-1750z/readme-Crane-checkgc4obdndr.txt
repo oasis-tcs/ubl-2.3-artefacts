@@ -1,4 +1,4 @@
-Crane-checkgc4obdndr.xsl 20200508-1640z
+Crane-checkgc4obdndr.xsl 20200604-1750z
 
 This is a stylesheet to analyze the genericode representation of a OASIS
 Business Document NDR 3.0 CCTS model, reporting on inconsistencies or 
