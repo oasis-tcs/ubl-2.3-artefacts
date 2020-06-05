@@ -7,7 +7,7 @@
                 exclude-result-prefixes="xs xsd gu"
                 version="2.0">
 
-<xs:doc info="$Id: checkgc4obdndr-model.xsl,v 1.32 2019/08/06 23:57:53 admin Exp $"
+<xs:doc info="$Id: checkgc4obdndr-model.xsl,v 1.33 2020/06/04 17:50:11 admin Exp $"
         filename="checkgc4obdndr-model.xsl" vocabulary="DocBook" internal-ns="gu">
   <xs:title>Check new model against old</xs:title>
   <para>
@@ -642,8 +642,20 @@ select="$gu:newnamesPrunedToOnlyOld/key('gu:internalABIEsByName',@name,$new)"/>
 <xsl:variable name="gu:COM06-invalid-component-type" as="element(ndrbad)*">
   <xsl:for-each select="$gu:gc/*/*/Row
             [not(gu:col(.,'ComponentType')=('ABIE','BBIE','ASBIE'))]">
-    <ndrbad gu:den="{gu:col(.,'DictionaryEntryName')}" gu:var="gu:MOD02"
-            gu:type="{gu:col(.,'ComponentType')}"/>
+    <ndrbad gu:den="{
+       for $den in string(gu:col(.,'DictionaryEntryName')) return
+       if( normalize-space($den) ) then $den else
+       for $name in string(gu:col(.,'ComponentName')) return
+       if( normalize-space($name) ) then $name else
+       for $model in string(gu:col(.,'ModelName')) return
+       if( normalize-space($model) )
+       then concat( 'Model ',$model,' row ',
+                    count(preceding-sibling::Row
+                    [gu:col(.,'ModelName')=$model] ) ) 
+       else '(no DEN, no name, no model)' }" 
+            gu:var="gu:COM06"
+            gu:type="{for $type in string(gu:col(.,'ComponentType')) return
+                     if( normalize-space($type) ) then $type else '(empty)'}"/>
   </xsl:for-each>
 </xsl:variable>
 
@@ -885,11 +897,22 @@ select="$gu:newnamesPrunedToOnlyOld/key('gu:internalABIEsByName',@name,$new)"/>
   <xsl:for-each-group select="$gu:allBIEs"
                       group-by="gu:col(.,'DictionaryEntryName')">
     <xsl:if test="count(current-group())>1">
-      <ndrbad gu:den="{current-grouping-key()}" gu:var="gu:COM09"
+      <ndrbad gu:den="{current-grouping-key()}" gu:var="gu:COM10"
            gu:models="{distinct-values(current-group()/gu:col(.,'ModelName'))}"
            gu:value="{.}"/>
     </xsl:if>
   </xsl:for-each-group>
+  <xsl:for-each select="$gu:gc/*/*/Row[not(gu:col(.,'DictionaryEntryName'))]">
+    <ndrbad gu:den="{
+       for $name in string(gu:col(.,'ComponentName')) return
+       if( normalize-space($name) ) then $name else
+       for $model in string(gu:col(.,'ModelName')) return
+       if( normalize-space($model) )
+       then concat( 'Model ',$model,' row ',
+                    count(preceding-sibling::Row
+                    [gu:col(.,'ModelName')=$model] ) ) 
+       else '(no name, no model)'} - empty or absent DEN"/>
+  </xsl:for-each>
 </xsl:variable>
 
 <xs:variable>
@@ -904,7 +927,7 @@ select="$gu:newnamesPrunedToOnlyOld/key('gu:internalABIEsByName',@name,$new)"/>
             select="$gu:allNewValues[../@ColumnRef=$gu:allDENRelatedColumns]">
     <xsl:if test="contains(.,'.') or contains(.,'_') or 
                   normalize-space(.) != .">
-      <ndrbad gu:den="{gu:col(../..,'DictionaryEntryName')}" gu:var="gu:COM10"
+      <ndrbad gu:den="{gu:col(../..,'DictionaryEntryName')}" gu:var="gu:COM11"
               gu:column="{../@ColumnRef}" gu:value="{.}"/>
     </xsl:if>
   </xsl:for-each>
@@ -969,10 +992,10 @@ select="$gu:newnamesPrunedToOnlyOld/key('gu:internalABIEsByName',@name,$new)"/>
     <xsl:variable name="gu:lastBBIE" 
                   select="$gu:bies[gu:col(.,'ComponentType')='BBIE'][last()]"/>
     <xsl:if test="$gu:lastBBIE >> $gu:firstASBIE">
-      <ndrbad gu:abie="{$gu:class}" gu:var="gu:COM15"/>
+      <ndrbad gu:abie="{$gu:class}" gu:var="gu:COM14"/>
     </xsl:if>
     <xsl:if test="count($gu:bies) != count($gu:bies-by-class)">
-      <ndrbad gu:abie="{$gu:class}" gu:var="gu:COM15"
+      <ndrbad gu:abie="{$gu:class}" gu:var="gu:COM14"
       gu:foreign="{string-join(( $gu:bies[not(some $gu:bie in $gu:bies-by-class
                                               satisfies $gu:bie is .)],
                                  $gu:bies-by-class[not(some $gu:bie in $gu:bies
