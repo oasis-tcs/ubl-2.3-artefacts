@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$3" = "" ]; then echo Missing results directory, stage and dateZ arguments ; exit 1 ; fi
+if [ "$3" = "" ]; then echo Missing results directory, platform, and dateZ arguments ; exit 1 ; fi
 
 # Configuration parameters
 

@@ -415,8 +415,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   </antcall>
 </target>
 
-<target name="-reports">
-  <!--create reports-->
+<!--create reports-->
+<target name="-report-check">
   <uptodate targetfile="${dir}/${UBLstage}-${UBLversion}/mod/summary/reports/UBL-WeightStatement-${UBLversion}.html"
             property=  "html-file-okay">
     <srcfiles dir="${dir}">
@@ -429,6 +429,20 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <istrue value="${skip-html-generation}"/>
     </or>
   </condition>
+</target>
+
+<target name="-report-all-only" if="skip-html-generation">
+  <echo message='Creating "all documents" report...'/>
+  <antcall target="-gc2html">
+    <param name="source"             value="${dir}/UBL-Entities-${UBLversion}.gc"/>
+    <param name="library"            value=""/>
+    <param name="group"              value="0"/>
+    <param name="parallelGroupCount" value="0"/>
+    <param name="doAllOnly"          value="yes"/>
+  </antcall>  
+</target>
+
+<target name="-reports" depends="-report-check,-report-all-only" unless="html-okay">
 <parallel>  
   <sequential>
     <antcall target="-gc2html">
@@ -568,7 +582,6 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <condition property="html-sig-okay">
     <or>
       <istrue value="${html-sig-file-okay}"/>
-      <istrue value="${skip-html-generation}"/>
     </or>
   </condition>
   <antcall target="-gc2html">
@@ -672,12 +685,21 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="errors-are-fatal=${fatal}"/>
   </java>
   <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${dict-uri} check ${words-uri} if abend)..."/>
-  <exec resultproperty="${returnSpell}" executable="sh">
+  <exec resultproperty="returnSpell" executable="sh">
     <arg value="-e"/>
     <arg value="-c"/>
     <arg value='aspell -l EN -p ${dict-uri} list &lt;${words-uri} | tee ${dir}/unexpectedWords.txt | wc -w | sed "s/ //g" | grep "^0$"'/>
   </exec>
-  <touch if:set="${returnSpell}" file="${dir}/${UBLstage}-${UBLversion}/NDR-SPELL-CHECK-WARNING.txt"/>
+  <condition property="reportSpell">
+    <and>
+      <equals arg1="${fatal}" arg2="yes"/>
+      <isset property="returnSpell"/>
+      <not>
+        <equals arg1="${returnSpell}" arg2="0"/>
+      </not>
+    </and>
+  </condition>
+  <touch if:set="reportSpell" file="${dir}/${UBLstage}-${UBLversion}/NDR-SPELL-CHECK-WARNING.txt"/>
 </target>
 
 <target name="-gc2ndr" unless="${okay}">
@@ -779,6 +801,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 <target name="-gc2html" unless="${okay}">
   <delete file="${dir}/${UBLstage}-${UBLversion}/mod/summary/reports"/>
   <property name="alldocsname" value="All-UBL-${UBLversion}-Documents"/>
+  <property name="doAllOnly" value="no"/>
+  <property name="parallelGroupCount" value="16"/>
   <echo message='Creating HTML reports (group ${group}) from "${source}" GC file...'/>
   <java append="true" classname="net.sf.saxon.Transform">
      <arg value="-xsl:${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-gc2obdsummary.xsl"/>
@@ -788,10 +812,11 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="title-prefix=${title} ${UBLstage}"/>
      <arg value="date-time=${version}"/>
      <arg value="parallel-group-index=${group}"/>
-     <arg value="parallel-group-count=16"/>
+     <arg value="parallel-group-count=${parallelGroupCount}"/>
      <arg value="common-library-singleton-model-name=${library}"/>
      <arg value="copyright-text=Copyright &#169; OASIS Open"/>
      <arg value="--suppressXsltNamespaceCheck:on"/>
+     <arg value="do-all-only=${doAllOnly}"/>
   </java>
 </target>
 

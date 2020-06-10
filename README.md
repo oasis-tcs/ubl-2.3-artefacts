@@ -58,10 +58,21 @@ This repository is for the artefacts:
 
 See https://github.com/oasis-tcs/ubl-2.3-hub for the hub documentation.
 
-The document models in ODF-ODS format being processed into results are downloaded from Google _(Important note: the ODF-ODS files from Microsoft Word or from OpenOffice are bloated and the generation process is slowed by a factor of sometimes up to 10; even if you have maintained the ODS files offline from Google, it will speed the generation process if you take the time to upload your ODS files to Google, convert them into a Google spreadsheet, and then download the Google spreadsheets as the ODS files to put into this repository)_:
-- `UBL-Documents-Google.ods` _(Please see important note above)_
-- `UBL-Library-Google.ods` _(Please see important note above)_
-- `UBL-Signature-Google.ods` _(Please see important note above)_
+The document models are downloaded directly by GitHub from Google. The titles of the Google documents are irrelevant. Each document is referenced in the invocation script as follows:
+`libGoogle=https://docs.google.com/spreadsheets/d/1bWAhvsb8..library.spreadsheet..iCMLhgUrHFzY`
+- the URL of your Google spreadsheet for the common library (be sure not to include the "/edit..." at the end of the browser bar)
+- see below for choices in starting points for your spreadsheet
+
+`docGoogle=https://docs.google.com/spreadsheets/d/1P-3yEI0..documents.spreadsheet..0NTmINxksPQ`
+- the URL of your Google spreadsheet for the documents (be sure not to include the "/edit..." at the end of the browser bar)
+- see below for choices in starting points for your spreadsheet
+
+`sigGoogle=https://docs.google.com/spreadsheets/d/1bWAhvsb8..signature.spreadsheet..hgUrHoiCML`
+- the URL of your Google spreadsheet for the common library (be sure not to include the "/edit..." at the end of the browser bar)
+- see below for choices in starting points for your spreadsheet
+
+
+Modify the [`subsetUBLSchemas-github.sh`](subsetUBLSchemas-github.sh) invocation to point to your subset generation invocation file `subsetUBLSchemas-myProject.sh` (or whatever it is that you chose). The [`subsetUBLSchemas-github.sh`](subsetUBLSchemas-github.sh) is an ignored file from git's perspective. It is ignored so that it will not be overwritten when merging central changes into your repository. Should you need to recreate it, this is the typical content of [`subsetUBLSchemas-github.sh`](subsetUBLSchemas-github.sh) where the bash invocation invokes your invocation script:
 
 The sample XML instances are found/placed in the [`raw/xml`]( raw/xml ) directory
 
@@ -99,7 +110,7 @@ If there are no errors then the XSD schemas, JSON schemas, and HTML reports all 
 
 ## Offline use for production purposes by project editors
 
-The document model genericode files are generated from the ODS files, preserved in this Git repository for archived reference, and copied to the results directory:
+The document model genericode files are generated from the ODS files and copied to the results directory:
 - [`UBL-Entities-2.3.gc`]( UBL-Entities-2.3.gc )
 - [`UBL-Signature-Entities-2.3.gc`]( UBL-Signature-Entities-2.3.gc )
 
