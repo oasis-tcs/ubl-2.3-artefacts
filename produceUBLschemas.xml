@@ -924,6 +924,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <exclude name="**/.git/**"/>
       <exclude name="**/.github/**"/>
       <exclude name="**/utilities/**"/>
+      <exclude name="**/raw/**"/>
       <exclude name="**/${dir}/**"/>
     </fileset>
   </copy>
