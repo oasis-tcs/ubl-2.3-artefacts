@@ -11,9 +11,12 @@
   <!--test skip-spreadsheet.txt for no spreadsheets-->
   <available property="skip-spreadsheet-generation" file="skip-ss.txt"/>
   <echo if:set="skip-spreadsheet-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: ODS and XLS spreadsheets not being generated from UBL-Entities-2.3.gc ; delete skip-ss.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
-  <!--test skip-html.txt for no HTML-->
+  <!--test skip-html.txt for no detailed HTML-->
   <available property="skip-html-generation" file="skip-html.txt"/>
-  <echo if:set="skip-html-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: HTML reports not being generated from UBL-Entities-2.3.gc; delete skip-html.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
+  <echo if:set="skip-html-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: detailed HTML reports not being generated from UBL-Entities-2.3.gc; delete skip-html.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
+  <!--test skip-all-html.txt for no all HTML-->
+  <available property="skip-all-html-generation" file="skip-all-html.txt"/>
+  <echo if:set="skip-all-html-generation" message="!!!!!!!!!!!!!! Incomplete execution requested: summary HTML report not being generated from UBL-Entities-2.3.gc; delete skip-all-html.txt to restore normal operation!!!!!!!!!!!!!!!!"/>
   <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
   <property name="abieExtensions" value="yes"/>
   <!--software timestamps-->
@@ -274,11 +277,16 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     
     <!--prepare reports-->
     <antcall target="-reports"/>
+
+    <!--run samples-->
+    <antcall target="-samples"/>
   </sequential>
   
   <!--package it all up-->
   <antcall target="-package"/>
 </target>
+
+<!--========================================================================-->
 
 <target name="-artefacts">
   <antcall target="-gc2cva">
@@ -431,7 +439,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   </condition>
 </target>
 
-<target name="-report-all-only" if="skip-html-generation">
+<target name="-report-all-only" if="skip-html-generation" unless="skip-all-html-generation">
   <echo message='Creating "all documents" report...'/>
   <antcall target="-gc2html">
     <param name="source"             value="${dir}/UBL-Entities-${UBLversion}.gc"/>
@@ -818,6 +826,81 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="--suppressXsltNamespaceCheck:on"/>
      <arg value="do-all-only=${doAllOnly}"/>
   </java>
+</target>
+
+<target name="-samples">
+  <echo message="Checking the use of namespace URI strings and processing instructions..."/>
+  <exec executable="sh" outputproperty="countBadNSPI">
+    <arg value="-c"/>
+    <arg value='java -jar ${utilitydir}Crane-gc2obdndr-${gc2obdndr}/saxon9he/saxon9he.jar 
+-s:namespaceCheck.xsl -xsl:namespaceCheck.xsl "dir=${dir}/${UBLstage}-${UBLversion}/xml" | grep "^ " | grep -E -v "ubl:schema:xsd:(SignatureBasicComponents|CommonExtensionComponents)-2" | tee ${dir}/${UBLstage}-${UBLversion}/UNEXPECTED-SAMPLES-NS-PI-DETAILS.txt | wc -l | sed "s/ //g"'/>
+  </exec>
+  <condition property="badNSPI">
+    <not>
+      <equals arg1="${countBadNSPI}" arg2="0"/>
+    </not>
+  </condition>
+  <echo if:set="badNSPI" message="ERROR Found ${countBadNSPI} rogue namespaces or processing instructions in sample files"/>
+  <delete unless:set="badNSPI" file="${dir}/${UBLstage}-${UBLversion}/UNEXPECTED-SAMPLES-NS-PI-DETAILS.txt"/>
+  
+  <echo message="Checking consistency of invocation scripts..."/>
+  <exec executable="sh" outputproperty="countXMLdirectory">
+    <arg value="-c"/>
+    <arg value='ls ${dir}/${UBLstage}-${UBLversion}/xml | wc -l | sed "s/ //g"'/>
+  </exec>  
+  <exec executable="sh" outputproperty="countXMLshell">
+    <arg value="-c"/>
+    <arg value='grep validate ${dir}/${UBLstage}-${UBLversion}/val/testsamples.sh | wc -l | sed "s/ //g"'/>
+  </exec>  
+  <condition property="mismatchedSamplesShell">
+    <not>
+      <equals arg1="${countXMLdirectory}" arg2="${countXMLshell}"/>
+    </not>
+  </condition>
+  <touch if:set="mismatchedSamplesShell" file="${dir}/${UBLstage}-${UBLversion}/MISMATCHED-TEST-SAMPLES-SH-WARNING.txt"/>
+  <exec executable="sh" outputproperty="countXMLbatch">
+    <arg value="-c"/>
+    <arg value='grep validate ${dir}/${UBLstage}-${UBLversion}/val/testsamples.sh | wc -l | sed "s/ //g"'/>
+  </exec>
+  <condition property="mismatchedSamplesBatch">
+    <not>
+      <equals arg1="${countXMLdirectory}" arg2="${countXMLbatch}"/>
+    </not>
+  </condition>
+  <touch if:set="mismatchedSamplesBatch" file="${dir}/${UBLstage}-${UBLversion}/MISMATCHED-TEST-SAMPLES-BAT-WARNING.txt"/>
+  
+  <echo message="Testing validation error files..."/>
+  <exec executable="sh" resultproperty="returnTest" dir="${dir}/${UBLstage}-${UBLversion}/val">
+    <arg value="test.sh"></arg>
+  </exec>
+  <condition property="reportTest">
+    <not>
+      <and>
+        <isset property="returnTest"/>
+        <equals arg1="${returnTest}" arg2="0"/>
+      </and>
+    </not>
+  </condition>
+  <touch if:set="reportTest" file="${dir}/${UBLstage}-${UBLversion}/UNEXPECTED-TEST-RESULT-WARNING.txt"/>
+  <echo/>
+  <echo/>
+  
+  <echo message="Validating sample test files..."/>
+  <exec executable="sh" resultproperty="returnTestSamples" dir="${dir}/${UBLstage}-${UBLversion}/val">
+    <arg value="-e"/>
+    <arg value="testsamples.sh"></arg>
+  </exec>
+  <condition property="reportTestSamples">
+    <not>
+      <and>
+        <isset property="returnTestSamples"/>
+        <equals arg1="${returnTestSamples}" arg2="0"/>
+      </and>
+    </not>
+  </condition>
+  <touch if:set="reportTestSamples" file="${dir}/${UBLstage}-${UBLversion}/UNEXPECTED-TEST-SAMPLES-RESULT-WARNING.txt"/>
+  <delete file="${dir}/${UBLstage}-${UBLversion}/val/output.txt"/>
+  
 </target>
 
 <target name="-package">

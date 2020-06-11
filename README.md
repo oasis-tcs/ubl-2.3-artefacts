@@ -68,7 +68,7 @@ The document models are downloaded directly from Google during the GitHub Action
 
 The [`produceUBLSchemas-github.sh`](produceUBLSchemas-github.sh) invocation points to the particular set of parameters to use to create the artefacts. Two examples included in this repositories are the intermediate work submitted by the UBL Transportation Subcommittee (TSC) [`produceUBLSchemas-TSC-2.3.sh`](produceUBLSchemas-TSC-2.3.sh) and the CSPRD03 voting artefacts [`produceUBLSchemas-2.3.sh`](produceUBLSchemas-2.3.sh).
 
-Every git push to the repository triggers the GitHub Action execution of [`produceUBLSchemas-github.sh`](produceUBLSchemas-github.sh) to invoke whichever set of results is needed. The action takes about 30 minutes of processing on GitHub to create all of the artefacts. This can be cut to about 20 minutes by skipping the generation of the many individual HTML report files and only generating the one summary HTML file. This skipping is signalled by the presence of the `skip-html.txt` file in the repository. When that file does not exist, all of the individual HTML reports are created. Skipping the individual HTML reports cuts this to about 15 minutes of processing.
+Every git push to the repository triggers the GitHub Action execution of [`produceUBLSchemas-github.sh`](produceUBLSchemas-github.sh) to invoke whichever set of results is needed. The action takes about 30 minutes of processing on GitHub to create all of the artefacts. This can be cut to about 20 minutes by skipping the generation of the many individual HTML report files and only generating the one summary HTML file. This skipping is signalled by the presence of the `skip-html.txt` file in the repository. When that file does not exist, all of the individual HTML reports are created. Skipping the individual HTML reports cuts this to about 20 minutes of processing.
 
 If you are changing the Google spreadsheet but not any of your repository files, you cannot do a git push until you create a temporary file in your directory and then push the temporary file to the repository. The next time around, you can delete the temporary file in your directory and then push the deletion to the repository. Either of these steps will trigger GitHub actions that will reach out to the Google spreadsheet and run the process.
 
@@ -176,6 +176,14 @@ Outputs:
   - `xsd/`
 - generated runtime copy of XML schemas (no annotations in the generated fragments)
   - `xsdrt/`
+
+Various warning and error files are created in the base output directory indicating issues regarding the build process:
+ - `NDR-SPELL-ChECK-WARNING.txt` - see the `unexpetedWords.txt` for a list of words that are not found in English or the UBL dictionary
+ - `UNEXPECTED-SAMPLES-NS-PI-DETAILS.txt` - open the file to see a list of unexpected namespace declarations found in sample files
+ - `MISMATCHED-TEST-SAMPLES-SH-WARNING.txt` - the number of invocations in the `val/testsamples.sh` script does not match the number of examples
+ - `MISMATCHED-TEST-SAMPLES-BAT-WARNING.txt` - the number of invocations in the `val/testsamples.bat` script does not match the number of examples
+ - `UNEXPECTED-TEST-RESULT-WARNING.txt` - the `val/test.sh` script did not end cleanly
+ - `UNEXPECTED-TEST-SAMPLES-RESULT-WARNING.txt` - at least one invocation in the `val/testsamples.sh` did not validate 
 
 When git runs the build process these invocation arguments are used to build everything (no timestamp checking on github):
 - `sh produceUBLSchemas-github.sh target github CCyymmdd-HHMMz`
