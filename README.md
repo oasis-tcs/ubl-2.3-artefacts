@@ -184,6 +184,7 @@ Various warning and error files are created in the base output directory indicat
  - `MISMATCHED-TEST-SAMPLES-BAT-WARNING.txt` - the number of invocations in the `val/testsamples.bat` script does not match the number of examples
  - `UNEXPECTED-TEST-RESULT-WARNING.txt` - the `val/test.sh` script did not end cleanly
  - `UNEXPECTED-TEST-SAMPLES-RESULT-WARNING.txt` - at least one invocation in the `val/testsamples.sh` did not validate 
+ - `LIST-OF-PROBLEM-CODE-LISTS.txt` - genericode files in the `cl/` directory that are not genericode-schema valid
 
 When git runs the build process these invocation arguments are used to build everything (no timestamp checking on github):
 - `sh produceUBLSchemas-github.sh target github CCyymmdd-HHMMz`

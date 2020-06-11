@@ -278,7 +278,10 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <!--prepare reports-->
     <antcall target="-reports"/>
 
-    <!--run samples-->
+    <!--check code lists-->
+    <antcall target="-codelists"/>
+
+    <!--check samples-->
     <antcall target="-samples"/>
   </sequential>
   
@@ -828,6 +831,37 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   </java>
 </target>
 
+<target name="-codelists">
+  <echo message="Testing code list files..."/>
+  <exec executable="sh" resultproperty="returnCLlist" 
+        dir="${dir}/${UBLstage}-${UBLversion}/cl"
+        output="${dir}/codeListCheckList.txt">
+    <arg value="-c"/>
+    <arg value="find . -name \*.gc -print"/>
+  </exec>
+  <exec executable="sh" resultproperty="returnCLparse" errorproperty="ignore"
+        dir="${dir}/${UBLstage}-${UBLversion}/cl"
+        output="${dir}/codeListCheckGood.txt">
+    <arg value="-c"/>
+    <arg value="find . -name \*.gc -exec sh ../val/w3cschema.sh ${utilitydir}/genericode/xsd/genericode.xsd {} \;
+      -print | grep /gc/"/>
+  </exec>
+  <exec executable="sh" resultproperty="returnCLdiff" dir="${dir}"
+        output="${dir}/${UBLstage}-${UBLversion}/LIST-OF-PROBLEM-CODE-LISTS.txt">
+    <arg value="-c"/>
+    <arg value="diff codeListCheckList.txt codeListCheckGood.txt"/>
+  </exec>
+  <condition property="reportCLdiff">
+    <not>
+      <and>
+        <isset property="returnCLdiff"/>
+        <equals arg1="${returnCLdiff}" arg2="0"/>
+      </and>
+    </not>
+  </condition>
+  <delete unless:set="reportCLdiff" file="${dir}/${UBLstage}-${UBLversion}/LIST-OF-PROBLEM-CODE-LISTS.txt"/>
+</target>
+
 <target name="-samples">
   <echo message="Checking the use of namespace URI strings and processing instructions..."/>
   <exec executable="sh" outputproperty="countBadNSPI">
@@ -871,7 +905,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   
   <echo message="Testing validation error files..."/>
   <exec executable="sh" resultproperty="returnTest" dir="${dir}/${UBLstage}-${UBLversion}/val">
-    <arg value="test.sh"></arg>
+    <arg value="test.sh"/>
   </exec>
   <condition property="reportTest">
     <not>
@@ -888,7 +922,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <echo message="Validating sample test files..."/>
   <exec executable="sh" resultproperty="returnTestSamples" dir="${dir}/${UBLstage}-${UBLversion}/val">
     <arg value="-e"/>
-    <arg value="testsamples.sh"></arg>
+    <arg value="testsamples.sh"/>
   </exec>
   <condition property="reportTestSamples">
     <not>
