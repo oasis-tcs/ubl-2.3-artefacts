@@ -15,28 +15,43 @@
 <!ENTITY versionDirectory   "csprd03-UBL-2.3">
 ]>
 <configuration xmlns:xsd="http://www.w3.org/2001/XMLSchema">
- <ndr>
-  <name-abbreviations>
-    <abbreviation short="CV2">Card Verification Value</abbreviation>
-    <abbreviation short="ID">Identifier</abbreviation>
-    <abbreviation short="OID">Object Identifier</abbreviation>
-    <abbreviation short="SME">Micro-, Small-, and Medium-sized Enterprise</abbreviation>
-    <abbreviation short="URI">Uniform Resource Identifier</abbreviation>
-    <abbreviation short="UNDG">United Nations Development Group</abbreviation>
-    <abbreviation short="UBL">Universal Business Language</abbreviation>
-    <abbreviation short="UUID">Universally Unique Identifier</abbreviation>
-    <abbreviation short="XPath">XML Path Language</abbreviation>
-  </name-abbreviations>
-  <den-abbreviations>
-    <abbreviation short="CV2">Card Verification Value</abbreviation>
-    <abbreviation short="OID">Object Identifier</abbreviation>
-    <abbreviation short="SME">Micro-, Small-, and Medium-sized Enterprise</abbreviation>
-    <abbreviation short="URI">Uniform Resource Identifier</abbreviation>
-    <abbreviation short="UNDG">United Nations Development Group</abbreviation>
-    <abbreviation short="UBL">Universal Business Language</abbreviation>
-    <abbreviation short="UUID">Universally Unique Identifier</abbreviation>
-    <abbreviation short="XPath">XML Path Language</abbreviation>
-  </den-abbreviations>
+  <ndr>
+		<name-abbreviations>
+			<abbreviation short="CV2">Card Verification Value</abbreviation>
+			<abbreviation short="ID">Identifier</abbreviation>
+			<abbreviation short="IMO">International Maritime Organisation</abbreviation>
+			<abbreviation short="INF">Irradiated Nuclear Fuel</abbreviation>
+			<abbreviation short="ISPS">International Ship and Port Facility Security</abbreviation>
+			<abbreviation short="ISSC">International Ship Security Certificate</abbreviation>
+			<abbreviation short="OID">Object Identifier</abbreviation>
+			<abbreviation short="MMSI">Maritime Mobile Service Identity</abbreviation>
+			<abbreviation short="SME">Micro-, Small-, and Medium-sized Enterprise</abbreviation>
+			<abbreviation short="SSP">Ship Security Plan</abbreviation>
+			<abbreviation short="URI">Uniform Resource Identifier</abbreviation>
+			<abbreviation short="UNDG">United Nations Development Group</abbreviation>
+			<abbreviation short="UBL">Universal Business Language</abbreviation>
+			<abbreviation short="UUID">Universally Unique Identifier</abbreviation>
+			<abbreviation short="WHO">World Health Organisation</abbreviation>
+			<abbreviation short="XPath">XML Path Language</abbreviation>
+		</name-abbreviations>
+		<den-abbreviations>
+			<abbreviation short="CV2">Card Verification Value</abbreviation>
+			<abbreviation short="ID">Identifier</abbreviation>
+			<abbreviation short="IMO">International Maritime Organisation</abbreviation>
+			<abbreviation short="INF">Irradiated Nuclear Fuel</abbreviation>
+			<abbreviation short="ISPS">International Ship and Port Facility Security</abbreviation>
+			<abbreviation short="ISSC">International Ship Security Certificate</abbreviation>
+			<abbreviation short="OID">Object Identifier</abbreviation>
+			<abbreviation short="MMSI">Maritime Mobile Service Identity</abbreviation>
+			<abbreviation short="SME">Micro-, Small-, and Medium-sized Enterprise</abbreviation>
+			<abbreviation short="SSP">Ship Security Plan</abbreviation>
+			<abbreviation short="URI">Uniform Resource Identifier</abbreviation>
+			<abbreviation short="UNDG">United Nations Development Group</abbreviation>
+			<abbreviation short="UBL">Universal Business Language</abbreviation>
+			<abbreviation short="UUID">Universally Unique Identifier</abbreviation>
+			<abbreviation short="WHO">World Health Organisation</abbreviation>
+			<abbreviation short="XPath">XML Path Language</abbreviation>
+		</den-abbreviations>
   <equivalences>
     <equivalence>
       <primary-noun>OID</primary-noun>

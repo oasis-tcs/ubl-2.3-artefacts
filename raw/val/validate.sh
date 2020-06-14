@@ -2,7 +2,7 @@
 #
 # Syntax: validate ubl-schema-file ubl-xml-file
 
-DP0=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+DP0=$( cd "$(dirname "$0")" ; pwd -P )
 echo
 echo "############################################################"
 echo Validating $2
