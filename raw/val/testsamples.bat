@@ -9,13 +9,16 @@ call validate  ..\xsdrt\maindoc\UBL-DigitalAgreement-2.3.xsd ..\xml\UBL-DigitalA
 call validate  ..\xsdrt\maindoc\UBL-DigitalCapability-2.3.xsd ..\xml\UBL-DigitalCapability-2.2-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-ExceptionCriteria-2.3.xsd ..\xml\UBL-ExceptionCriteria-2.1-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-ExceptionNotification-2.3.xsd ..\xml\UBL-ExceptionNotification-2.1-Example.xml
+call validate  ..\xsdrt\maindoc\UBL-ExportCustomsDeclaration-2.3.xsd ..\xml\UBL-ExportCustomsDeclaration-2.3-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-ExpressionOfInterestRequest-2.3.xsd ..\xml\UBL-ExpressionOfInterestRequest-2.2-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-Forecast-2.3.xsd ..\xml\UBL-Forecast-2.1-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-ForecastRevision-2.3.xsd ..\xml\UBL-ForecastRevision-2.1-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-ForwardingInstructions-2.3.xsd ..\xml\UBL-ForwardingInstructions-2.0-Example-International.xml
 call validate  ..\xsdrt\maindoc\UBL-FreightInvoice-2.3.xsd ..\xml\UBL-FreightInvoice-2.1-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-FulfilmentCancellation-2.3.xsd ..\xml\UBL-FulfilmentCancellation-2.1-Example.xml
+call validate  ..\xsdrt\maindoc\UBL-GoodsCertificate-2.3.xsd ..\xml\UBL-GoodsCertificate-2.3-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-GoodsItemItinerary-2.3.xsd ..\xml\UBL-GoodsItemItinerary-2.1-Example.xml
+call validate  ..\xsdrt\maindoc\UBL-GoodsItemPassport-2.3.xsd ..\xml\UBL-GoodsItemPassport-2.3-Example-Issued.xml
 call validate  ..\xsdrt\maindoc\UBL-InstructionForReturns-2.3.xsd ..\xml\UBL-InstructionForReturns-2.1-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-InventoryReport-2.3.xsd ..\xml\UBL-InventoryReport-2.1-Example.xml
 rem cannot validate ../xml/UBL-Invoice-2.0-Detached-Signature.xml because it isn't UBL
@@ -41,6 +44,9 @@ call validate  ..\xsdrt\maindoc\UBL-PriorInformationNotice-2.3.xsd ..\xml\UBL-Pr
 call validate  ..\xsdrt\maindoc\UBL-ProductActivity-2.3.xsd ..\xml\UBL-ProductActivity-2.1-Example-1.xml
 call validate  ..\xsdrt\maindoc\UBL-ProductActivity-2.3.xsd ..\xml\UBL-ProductActivity-2.1-Example-2.xml
 call validate  ..\xsdrt\maindoc\UBL-ProductActivity-2.3.xsd ..\xml\UBL-ProductActivity-2.1-Example-3.xml
+call validate  ..\xsdrt\maindoc\UBL-ProofOfReexportation-2.3.xsd ..\xml\UBL-ProofOfReexportation-2.3-Example.xml
+call validate  ..\xsdrt\maindoc\UBL-ProofOfReexportationReminder-2.3.xsd ..\xml\UBL-ProofOfReexportationReminder-2.3-Example.xml
+call validate  ..\xsdrt\maindoc\UBL-ProofOfReexportationRequest-2.3.xsd ..\xml\UBL-ProofOfReexportationRequest-2.3-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-Quotation-2.3.xsd ..\xml\UBL-Quotation-2.0-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-Quotation-2.3.xsd ..\xml\UBL-Quotation-2.1-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-ReceiptAdvice-2.3.xsd ..\xml\UBL-ReceiptAdvice-2.0-Example.xml
@@ -63,3 +69,5 @@ call validate  ..\xsdrt\maindoc\UBL-TransportationStatus-2.3.xsd ..\xml\UBL-Tran
 call validate  ..\xsdrt\maindoc\UBL-TransportationStatusRequest-2.3.xsd ..\xml\UBL-TransportationStatusRequest-2.1-Example.xml
 call validate  ..\xsdrt\maindoc\UBL-Waybill-2.3.xsd ..\xml\UBL-Waybill-2.0-Example-International.xml
 call validate  ..\xsdrt\maindoc\UBL-WeightStatement-2.3.xsd ..\xml\UBL-WeightStatement-2.2-Example.xml
+
+
