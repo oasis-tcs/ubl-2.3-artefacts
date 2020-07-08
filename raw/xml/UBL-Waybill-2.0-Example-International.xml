@@ -183,6 +183,8 @@
 					<cbc:DocumentType>String</cbc:DocumentType>
 					<cbc:XPath>String</cbc:XPath>
 					<cbc:XPath>String</cbc:XPath>
+					<cbc:XPath>String</cbc:XPath>
+					<cbc:XPath>String</cbc:XPath>
 					<cac:Attachment>
 						<cbc:EmbeddedDocumentBinaryObject mimeCode="application/CSTAdata+xml">UjBsR09EbGhjZ0dTQUxNQUFBUUNBRU1tQ1p0dU1GUXhEUzhi</cbc:EmbeddedDocumentBinaryObject>
 						<cac:ExternalReference>
@@ -200,6 +202,8 @@
 					<cbc:IssueDate>1967-08-13</cbc:IssueDate>
 					<cbc:DocumentTypeCode>normalizedString</cbc:DocumentTypeCode>
 					<cbc:DocumentType>String</cbc:DocumentType>
+					<cbc:XPath>String</cbc:XPath>
+					<cbc:XPath>String</cbc:XPath>
 					<cbc:XPath>String</cbc:XPath>
 					<cbc:XPath>String</cbc:XPath>
 					<cac:Attachment>

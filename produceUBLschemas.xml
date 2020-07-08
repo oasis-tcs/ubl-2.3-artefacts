@@ -315,12 +315,20 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="**"/>
     </fileset>
   </copy>
+  <copy preservelastmodified="true" tofile="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ.sch"
+        file="UBL-DefaultDTQ-shell.sch"/>
+  <echo message='Creating Schematron document constraints from "${source}" GC file...'/>
+  <java append="true" classname="net.sf.saxon.Transform">
+     <arg value="-xsl:UBL-DocumentConstraints-2.3.pattern.xsl"/>
+     <arg value="-s:${dir}/UBL-Entities-${UBLversion}.gc"/>
+     <arg value="-o:${dir}/${UBLstage}-${UBLversion}/cva/UBL-DocumentConstraints-2.3.pattern.sch"/>
+  </java>
   <antcall target="-cva2xsl">
     <param name="okay"    value="xsd-okay"/>
     <param name="cvain"   value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.cva"/>
     <param name="cvaout"  value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.html"/>
     <param name="cvabase" value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}"/>
-    <param name="schin"   value="UBL-DefaultDTQ-shell.sch"/>
+    <param name="schin"   value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ.sch"/>
     <param name="schadd"  value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.pattern.sch"/>
     <param name="xslout"  value="${dir}/${UBLstage}-${UBLversion}/val/UBL-DefaultDTQ-${UBLversion}.xsl"/>
   </antcall>
@@ -792,19 +800,17 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   </java>
   <java append="true" classname="com.icl.saxon.StyleSheet">
      <arg value="-o"/>
-     <arg value="${dir}/${UBLstage}-${UBLversion}/cva/${schin}.temp.sch"/>
-     <arg value="${dir}/${UBLstage}-${UBLversion}/cva/${schin}"/>
+     <arg value="${schin}.temp.sch"/>
+     <arg value="${schin}"/>
      <arg value="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"/>
   </java>
   <java append="true" classname="com.icl.saxon.StyleSheet">
      <arg value="-o"/>
      <arg value="${xslout}"/>
-     <arg value="${dir}/${UBLstage}-${UBLversion}/cva/${schin}.temp.sch"/>
+     <arg value="${schin}.temp.sch"/>
      <arg value="${utilitydir}Crane-cva2sch-${cva2sch}/utility/Message-Schematron-terminator.xsl"/>
   </java>
-  <delete file="${schadd}"/>
-  <delete file="${dir}/${UBLstage}-${UBLversion}/cva/${schin}"/>
-  <delete file="${dir}/${UBLstage}-${UBLversion}/cva/${schin}.temp.sch"/>
+  <delete file="${schin}.temp.sch"/>
   <delete file="${cvain}.temp.xsl"/>
   <echo message='Completed creating CVA/XSD artefacts'/>
 </target>
