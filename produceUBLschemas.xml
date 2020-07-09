@@ -315,7 +315,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="**"/>
     </fileset>
   </copy>
-  <copy preservelastmodified="true" tofile="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ.sch"
+  <copy preservelastmodified="true" tofile="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.sch"
         file="UBL-DefaultDTQ-shell.sch"/>
   <echo message='Creating Schematron document constraints from "${source}" GC file...'/>
   <java append="true" classname="net.sf.saxon.Transform">
@@ -327,8 +327,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <param name="okay"    value="xsd-okay"/>
     <param name="cvain"   value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.cva"/>
     <param name="cvaout"  value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.html"/>
-    <param name="cvabase" value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}"/>
-    <param name="schin"   value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ.sch"/>
+    <param name="schin"   value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.sch"/>
     <param name="schadd"  value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.pattern.sch"/>
     <param name="xslout"  value="${dir}/${UBLstage}-${UBLversion}/val/UBL-DefaultDTQ-${UBLversion}.xsl"/>
   </antcall>

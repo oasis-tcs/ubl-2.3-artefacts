@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<pattern xmlns="http://purl.oclc.org/dsdl/schematron" id="UBL-DocumentConstraints-2.3"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  exclude-result-prefixes="xsd ubl"
+  xmlns:ubl="urn:oasis"
+  version="2.0">
+
+<xsl:output indent="yes"/>
+
+<xsl:template match="/">
+  <pattern xmlns="http://purl.oclc.org/dsdl/schematron" id="UBL-DocumentConstraints-2.3"
          xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xsl:version="2.0">
-<!--
+<xsl:comment>
 UBL 2.3 Additional Document Constraints
   
-2020-04-18 14:50(UTC)
+20200708-2250(UTC)
 
 A set of Schematron rules against which UBL 2.3 document constraints are
 tested where in the scope of a second pass validation after schema validation
@@ -12,8 +21,8 @@ has been performed.
 
 Required namespace declarations as indicated in this set of rules:
 
-<ns prefix="ext" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"/>
-<ns prefix="cbc" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"/>
+&lt;ns prefix="ext" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"/>
+&lt;ns prefix="cbc" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"/>
 
 The following is a summary of the additional document constraints enumerated
 in UBL 2.3:
@@ -62,8 +71,8 @@ in UBL 2.3:
  - implemented below
  - per the documentation, this does not apply to the arbitrary content of
    an extension
-
--->
+</xsl:comment>
+    
    <rule id="Extensions-IND5-IND9" 
          context="ext:ExtensionContent//*[not(*) and not(normalize-space(.))] |
                   ext:ExtensionContent//@*[not(normalize-space(.))]">
@@ -91,3 +100,23 @@ in UBL 2.3:
      </report>
    </rule>
 </pattern>
+</xsl:template>
+
+<xsl:variable name="ubl:top" as="document-node()" select="/"/>
+
+<xsl:function name="ubl:textBBIEunion" as="xsd:string">  
+  <xsl:value-of>
+    <xsl:for-each-group select="$ubl:top
+   /*/SimpleCodeList/Row[Value[@ColumnRef='DataType']/SimpleValue='Text. Type']
+                        [Value[@ColumnRef='Cardinality']/ends-with(SimpleValue,'n')]"
+                      group-by="Value[@ColumnRef='ComponentName']/SimpleValue">
+      <xsl:sort select="Value[@ColumnRef='ComponentName']/SimpleValue"/>
+      <xsl:if test="position() &lt; last()"> | </xsl:if>
+      <xsl:value-of select="concat('cbc:',
+                                 Value[@ColumnRef='ComponentName']/SimpleValue,
+                                 '[1]')"/>
+    </xsl:for-each-group>
+  </xsl:value-of>
+</xsl:function>
+
+</xsl:stylesheet>
