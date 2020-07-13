@@ -2,7 +2,7 @@
 <ProofOfReexportation xmlns="urn:oasis:names:specification:ubl:schema:xsd:ProofOfReexportation-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
 	<cbc:ID>23424244</cbc:ID>
 	<cbc:IssueDate>2019-05-08</cbc:IssueDate>
-	<cac:ImportingGuarantorParty>
+	<cac:IssuerParty>
 		<cac:PartyName>
 			<cbc:Name>Deutscher Industrie- und Handelskammertag e.V.</cbc:Name>
 		</cac:PartyName>
@@ -18,24 +18,7 @@
 		<cac:PartyLegalEntity>
 			<cbc:CompanyID>DE122125278</cbc:CompanyID>
 		</cac:PartyLegalEntity>
-	</cac:ImportingGuarantorParty>
-	<cac:ExportingGuarantorParty>
-		<cac:PartyName>
-			<cbc:Name>Dansk Erhverv</cbc:Name>
-		</cac:PartyName>
-		<cac:PostalAddress>
-			<cbc:StreetName>Slotsholmsgade</cbc:StreetName>
-			<cbc:BuildingNumber>1</cbc:BuildingNumber>
-			<cbc:CityName>København K</cbc:CityName>
-			<cbc:PostalZone>1216</cbc:PostalZone>
-			<cac:Country>
-				<cbc:IdentificationCode>DK</cbc:IdentificationCode>
-			</cac:Country>
-		</cac:PostalAddress>
-		<cac:PartyLegalEntity>
-			<cbc:CompanyID>DK43232010</cbc:CompanyID>
-		</cac:PartyLegalEntity>
-	</cac:ExportingGuarantorParty>
+	</cac:IssuerParty>
 	<cac:GoodsItemPassportCounterfoil>
 		<cbc:ID>645634567</cbc:ID>
 		<cbc:GoodsItemPassportID>ata01661</cbc:GoodsItemPassportID>

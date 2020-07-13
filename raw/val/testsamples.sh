@@ -19,6 +19,7 @@ sh validate.sh ../xsdrt/maindoc/UBL-FulfilmentCancellation-2.3.xsd ../xml/UBL-Fu
 sh validate.sh ../xsdrt/maindoc/UBL-GoodsCertificate-2.3.xsd ../xml/UBL-GoodsCertificate-2.3-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-GoodsItemItinerary-2.3.xsd ../xml/UBL-GoodsItemItinerary-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-GoodsItemPassport-2.3.xsd ../xml/UBL-GoodsItemPassport-2.3-Example-Issued.xml
+sh validate.sh ../xsdrt/maindoc/UBL-ImportCustomsDeclaration-2.3.xsd ../xml/UBL-ImportCustomsDeclaration-2.3-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-InstructionForReturns-2.3.xsd ../xml/UBL-InstructionForReturns-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-InventoryReport-2.3.xsd ../xml/UBL-InventoryReport-2.1-Example.xml
 # cannot validate ../xml/UBL-Invoice-2.0-Detached-Signature.xml because it isn't UBL
@@ -59,6 +60,7 @@ sh validate.sh ../xsdrt/maindoc/UBL-SelfBilledCreditNote-2.3.xsd ../xml/UBL-Self
 sh validate.sh ../xsdrt/maindoc/UBL-Statement-2.3.xsd ../xml/UBL-Statement-2.0-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-StockAvailabilityReport-2.3.xsd ../xml/UBL-StockAvailabilityReport-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-TradeItemLocationProfile-2.3.xsd ../xml/UBL-TradeItemLocationProfile-2.1-Example.xml
+sh validate.sh ../xsdrt/maindoc/UBL-TransitCustomsDeclaration-2.3.xsd ../xml/UBL-TransitCustomsDeclaration-2.3-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-TransportExecutionPlan-2.3.xsd ../xml/UBL-TransportExecutionPlan-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-TransportExecutionPlanRequest-2.3.xsd ../xml/UBL-TransportExecutionPlanRequest-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-TransportProgressStatus-2.3.xsd ../xml/UBL-TransportProgressStatus-2.1-Example.xml
