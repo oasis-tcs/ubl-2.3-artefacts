@@ -296,11 +296,7 @@
 	</cac:Shipment>
 	<cac:Attestation>
 		<cbc:ID>1</cbc:ID>
-  	<cac:IssuerParty>
-  		<cac:PartyName>
-  			<cbc:Name>ConsignorExample</cbc:Name>
-  		</cac:PartyName>
-  	</cac:IssuerParty>
+  	<cbc:AcceptanceIndicator>true</cbc:AcceptanceIndicator>
 		<cac:AttestationLine>
 			<cbc:Description languageID="EN">
 						fish or aquatic invertebrates caught in the country or region’s domestic sea or in the open sea or farming aquatic animals
@@ -316,11 +312,7 @@
 	</cac:Attestation>
 	<cac:Attestation>
 		<cbc:ID>2</cbc:ID>
-  	<cac:IssuerParty>
-  		<cac:PartyName>
-  			<cbc:Name>ConsignorExample</cbc:Name>
-  		</cac:PartyName>
-  	</cac:IssuerParty>
+  	<cbc:AcceptanceIndicator>false</cbc:AcceptanceIndicator>
 		<cac:AttestationLine>
 			<cbc:Description languageID="EN">
 						from offal from plants, which are approved by the competent authority in Denmark for manufacture of aquatic products
@@ -337,11 +329,7 @@
 	</cac:Attestation>
 	<cac:Attestation>
 		<cbc:ID>3</cbc:ID>
-  	<cac:IssuerParty>
-  		<cac:PartyName>
-  			<cbc:Name>ConsignorExample</cbc:Name>
-  		</cac:PartyName>
-  	</cac:IssuerParty>
+  	<cbc:AcceptanceIndicator>false</cbc:AcceptanceIndicator>
 		<cac:AttestationLine>
 			<cbc:Description languageID="EN">
 						fish meal or fish oil from countries other than Denmark from establishments approved the AQSIQ. The fish meal or fish oil

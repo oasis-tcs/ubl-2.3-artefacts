@@ -47,6 +47,10 @@
   <echo message="libraryGoogle=${libraryGoogle}"/>
   <echo message="documentsGoogle=${documentsGoogle}"/>
   <echo message="signatureGoogle=${signatureGoogle}"/>
+  <tstamp>
+    <format property="wgettime" pattern="yyyy-MM-dd HH:mm:ss"/>
+  </tstamp>
+  <echo message="wgettime=${wgettime}"/>
   
   <available property="gc2obdndr-exists"
          file="${utilitydir}Crane-gc2obdndr-${gc2obdndr}/Crane-gc2obdndr.xsl"/>
@@ -97,6 +101,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <delete file="${dir}/UBL-Signature-Entities-${UBLversion}.gc"/>
     <delete file="${dir}/UBL-Entities-${UBLversion}.gc"/>
     
+    <echo file="${dir}/wget-signature-time.txt" message="${wgettime}"/>
+    <echo file="${dir}/wget-signature-uri.txt" message="${signatureGoogle}"/>
     <exec executable="wget">
       <arg value="--no-check-certificate"/>
       <arg value="-O"/><arg value="${dir}/UBL-Signature-Google.ods"/>
@@ -142,6 +148,9 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <touch if:set="gcSigErrors"
            message="VALID-SIGNATURE-GC-FILE-NOT-GENERATED"/>
   
+    <echo file="${dir}/wget-model-time.txt" message="${wgettime}"/>
+    <echo file="${dir}/wget-model-library-uri.txt" message="${libraryGoogle}"/>
+    <echo file="${dir}/wget-model-documents-uri.txt" message="${documentsGoogle}"/>
     <exec executable="wget">
       <arg value="--no-check-certificate"/>
       <arg value="-O"/><arg value="${dir}/UBL-Library-Google.ods"/>

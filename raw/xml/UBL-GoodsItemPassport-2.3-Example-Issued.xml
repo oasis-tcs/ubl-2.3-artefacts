@@ -3,6 +3,7 @@
 	<cbc:CustomizationID>UBL-2.3</cbc:CustomizationID>
 	<cbc:ID>ata01661</cbc:ID>
 	<cbc:IssueDate>2019-02-21</cbc:IssueDate>
+	<cbc:StatusCode>ISSUED</cbc:StatusCode>
 	<cac:ValidityPeriod>
 		<cbc:StartDate>2019-02-21</cbc:StartDate>
 		<cbc:EndDate>2020-02-20</cbc:EndDate>
