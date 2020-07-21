@@ -15,8 +15,10 @@ jobs:
       with:
         java-version: 1.8
 
-    - name: dependencies
-      run: sudo apt install -y aspell libreoffice
+    - name: Dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y aspell libreoffice
 
     - name: Build
 
