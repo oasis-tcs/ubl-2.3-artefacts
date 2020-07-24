@@ -9,13 +9,17 @@ sh validate.sh ../xsdrt/maindoc/UBL-DigitalAgreement-2.3.xsd ../xml/UBL-DigitalA
 sh validate.sh ../xsdrt/maindoc/UBL-DigitalCapability-2.3.xsd ../xml/UBL-DigitalCapability-2.2-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-ExceptionCriteria-2.3.xsd ../xml/UBL-ExceptionCriteria-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-ExceptionNotification-2.3.xsd ../xml/UBL-ExceptionNotification-2.1-Example.xml
+sh validate.sh ../xsdrt/maindoc/UBL-ExportCustomsDeclaration-2.3.xsd ../xml/UBL-ExportCustomsDeclaration-2.3-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-ExpressionOfInterestRequest-2.3.xsd ../xml/UBL-ExpressionOfInterestRequest-2.2-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-Forecast-2.3.xsd ../xml/UBL-Forecast-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-ForecastRevision-2.3.xsd ../xml/UBL-ForecastRevision-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-ForwardingInstructions-2.3.xsd ../xml/UBL-ForwardingInstructions-2.0-Example-International.xml
 sh validate.sh ../xsdrt/maindoc/UBL-FreightInvoice-2.3.xsd ../xml/UBL-FreightInvoice-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-FulfilmentCancellation-2.3.xsd ../xml/UBL-FulfilmentCancellation-2.1-Example.xml
+sh validate.sh ../xsdrt/maindoc/UBL-GoodsCertificate-2.3.xsd ../xml/UBL-GoodsCertificate-2.3-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-GoodsItemItinerary-2.3.xsd ../xml/UBL-GoodsItemItinerary-2.1-Example.xml
+sh validate.sh ../xsdrt/maindoc/UBL-GoodsItemPassport-2.3.xsd ../xml/UBL-GoodsItemPassport-2.3-Example-Issued.xml
+sh validate.sh ../xsdrt/maindoc/UBL-ImportCustomsDeclaration-2.3.xsd ../xml/UBL-ImportCustomsDeclaration-2.3-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-InstructionForReturns-2.3.xsd ../xml/UBL-InstructionForReturns-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-InventoryReport-2.3.xsd ../xml/UBL-InventoryReport-2.1-Example.xml
 # cannot validate ../xml/UBL-Invoice-2.0-Detached-Signature.xml because it isn't UBL
@@ -41,6 +45,9 @@ sh validate.sh ../xsdrt/maindoc/UBL-PriorInformationNotice-2.3.xsd ../xml/UBL-Pr
 sh validate.sh ../xsdrt/maindoc/UBL-ProductActivity-2.3.xsd ../xml/UBL-ProductActivity-2.1-Example-1.xml
 sh validate.sh ../xsdrt/maindoc/UBL-ProductActivity-2.3.xsd ../xml/UBL-ProductActivity-2.1-Example-2.xml
 sh validate.sh ../xsdrt/maindoc/UBL-ProductActivity-2.3.xsd ../xml/UBL-ProductActivity-2.1-Example-3.xml
+sh validate.sh ../xsdrt/maindoc/UBL-ProofOfReexportation-2.3.xsd ../xml/UBL-ProofOfReexportation-2.3-Example.xml
+sh validate.sh ../xsdrt/maindoc/UBL-ProofOfReexportationReminder-2.3.xsd ../xml/UBL-ProofOfReexportationReminder-2.3-Example.xml
+sh validate.sh ../xsdrt/maindoc/UBL-ProofOfReexportationRequest-2.3.xsd ../xml/UBL-ProofOfReexportationRequest-2.3-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-Quotation-2.3.xsd ../xml/UBL-Quotation-2.0-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-Quotation-2.3.xsd ../xml/UBL-Quotation-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-ReceiptAdvice-2.3.xsd ../xml/UBL-ReceiptAdvice-2.0-Example.xml
@@ -53,6 +60,7 @@ sh validate.sh ../xsdrt/maindoc/UBL-SelfBilledCreditNote-2.3.xsd ../xml/UBL-Self
 sh validate.sh ../xsdrt/maindoc/UBL-Statement-2.3.xsd ../xml/UBL-Statement-2.0-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-StockAvailabilityReport-2.3.xsd ../xml/UBL-StockAvailabilityReport-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-TradeItemLocationProfile-2.3.xsd ../xml/UBL-TradeItemLocationProfile-2.1-Example.xml
+sh validate.sh ../xsdrt/maindoc/UBL-TransitCustomsDeclaration-2.3.xsd ../xml/UBL-TransitCustomsDeclaration-2.3-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-TransportExecutionPlan-2.3.xsd ../xml/UBL-TransportExecutionPlan-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-TransportExecutionPlanRequest-2.3.xsd ../xml/UBL-TransportExecutionPlanRequest-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-TransportProgressStatus-2.3.xsd ../xml/UBL-TransportProgressStatus-2.1-Example.xml
@@ -63,3 +71,4 @@ sh validate.sh ../xsdrt/maindoc/UBL-TransportationStatus-2.3.xsd ../xml/UBL-Tran
 sh validate.sh ../xsdrt/maindoc/UBL-TransportationStatusRequest-2.3.xsd ../xml/UBL-TransportationStatusRequest-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-Waybill-2.3.xsd ../xml/UBL-Waybill-2.0-Example-International.xml
 sh validate.sh ../xsdrt/maindoc/UBL-WeightStatement-2.3.xsd ../xml/UBL-WeightStatement-2.2-Example.xml
+
