@@ -41,3 +41,8 @@ UUID
 Reexportation
 Reimportation
 SME
+ISPS
+ISSC
+MMSI
+Reinspection
+SSP
