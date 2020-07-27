@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GoodsCertificate xmlns="urn:oasis:names:specification:ubl:schema:xsd:GoodsCertificate-2" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+<GoodsCertificate xmlns="urn:oasis:names:specification:ubl:schema:xsd:GoodsCertificate-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
 	<cbc:ID>ExampleID</cbc:ID>
 	<cbc:UUID>ExampleUUID</cbc:UUID>
 	<cbc:IssueDate>2020-06-23</cbc:IssueDate>
@@ -297,6 +297,11 @@
 	<cac:Attestation>
 		<cbc:ID>1</cbc:ID>
   	<cbc:AcceptanceIndicator>true</cbc:AcceptanceIndicator>
+	  <cac:IssuerParty>
+	    <cac:PartyIdentification>
+	      <cbc:ID>1</cbc:ID>
+	    </cac:PartyIdentification>
+	  </cac:IssuerParty>
 		<cac:AttestationLine>
 			<cbc:Description languageID="EN">
 						fish or aquatic invertebrates caught in the country or region’s domestic sea or in the open sea or farming aquatic animals
@@ -313,6 +318,11 @@
 	<cac:Attestation>
 		<cbc:ID>2</cbc:ID>
   	<cbc:AcceptanceIndicator>false</cbc:AcceptanceIndicator>
+	  <cac:IssuerParty>
+	    <cac:PartyIdentification>
+	      <cbc:ID>1</cbc:ID>
+	    </cac:PartyIdentification>
+	  </cac:IssuerParty>
 		<cac:AttestationLine>
 			<cbc:Description languageID="EN">
 						from offal from plants, which are approved by the competent authority in Denmark for manufacture of aquatic products
@@ -330,6 +340,11 @@
 	<cac:Attestation>
 		<cbc:ID>3</cbc:ID>
   	<cbc:AcceptanceIndicator>false</cbc:AcceptanceIndicator>
+	  <cac:IssuerParty>
+	    <cac:PartyIdentification>
+	      <cbc:ID>1</cbc:ID>
+	    </cac:PartyIdentification>
+	  </cac:IssuerParty>
 		<cac:AttestationLine>
 			<cbc:Description languageID="EN">
 						fish meal or fish oil from countries other than Denmark from establishments approved the AQSIQ. The fish meal or fish oil
