@@ -83,10 +83,10 @@
     </cac:PartyIdentification>
   </cac:CustomsParty>
   <cac:Shipment>
-    <cbc:ID/>
+    <cbc:ID>S1</cbc:ID>
     <cbc:GrossWeightMeasure unitCode="KGM">30</cbc:GrossWeightMeasure>
     <cac:Consignment>
-      <cbc:ID/>
+      <cbc:ID>C1</cbc:ID>
       <cbc:ContainerizedIndicator>true</cbc:ContainerizedIndicator>
       <cbc:TotalGoodsItemQuantity>1</cbc:TotalGoodsItemQuantity>
       <cbc:TotalPackagesQuantity>5</cbc:TotalPackagesQuantity>
@@ -122,7 +122,7 @@
     <cac:ShipmentStage>
       <cbc:TransportModeCode>1</cbc:TransportModeCode>
       <cac:TransportMeans>
-        <cbc:JourneyID> </cbc:JourneyID>
+        <cbc:JourneyID>TM1</cbc:JourneyID>
         <cbc:RegistrationNationalityID>EE</cbc:RegistrationNationalityID>
         <cac:MaritimeTransport>
           <cbc:VesselID>Eestiship</cbc:VesselID>

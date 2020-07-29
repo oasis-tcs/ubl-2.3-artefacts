@@ -86,11 +86,11 @@
 		</cac:PartyIdentification>
 	</cac:NotifierParty>
 	<cac:Shipment>
-		<cbc:ID></cbc:ID>
+		<cbc:ID>S1</cbc:ID>
 		<cbc:GrossWeightMeasure unitCode="KGM">1.5</cbc:GrossWeightMeasure>
 		<cbc:DeclaredStatisticsValueAmount currencyID="USD">250.00</cbc:DeclaredStatisticsValueAmount>
 		<cac:Consignment>
-			<cbc:ID></cbc:ID>
+			<cbc:ID>C1</cbc:ID>
 			<cbc:ContainerizedIndicator>0</cbc:ContainerizedIndicator>
 			<cbc:TotalGoodsItemQuantity>1</cbc:TotalGoodsItemQuantity>
 			<cbc:TotalPackagesQuantity>1</cbc:TotalPackagesQuantity>

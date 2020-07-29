@@ -95,7 +95,6 @@ xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
 						<cbc:ID>W123</cbc:ID>
 						<cbc:IssueDate>2016-11-02</cbc:IssueDate>
 						<cbc:DocumentTypeCode listAgencyID="306" listAgencyName="SMDG" listID="VGM">SM1</cbc:DocumentTypeCode>
-						<cbc:DocumentType/>
 						<cbc:DocumentDescription>Certificate for determination of VGM according to method 1</cbc:DocumentDescription>
 					</cac:DocumentReference>
 				</cac:VerifiedGrossMass>

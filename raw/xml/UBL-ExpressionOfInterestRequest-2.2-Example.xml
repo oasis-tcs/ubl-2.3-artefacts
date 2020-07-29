@@ -29,7 +29,6 @@ xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponent
         <cbc:StreetName>Korsbygade 34</cbc:StreetName>
         <cbc:CityName>Aalborg</cbc:CityName>
         <cbc:PostalZone>9000</cbc:PostalZone>
-        <cbc:CountrySubentity/>
         <cac:Country>
           <cbc:IdentificationCode>DK</cbc:IdentificationCode>
         </cac:Country>

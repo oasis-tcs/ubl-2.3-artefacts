@@ -20,7 +20,7 @@
   <!--override abieExtensions as "no" for UBL 2.2 and earlier-->
   <property name="abieExtensions" value="yes"/>
   <!--software timestamps-->
-  <property name="gc2obdndr" value="20200604-1750z"/>
+  <property name="gc2obdndr" value="20200604-1750z-modified"/>
   <property name="ods2obdgc" value="20200412-1320z"/>
   <property name="cvagcxsl"  value="20130416-0040z"/>
   <property name="cva2sch"   value="20130207-1940z"/>
@@ -97,6 +97,20 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   </copy>
 
   <!--create GC files for business and signature-->
+  <sequential if:set="skip-gc">
+    <copy preservelastmodified="true"
+          todir="${dir}"
+          file="UBL-Signature-Entities-${UBLversion}.gc"/>
+    <copy preservelastmodified="true"
+          todir="${dir}/${UBLstage}-${UBLversion}/mod/"
+          file="${dir}/UBL-Signature-Entities-${UBLversion}.gc"/>
+    <copy preservelastmodified="true"
+          todir="${dir}"
+          file="UBL-Entities-${UBLversion}.gc"/>
+    <copy preservelastmodified="true"
+          todir="${dir}/${UBLstage}-${UBLversion}/mod/"
+          file="${dir}/UBL-Entities-${UBLversion}.gc"/>
+  </sequential>
   <sequential unless:set="skip-gc">
     <delete file="${dir}/UBL-Signature-Entities-${UBLversion}.gc"/>
     <delete file="${dir}/UBL-Entities-${UBLversion}.gc"/>
@@ -221,7 +235,8 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
     <srcfiles dir="${dir}">
       <include name="UBL-Entities-${UBLversion}.gc"/>
       <include name="config-UBL.xml"/>
-      <include name="UBL-DefaultDTQ-shell.sch"/>
+      <include name="UBL-DefaultDTQ.sch"/>
+      <include name="UBL-DocumentConstraints-2.3.pattern.sch"/>
       <include name="UBL-CVA-Skeleton.cva"/>
     </srcfiles>
   </uptodate>
@@ -327,12 +342,18 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <include name="**"/>
     </fileset>
   </copy>
+  <copy todir="${dir}/${UBLstage}-${UBLversion}/cva">
+    <fileset dir=".">
+      <include name="UBL-DefaultDTQ-${UBLversion}.sch"/>
+      <include name="UBL-DocumentConstraints-${UBLversion}.pattern.sch"/>
+    </fileset>
+  </copy>
   <antcall target="-cva2xsl">
     <param name="okay"    value="xsd-okay"/>
     <param name="cvain"   value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.cva"/>
     <param name="cvaout"  value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.html"/>
     <param name="cvabase" value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}"/>
-    <param name="schin"   value="UBL-DefaultDTQ-shell.sch"/>
+    <param name="schin"   value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.sch"/>
     <param name="schadd"  value="${dir}/${UBLstage}-${UBLversion}/cva/UBL-DefaultDTQ-${UBLversion}.pattern.sch"/>
     <param name="xslout"  value="${dir}/${UBLstage}-${UBLversion}/val/UBL-DefaultDTQ-${UBLversion}.xsl"/>
   </antcall>
@@ -781,7 +802,6 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 <target name="-cva2xsl" unless="${okay}">
   <delete file="${cvaout}"/>
   <delete file="${xslout}"/>
-  <copy preservelastmodified="true" file="${schin}" todir="${dir}/${UBLstage}-${UBLversion}/cva"/>
   <echo message='Creating CVA documentation from "${cvain}" CVA file...'/>
   <java append="true" classname="com.icl.saxon.StyleSheet">
      <arg value="-o"/>
@@ -804,21 +824,19 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   </java>
   <java append="true" classname="com.icl.saxon.StyleSheet">
      <arg value="-o"/>
-     <arg value="${dir}/${UBLstage}-${UBLversion}/cva/${schin}.temp.sch"/>
-     <arg value="${dir}/${UBLstage}-${UBLversion}/cva/${schin}"/>
+     <arg value="${schin}.temp.sch"/>
+     <arg value="${schin}"/>
      <arg value="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"/>
   </java>
   <java append="true" classname="com.icl.saxon.StyleSheet">
      <arg value="-o"/>
      <arg value="${xslout}"/>
-     <arg value="${dir}/${UBLstage}-${UBLversion}/cva/${schin}.temp.sch"/>
+     <arg value="${schin}.temp.sch"/>
      <arg value="${utilitydir}Crane-cva2sch-${cva2sch}/utility/Message-Schematron-terminator.xsl"/>
   </java>
-  <delete file="${schadd}"/>
-  <delete file="${dir}/${UBLstage}-${UBLversion}/cva/${schin}"/>
-  <delete file="${dir}/${UBLstage}-${UBLversion}/cva/${schin}.temp.sch"/>
   <delete file="${cvain}.temp.xsl"/>
-  <echo message='Completed creating CVA/XSD artefacts'/>
+  <delete file="${schin}.temp.sch"/>
+  <echo message='Completed creating CVA/SCH/XSD artefacts'/>
 </target>
 
 <target name="-gc2html" unless="${okay}">

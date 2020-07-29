@@ -286,7 +286,7 @@
 <xsl:template name="gu:makeReport">
   <xsl:param name="common" as="xsd:boolean" required="yes"/>
   <xsl:param name="summary" as="xsd:boolean" required="yes"/>
-  <title>
+  <xsl:comment>
     <xsl:choose>
       <xsl:when test="$summary">Summary</xsl:when>
       <xsl:otherwise>Detailed</xsl:otherwise>
@@ -295,7 +295,7 @@
     <xsl:value-of select="if( $common ) then 'Library' else 'Document'"/>
     <xsl:text> Elements </xsl:text>
     <xsl:value-of select="$title-suffix"/>
-  </title>
+  </xsl:comment>
   <tgroup cols="{if( $summary ) then '3' else '20'}">
     <xsl:comment select="if( $common ) then 'Library' else 'Document',
                          $title-suffix"/>

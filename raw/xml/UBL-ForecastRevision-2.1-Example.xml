@@ -106,8 +106,8 @@
 		</cac:Party>
 	</cac:SellerSupplierParty>
 	<cac:ForecastRevisionLine>
-		<cbc:ID/>
-		<cbc:RevisedForecastLineID/>
+		<cbc:ID>FRL1</cbc:ID>
+		<cbc:RevisedForecastLineID>RFL1</cbc:RevisedForecastLineID>
 		<cbc:SourceForecastIssueDate>2005-02-17</cbc:SourceForecastIssueDate>
 		<cbc:SourceForecastIssueTime>10:00:00.000</cbc:SourceForecastIssueTime>
 		<cbc:AdjustmentReasonCode>REVISED_PROMOTION</cbc:AdjustmentReasonCode>

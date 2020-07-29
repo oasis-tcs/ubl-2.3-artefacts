@@ -86,8 +86,6 @@
 	</cac:ExportingGuarantorParty>
 	<cac:Shipment>
 		<cbc:ID>32453</cbc:ID>
-		<cbc:HandlingCode/>
-		<cbc:HandlingInstructions/>
 		<cbc:DeclaredStatisticsValueAmount currencyID="DKK">34800.00</cbc:DeclaredStatisticsValueAmount>
 		<cac:Consignment>
 			<cbc:ID>1</cbc:ID>
