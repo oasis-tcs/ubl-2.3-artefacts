@@ -212,31 +212,31 @@ The use of GitHub Actions is suitable for development but not for creating the f
 
 This artefacts-production process is performed first, followed by the hub-production process.
 
-### 6.1 Prepare configuration, identification, and invocation files
+### 8.1 Prepare configuration, identification, and invocation files
 
 These offline steps presume that the configuration and identification files in the repository already have been updated to the current stage information from having tested the generation of artefacts on GitHub Actions. See above "Preparing revision information".
 
 Also ensure that the invocation file `produce-UBL-schemas-2.3.sh` also has been updated with the appropriate revision information.
 
-### 6.2 Prepare raw static schema files
+### 8.2 Prepare raw static schema files
 
 There are eight schema fragments named `raw/xsd/common/U*.xsd` and the same three lines in each of the files must be manually edited to match the same three lines found in the configuration files. The configuration files are used for generated files but the static files must be manually edited.
 
-### 6.3 Establish the label to use for the build process
+### 8.3 Establish the label to use for the build process
 
 This label is used to identify the result of the build process. It can be as simple as "`test`" for intermediate results. For final distribution results it is a UTC date/time (Zulu time zone) and takes the format: `CCYYMMDD-HHMMz`
 
 For the integrity checking process to work properly, the same label needs to be used when creating the artefacts and then later when creating the hub document.
 
-### 6.4 Prepare the artefacts locally
+### 8.4 Prepare the artefacts locally
 
 The process presumes that the local copies of both the repositories for `ubl-2.3-artefacts` and `ubl-2.3-hub` have the same parent directory. By convention, in the following step use the subdirectory name `results` that will become a sibling to the two repository directories. Any name can be used, but the examples that follow assume `results/` is to be created.
 
 From the local artefacts repository directory, run the production process indicating the `local` platform and the label to be used also when generating the hub document:
 
-`sh produceUBLSchemas-2.3.sh ../results {platform} {label}`
-`sh produceUBLSchemas-2.3.sh ../results local test`
-`sh produceUBLSchemas-2.3.sh ../results local 20200511-1720z`
+- `sh produceUBLSchemas-2.3.sh ../results {platform} {label}`
+- `sh produceUBLSchemas-2.3.sh ../results local test`
+- `sh produceUBLSchemas-2.3.sh ../results local 20200511-1720z`
 
 When successful, continue with offline hub document production as documented in https://github.com/oasis-tcs/ubl-2.3-hub#readme
 
