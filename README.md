@@ -13,12 +13,12 @@ and other policies. While they make use of public GitHub repositories, these rep
 development of open source [licensed](https://www.oasis-open.org/resources/open-repositories/licenses) 
 content.
 
-## Description
+## 1. Description
 
 The build process in this repository creates the suite of artefacts to be included with the hub document 
 in the creation of the UBL 2.3 deliveries. The build process is triggered on every commit.
 
-## Contributions
+## 2. Contributions
 
 As stated in this repository's 
 [CONTRIBUTING](https://github.com/oasis-tcs/ubl-2.3-artefacts/blob/master/CONTRIBUTING.md) file, 
@@ -29,7 +29,7 @@ activity is invited to join as an OASIS TC Member. Public feedback is also accep
 subject to the terms of the 
 [OASIS Feedback License](https://www.oasis-open.org/policies-guidelines/ipr#appendixa). 
 
-## Licensing
+## 3. Licensing
 
 Please see the [LICENSE](https://github.com/oasis-tcs/ubl-2.3-artefacts/blob/master/LICENSE.md) file 
 for description of the license terms and OASIS policies applicable to the TC's work in this GitHub 
@@ -37,7 +37,7 @@ project. Content in this repository is intended to be part of the UBL TC's perma
 visible and freely available for all to use, subject to applicable OASIS policies, as presented in the 
 repository [LICENSE](https://github.com/oasis-tcs/ubl-2.3-artefacts/blob/master/LICENSE.md). 
 
-## Further Description of this Repository
+## 4. Further Description of this Repository
 
 Distributions for UBL 2.0 through 2.3 have comprised two main collections of information, the documentation and the artefacts.
 
@@ -88,6 +88,8 @@ To determine if the files are ready for sending to the project editors, look in 
 
 If there are no errors then the XSD schemas, JSON schemas, and HTML reports all will be generated and found in the ZIP file for your use in testing.
 
+## 5. Preparing revision information
+
 Each revision is described by the following configuration files:
 - target identification when converting ODS to genericode
   - [`ident-UBL.xml`]( ident-UBL.xml ) 
@@ -95,10 +97,11 @@ Each revision is described by the following configuration files:
 - XSD and JSON schema configuration
   - [`config-UBL.xml`]( config-UBL.xml )
     - IMPORTANT NOTE: there is version information in a comment at the top of this configuration file that, when changed, must be manually added to comments in the eight `UBL-*.xsd` XSD schema fragments found in the directory [`raw/xsd/common`]( raw/xsd/common )
-    - `  Library:           OASIS Universal Business Language (UBL) 2.3 *VERSION*`
-    - `                     http://docs.oasis-open.org/ubl/*VERSION*-UBL-2.3/`
+    - `  Library:           OASIS Universal Business Language (UBL) 2.3 *STAGE-UPPER-CASE*`
+    - `                     http://docs.oasis-open.org/ubl/*stage-lower-case*-UBL-2.3/`
     - `  Release Date:      *DATE*`
   - [`config-UBL-Signature.xml`]( config-UBL-Signature.xml )
+    - IMPORTANT NOTE: this file has the same version information as found in `config-UBL.xml` that needs to be updated as required
 - CVA master file for code list second-pass validation
   - [`UBL-CVA-Skeleton.cva`]( UBL-CVA-Skeleton.cva )
 - shell wrapper for generated CVA Schematron pattern
@@ -137,6 +140,8 @@ Comparisons to old versions of UBL are generated as DocBook files for inclusion 
 - [`UBL-Signature-Entities-2.3-csprd02.gc`]( UBL-Signature-Entities-2.3-csprd02.gc )
 - [`UBL-Entities-2.2.gc`]( UBL-Entities-2.2.gc )
 - [`UBL-Signature-Entities-2.2.gc`]( UBL-Signature-Entities-2.2.gc )
+
+## 6. Results
 
 Outputs:
 - document model spreadsheets as downloaded from Google
@@ -197,9 +202,43 @@ Note that in the archive directory are the files:
 - `artefacts.console.{label}.txt` - console log of the execution of the Ant build script
 - `artefacts.exitcode.{label}.txt` - exit code from the execution of the Ant build script
 
-## Housekeeping
+## 7. Housekeeping
 
 The return ZIP file is doubly-zipped, once on the web site to reduce storage costs (300Mb down to 30Mb), and once by GitHub to return the artefacts from the server. Once downloaded, please delete the download artefact off of GitHub to reduce storage costs.
+
+## 8. Offline use for production purposes by project editors
+
+The use of GitHub Actions is suitable for development but not for creating the final distribution. This needs to be performed offline so that the target directory of the artefacts and the target directory of the hub document are the same directory. This triggers the hub document creation also to perform integrity checks regarding missing artefact files referenced from the hub document XML.
+
+This artefacts-production process is performed first, followed by the hub-production process.
+
+### 6.1 Prepare configuration, identification, and invocation files
+
+These offline steps presume that the configuration and identification files in the repository already have been updated to the current stage information from having tested the generation of artefacts on GitHub Actions. See above "Preparing revision information".
+
+Also ensure that the invocation file `produce-UBL-schemas-2.3.sh` also has been updated with the appropriate revision information.
+
+### 6.2 Prepare raw static schema files
+
+There are eight schema fragments named `raw/xsd/common/U*.xsd` and the same three lines in each of the files must be manually edited to match the same three lines found in the configuration files. The configuration files are used for generated files but the static files must be manually edited.
+
+### 6.3 Establish the label to use for the build process
+
+This label is used to identify the result of the build process. It can be as simple as "`test`" for intermediate results. For final distribution results it is a UTC date/time (Zulu time zone) and takes the format: `CCYYMMDD-HHMMz`
+
+For the integrity checking process to work properly, the same label needs to be used when creating the artefacts and then later when creating the hub document.
+
+### 6.4 Prepare the artefacts locally
+
+The process presumes that the local copies of both the repositories for `ubl-2.3-artefacts` and `ubl-2.3-hub` have the same parent directory. By convention, in the following step use the subdirectory name `results` that will become a sibling to the two repository directories. Any name can be used, but the examples that follow assume `results/` is to be created.
+
+From the local artefacts repository directory, run the production process indicating the `local` platform and the label to be used also when generating the hub document:
+
+`sh produceUBLSchemas-2.3.sh ../results {platform} {label}`
+`sh produceUBLSchemas-2.3.sh ../results local test`
+`sh produceUBLSchemas-2.3.sh ../results local 20200511-1720z`
+
+When successful, continue with offline hub document production as documented in https://github.com/oasis-tcs/ubl-2.3-hub#readme
 
 ## Contact
 

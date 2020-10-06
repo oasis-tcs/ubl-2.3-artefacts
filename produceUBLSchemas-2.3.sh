@@ -1,12 +1,12 @@
 #!/bin/bash
 
-if [ "$3" = "" ]; then echo Missing results directory, platform, and dateZ arguments ; exit 1 ; fi
+if [ "$3" = "" ]; then echo Missing results directory, platform, and label arguments ; exit 1 ; fi
 
 # Configuration parameters
 
 export targetdir="$1"
 export platform=$2
-export version=$3
+export label=$3
 export title="UBL 2.3"
 export package=UBL-2.3
 export UBLversion=2.3

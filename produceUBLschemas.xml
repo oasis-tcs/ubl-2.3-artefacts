@@ -43,7 +43,7 @@
   <echo message="UBLprevStage=${UBLprevStage}"/>
   <echo message="UBLprevVersion=${UBLprevVersion}"/>
   <echo message="abieExtensions=${abieExtensions}"/>
-  <echo message="version=${version}"/>
+  <echo message="label=${label}"/>
   <echo message="libraryGoogle=${libraryGoogle}"/>
   <echo message="documentsGoogle=${documentsGoogle}"/>
   <echo message="signatureGoogle=${signatureGoogle}"/>
@@ -851,7 +851,7 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="-o:${dir}/${UBLstage}-${UBLversion}/mod/summary/reports/junk.out"/>
      <arg value="all-documents-base-name=${alldocsname}"/>
      <arg value="title-prefix=${title} ${UBLstage}"/>
-     <arg value="date-time=${version}"/>
+     <arg value="date-time=${label}"/>
      <arg value="parallel-group-index=${group}"/>
      <arg value="parallel-group-count=${parallelGroupCount}"/>
      <arg value="common-library-singleton-model-name=${library}"/>
@@ -968,21 +968,21 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 </target>
 
 <target name="-package">
-  <delete dir="${dir}/artefacts-${package}-${UBLstage}-${version}"/>
-  <mkdir dir="${dir}/artefacts-${package}-${UBLstage}-${version}"/>
-  <copy preservelastmodified="true" todir="${dir}/artefacts-${package}-${UBLstage}-${version}">
+  <delete dir="${dir}/artefacts-${package}-${UBLstage}-${label}"/>
+  <mkdir dir="${dir}/artefacts-${package}-${UBLstage}-${label}"/>
+  <copy preservelastmodified="true" todir="${dir}/artefacts-${package}-${UBLstage}-${label}">
     <fileset dir="${dir}/${UBLstage}-${UBLversion}">
      <include name="**"/>
     </fileset>
   </copy>
-  <touch if:set="skip-gc" file="${dir}/artefacts-${package}-${UBLstage}-${version}/GC-FILES-NOT-REGENERATED.txt"/>
-  <touch if:set="skip-spreadsheet-generation" file="${dir}/artefacts-${package}-${UBLstage}-${version}/ODS-XLS-FILES-NOT-GENERATED.txt"/>
-  <touch if:set="skip-html-generation" file="${dir}/artefacts-${package}-${UBLstage}-${version}/HTML-FILES-NOT-GENERATED.txt"/>
-  <mkdir dir="${dir}/artefacts-${package}-${UBLstage}-${version}/archive-only-not-in-final-distribution"/>
-  <mkdir dir="${dir}/artefacts-${package}-${UBLstage}-${version}/archive-only-not-in-final-distribution/json"/>
-  <mkdir dir="${dir}/artefacts-${package}-${UBLstage}-${version}/archive-only-not-in-final-distribution/json/val"/>
+  <touch if:set="skip-gc" file="${dir}/artefacts-${package}-${UBLstage}-${label}/GC-FILES-NOT-REGENERATED.txt"/>
+  <touch if:set="skip-spreadsheet-generation" file="${dir}/artefacts-${package}-${UBLstage}-${label}/ODS-XLS-FILES-NOT-GENERATED.txt"/>
+  <touch if:set="skip-html-generation" file="${dir}/artefacts-${package}-${UBLstage}-${label}/HTML-FILES-NOT-GENERATED.txt"/>
+  <mkdir dir="${dir}/artefacts-${package}-${UBLstage}-${label}/archive-only-not-in-final-distribution"/>
+  <mkdir dir="${dir}/artefacts-${package}-${UBLstage}-${label}/archive-only-not-in-final-distribution/json"/>
+  <mkdir dir="${dir}/artefacts-${package}-${UBLstage}-${label}/archive-only-not-in-final-distribution/json/val"/>
   <copy preservelastmodified="true"  includeEmptyDirs="false"
-       todir="${dir}/artefacts-${package}-${UBLstage}-${version}/archive-only-not-in-final-distribution">
+       todir="${dir}/artefacts-${package}-${UBLstage}-${label}/archive-only-not-in-final-distribution">
     <fileset dir=".">
       <include name="**"/>
       <exclude name="**/.git/**"/>
@@ -992,25 +992,25 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
       <exclude name="**/${dir}/**"/>
     </fileset>
   </copy>
-  <move preservelastmodified="true" includeEmptyDirs="false" todir="${dir}/artefacts-${package}-${UBLstage}-${version}/archive-only-not-in-final-distribution">
+  <move preservelastmodified="true" includeEmptyDirs="false" todir="${dir}/artefacts-${package}-${UBLstage}-${label}/archive-only-not-in-final-distribution">
     <fileset dir="${dir}">
       <include name="*"/>
       <exclude name="artefacts.*.txt"/>
     </fileset>
   </move>
-  <move preservelastmodified="true" todir="${dir}/artefacts-${package}-${UBLstage}-${version}/archive-only-not-in-final-distribution/json">
-    <fileset dir="${dir}/artefacts-${package}-${UBLstage}-${version}">
+  <move preservelastmodified="true" todir="${dir}/artefacts-${package}-${UBLstage}-${label}/archive-only-not-in-final-distribution/json">
+    <fileset dir="${dir}/artefacts-${package}-${UBLstage}-${label}">
       <include name="json/**"/>
       <include name="json-schema/**"/>
     </fileset>
   </move>
-  <move preservelastmodified="true" todir="${dir}/artefacts-${package}-${UBLstage}-${version}/archive-only-not-in-final-distribution/json/val">
-    <fileset dir="${dir}/artefacts-${package}-${UBLstage}-${version}/val">
+  <move preservelastmodified="true" todir="${dir}/artefacts-${package}-${UBLstage}-${label}/archive-only-not-in-final-distribution/json/val">
+    <fileset dir="${dir}/artefacts-${package}-${UBLstage}-${label}/val">
       <include name="*json*"/>
     </fileset>
   </move>
-  <move preservelastmodified="true" todir="${dir}/artefacts-${package}-${UBLstage}-${version}/archive-only-not-in-final-distribution">
-    <fileset dir="${dir}/artefacts-${package}-${UBLstage}-${version}">
+  <move preservelastmodified="true" todir="${dir}/artefacts-${package}-${UBLstage}-${label}/archive-only-not-in-final-distribution">
+    <fileset dir="${dir}/artefacts-${package}-${UBLstage}-${label}">
       <include name="master-code-list-*.xml"/>
     </fileset>
   </move>
@@ -1024,17 +1024,17 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 <!--
     Cannot create zip until console log and error exit files added to archive. 
     
-  <delete file="${dir}/artefacts-${package}-${UBLstage}-${version}.zip"/>
+  <delete file="${dir}/artefacts-${package}-${UBLstage}-${label}.zip"/>
 
-  <zip destfile="${dir}/artefacts-${package}-${UBLstage}-${version}.zip"
-       basedir="${dir}" includes="artefacts-${package}-${UBLstage}-${version}/**"/>
-  <delete dir="${dir}/artefacts-${package}-${UBLstage}-${version}"/>
-  <unzip src="${dir}/artefacts-${package}-${UBLstage}-${version}.zip" 
+  <zip destfile="${dir}/artefacts-${package}-${UBLstage}-${label}.zip"
+       basedir="${dir}" includes="artefacts-${package}-${UBLstage}-${label}/**"/>
+  <delete dir="${dir}/artefacts-${package}-${UBLstage}-${label}"/>
+  <unzip src="${dir}/artefacts-${package}-${UBLstage}-${label}.zip" 
          dest="${dir}" />
 -->
   <!--documentation-->
   <echo message="stage=${UBLstage}"/>
-  <echo message="version=${version}"/>
+  <echo message="label=${label}"/>
   
 </target>
 
