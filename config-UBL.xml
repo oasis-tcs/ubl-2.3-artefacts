@@ -4,15 +4,15 @@
 <!--
   This is the configuration of the base schema fragments for UBL 2.3
  
-  Library:           OASIS Universal Business Language (UBL) 2.3 CSPRD03
-                     http://docs.oasis-open.org/ubl/csprd03-UBL-2.3/
-  Release Date:      10 April 2020
+  Library:           OASIS Universal Business Language (UBL) 2.3 CSD04
+                     http://docs.oasis-open.org/ubl/csd04-UBL-2.3/
+  Release Date:      18 November 2020
   
 -->
-<!ENTITY copyrightYear        "2020">
-<!ENTITY versionDate "10 April 2020">
-<!ENTITY versionDisplay "2.3 CSPRD03">
-<!ENTITY versionDirectory   "csprd03-UBL-2.3">
+<!ENTITY copyrightYear           "2020">
+<!ENTITY versionDate "18 November 2020">
+<!ENTITY versionDisplay "2.3 CSD04">
+<!ENTITY versionDirectory   "csd04-UBL-2.3">
 ]>
 <configuration xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ndr>
