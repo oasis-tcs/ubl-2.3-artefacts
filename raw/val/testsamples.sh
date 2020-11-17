@@ -1,5 +1,6 @@
 sh validate.sh ../xsdrt/maindoc/UBL-TransportationStatus-2.3.xsd ../xml/MyTransportationStatus.xml
 sh validate.sh ../xsdrt/maindoc/UBL-BusinessCard-2.3.xsd ../xml/UBL-BusinessCard-2.2-Example.xml
+sh validate.sh ../xsdrt/maindoc/UBL-CommonTransportationReport-2.3.xsd ../xml/UBL-CommonTransportationReport-2.3-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-CreditNote-2.3.xsd ../xml/UBL-CreditNote-2.0-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-CreditNote-2.3.xsd ../xml/UBL-CreditNote-2.1-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-DebitNote-2.3.xsd ../xml/UBL-DebitNote-2.1-Example.xml
@@ -32,6 +33,8 @@ sh validate.sh ../xsdrt/maindoc/UBL-Invoice-2.3.xsd ../xml/UBL-Invoice-2.0-Examp
 sh validate.sh ../xsdrt/maindoc/UBL-Invoice-2.3.xsd ../xml/UBL-Invoice-2.0-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-Invoice-2.3.xsd ../xml/UBL-Invoice-2.1-Example-Trivial.xml
 sh validate.sh ../xsdrt/maindoc/UBL-Invoice-2.3.xsd ../xml/UBL-Invoice-2.1-Example.xml
+sh validate.sh ../xsdrt/maindoc/UBL-Manifest-2.3.xsd ../xml/UBL-Manifest-2.3-Example-Reference-Only.xml
+sh validate.sh ../xsdrt/maindoc/UBL-Manifest-2.3.xsd ../xml/UBL-Manifest-2.3-Example-Shipment.xml
 sh validate.sh ../xsdrt/maindoc/UBL-Order-2.3.xsd ../xml/UBL-Order-2.0-Example-International.xml
 sh validate.sh ../xsdrt/maindoc/UBL-Order-2.3.xsd ../xml/UBL-Order-2.0-Example.xml
 sh validate.sh ../xsdrt/maindoc/UBL-Order-2.3.xsd ../xml/UBL-Order-2.1-Example.xml
