@@ -208,7 +208,7 @@ The return ZIP file is doubly-zipped, once on the web site to reduce storage cos
 
 ## 8. Offline use for production purposes by project editors
 
-The use of GitHub Actions is suitable for development but not for creating the final distribution. This needs to be performed offline so that the target directory of the artefacts and the target directory of the hub document are the same directory. This triggers the hub document creation also to perform integrity checks regarding missing artefact files referenced from the hub document XML.
+The use of GitHub Actions is suitable for development and also as a first step for creating the final distribution. See the hub documentation [readme](https://github.com/oasis-tcs/ubl-2.3-hub#readme) regarding the steps to take after completing the GitHub action for the artefacts. Hub document creation performs integrity checks regarding missing artefact files referenced from the hub document XML.
 
 This artefacts-production process is performed first, followed by the hub-production process.
 
@@ -226,9 +226,9 @@ There are eight schema fragments named `raw/xsd/common/U*.xsd` and the same thre
 
 This label is used to identify the result of the build process. It can be as simple as "`test`" for intermediate results. For final distribution results it is a UTC date/time (Zulu time zone) and takes the format: `CCYYMMDD-HHMMz`
 
-For the integrity checking process to work properly, the same label needs to be used when creating the artefacts and then later when creating the hub document.
+For the integrity checking process to work properly, the same label needs to be used when creating the artefacts and then later when creating the hub document. GitHub uses its own real-time label and so the hub document [readme](https://github.com/oasis-tcs/ubl-2.3-hub#readme) file has instructions regarding renaming this file appropriately.
 
-### 8.4 Prepare the artefacts locally
+### 8.4 When preparing the artefacts locally
 
 The process presumes that the local copies of both the repositories for `ubl-2.3-artefacts` and `ubl-2.3-hub` have the same parent directory. By convention, in the following step use the subdirectory name `results` that will become a sibling to the two repository directories. Any name can be used, but the examples that follow assume `results/` is to be created.
 
