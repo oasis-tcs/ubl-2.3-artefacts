@@ -301,15 +301,15 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
   <sequential unless:set="processFailed">
     <!--prepare other artefacts-->
     <antcall target="-artefacts"/>
-    
-    <!--prepare reports-->
-    <antcall target="-reports"/>
 
     <!--check code lists-->
     <antcall target="-codelists"/>
 
     <!--check samples-->
     <antcall target="-samples"/>
+    
+    <!--prepare reports-->
+    <antcall target="-reports"/>
   </sequential>
   
   <!--package it all up-->

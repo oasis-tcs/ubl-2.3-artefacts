@@ -10,8 +10,7 @@
 	<!-- Submitter's reference number -->
 	<cbc:IssueDate>2013-05-08</cbc:IssueDate>
 	<cbc:IssueTime>10:15:00+02:00</cbc:IssueTime>
-	<cbc:DocumentStatusCode>1</cbc:DocumentStatusCode>
-	<!-- = Not Confirmed -->
+	<cbc:DocumentStatusCode>NotConfirmed</cbc:DocumentStatusCode>
 	<cbc:VersionID>1</cbc:VersionID>
 	<cac:ReporterParty>
 		<cac:PartyIdentification>
@@ -65,7 +64,7 @@
 	<cac:Shipment>
 		<cac:Consignment>
 			<cbc:ID schemeAgencyName="GS1" schemeName="GINC">7365566156191234567</cbc:ID>
-			<cbc:GrossWeightMeasure unitCode="kg">600</cbc:GrossWeightMeasure>
+			<cbc:GrossWeightMeasure unitCode="KGM">600</cbc:GrossWeightMeasure>
 			<cbc:TotalGoodsItemQuantity>1500</cbc:TotalGoodsItemQuantity>
 			<cbc:TotalTransportHandlingUnitQuantity>2</cbc:TotalTransportHandlingUnitQuantity>
 			<cac:PlannedPickupTransportEvent>

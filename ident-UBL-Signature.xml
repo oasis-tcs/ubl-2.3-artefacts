@@ -1,6 +1,6 @@
 <!DOCTYPE Identification [
-<!ENTITY short "CSDPRD03">
-<!ENTITY dir   "csdprd03">
+<!ENTITY short "CSD04">
+<!ENTITY dir   "csd04">
 ]>
 <Identification>
   <ShortName>UBL-2.3-Sig-&short;</ShortName>
