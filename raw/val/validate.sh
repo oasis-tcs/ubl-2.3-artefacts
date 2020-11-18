@@ -1,6 +1,10 @@
 # Default UBL 2 two-phase validation for linux
-#
-# Syntax: validate ubl-schema-file ubl-xml-file
+
+if [ "$2" == "" ] || [ "$3" != "" ]
+then
+echo Usage: sh validate.sh ubl-schema-file ubl-xml-file
+exit 1
+fi
 
 DP0=$( cd "$(dirname "$0")" ; pwd -P )
 echo

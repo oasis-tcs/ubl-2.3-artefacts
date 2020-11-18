@@ -1,7 +1,12 @@
 @echo off
 rem Default UBL 2 two-phase validation for XP
-rem
-rem Syntax: validate ubl-schema-file ubl-xml-file
+
+if "a%~2" == "a" goto :usage
+if "a%~3" == "a" goto :ready
+:usage
+echo Usage: validate.bat  ubl-schema-file  ubl-xml-file
+exit /B 1
+:ready
 
 echo.
 echo ############################################################
