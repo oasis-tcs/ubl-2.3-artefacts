@@ -1,4 +1,4 @@
-if [ "$3" == "" ] || [ "$4" != "" ]
+if [ "$3" = "" ] || [ "$4" != "" ]
 then
 echo Usage: sh xslt.sh xml-file xslt-file output-file
 exit 1

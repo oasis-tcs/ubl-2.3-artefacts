@@ -1,4 +1,4 @@
-if [ "$2" == "" ] || [ "$3" != "" ]
+if [ "$2" = "" ] || [ "$3" != "" ]
 then
 echo Usage: sh w3cschema.sh schema-file xml-file
 exit 1

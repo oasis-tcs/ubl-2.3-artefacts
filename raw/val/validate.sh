@@ -1,6 +1,6 @@
 # Default UBL 2 two-phase validation for linux
 
-if [ "$2" == "" ] || [ "$3" != "" ]
+if [ "$2" = "" ] || [ "$3" != "" ]
 then
 echo Usage: sh validate.sh ubl-schema-file ubl-xml-file
 exit 1
