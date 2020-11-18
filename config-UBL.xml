@@ -6,11 +6,11 @@
  
   Library:           OASIS Universal Business Language (UBL) 2.3 CSD04
                      http://docs.oasis-open.org/ubl/csd04-UBL-2.3/
-  Release Date:      18 November 2020
+  Release Date:      25 November 2020
   
 -->
 <!ENTITY copyrightYear           "2020">
-<!ENTITY versionDate "18 November 2020">
+<!ENTITY versionDate "25 November 2020">
 <!ENTITY versionDisplay "2.3 CSD04">
 <!ENTITY versionDirectory   "csd04-UBL-2.3">
 ]>
