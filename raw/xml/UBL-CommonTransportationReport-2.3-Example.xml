@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CommonTransportationReport xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonTransportationReport-2">
+<CommonTransportationReport
+	xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonTransportationReport-2"
+	xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+	xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
 	<cbc:UBLVersionID>2.1</cbc:UBLVersionID>
 	<cbc:CustomizationID>Common Framework</cbc:CustomizationID>
 	<cbc:ProfileID>ENS</cbc:ProfileID>
@@ -127,15 +130,14 @@
 			<cac:TransitCountry>
 				<cbc:IdentificationCode>AT</cbc:IdentificationCode>
 			</cac:TransitCountry>
-			
 
-				
+
+
 			<!-- Details of the transport leg/shipment stage which brings the cargo into the EU -->
-			<cac:MainCarriageShipmentStage>				
-				<!-- = Maritime -->				
+			<cac:MainCarriageShipmentStage>
+				<!-- = Maritime -->
 				<cbc:ShipmentStageTypeCode>1</cbc:ShipmentStageTypeCode>
 				<cbc:TransportModeCode>1</cbc:TransportModeCode>
-				<cbc:SequenceNumeric>1</cbc:SequenceNumeric>
 				<cac:TransportMeans>
 					<cbc:JourneyID>00344</cbc:JourneyID>
 					<cbc:RegistrationNationalityID>IT</cbc:RegistrationNationalityID>
@@ -144,7 +146,7 @@
 						<cbc:VesselName>Vessel Name</cbc:VesselName>
 					</cac:MaritimeTransport>
 				</cac:TransportMeans>
-				
+
 				<cac:EstimatedArrivalTransportEvent>
 					<cbc:OccurrenceDate>2013-05-25</cbc:OccurrenceDate>
 					<cbc:OccurrenceTime>18:00:00+01:00</cbc:OccurrenceTime>
@@ -159,8 +161,8 @@
 						</cac:Address>
 					</cac:Location>
 				</cac:EstimatedArrivalTransportEvent>
-				
-				
+
+
 			</cac:MainCarriageShipmentStage>
 			<cac:TransportHandlingUnit>
 				<cbc:ID>CON_THU_1</cbc:ID>
@@ -245,29 +247,29 @@
 						</cac:Item>
 					</cac:GoodsItem>
 				</cac:TransportEquipment>
-			</cac:TransportHandlingUnit>				
-				<!-- First Port of Arrival into Community -->
-				<cac:FirstArrivalPortLocation>
-					<cbc:ID schemeName="UNLOCODE">ITGOA</cbc:ID>
-					<!-- 41 = "Consignment entry customs office location -->
-					<cbc:LocationTypeCode>41</cbc:LocationTypeCode>
-					<cac:Address>
-						<cac:Country>
-							<cbc:IdentificationCode>IT</cbc:IdentificationCode>
-						</cac:Country>
-					</cac:Address>
-				</cac:FirstArrivalPortLocation>
-				<!-- Customs Office of Subsequent Entry -->
-				<cac:OfficeOfEntryLocation>
-					<cbc:ID>DE000396</cbc:ID>
-					<!-- 41 = "Consignment entry customs office location -->
-					<cbc:LocationTypeCode>41</cbc:LocationTypeCode>
-					<cac:Address>
-						<cac:Country>
-							<cbc:IdentificationCode>DE</cbc:IdentificationCode>
-						</cac:Country>
-					</cac:Address>
-				</cac:OfficeOfEntryLocation>			
+			</cac:TransportHandlingUnit>
+			<!-- First Port of Arrival into Community -->
+			<cac:FirstArrivalPortLocation>
+				<cbc:ID schemeName="UNLOCODE">ITGOA</cbc:ID>
+				<!-- 41 = "Consignment entry customs office location -->
+				<cbc:LocationTypeCode>41</cbc:LocationTypeCode>
+				<cac:Address>
+					<cac:Country>
+						<cbc:IdentificationCode>IT</cbc:IdentificationCode>
+					</cac:Country>
+				</cac:Address>
+			</cac:FirstArrivalPortLocation>
+			<!-- Customs Office of Subsequent Entry -->
+			<cac:OfficeOfEntryLocation>
+				<cbc:ID>DE000396</cbc:ID>
+				<!-- 41 = "Consignment entry customs office location -->
+				<cbc:LocationTypeCode>41</cbc:LocationTypeCode>
+				<cac:Address>
+					<cac:Country>
+						<cbc:IdentificationCode>DE</cbc:IdentificationCode>
+					</cac:Country>
+				</cac:Address>
+			</cac:OfficeOfEntryLocation>
 		</cac:Consignment>
 	</cac:Shipment>
 	<cac:DocumentReference>
