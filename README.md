@@ -83,7 +83,7 @@ Two examples of the use of temporary files in a DOS script are:
 To determine if the files are ready for sending to the project editors, look in the results in the `archive-only-not-in-final-distribution` directory for these files summarizing any problems with the submission:
 - `artefacts.exitcode.{label}.txt` - exit code from the execution of the Ant build script
 - `artefacts.console.{label}.txt` - console log of the execution of the Ant build script
-- `check-ubl-2.3-github-ubl-2.3-csprd02.html` - report of differences UBL 2.3 CSPRD03 to CSPRD02
+- `check-ubl-2.3-github-ubl-2.3-csd03.html` - report of differences UBL 2.3 CSD04 to CSD03
 - `check-ubl-2.3-github-ubl-2.2.html` - report of differences UBL 2.3 CSPRD03 to UBL 2.2
 
 If there are no errors then the XSD schemas, JSON schemas, and HTML reports all will be generated and found in the ZIP file for your use in testing.
@@ -113,6 +113,16 @@ Each revision is described by the following configuration files:
 - documentary ODS template skeleton for generating spreadsheet results
   - [`skeletonDisplayEditSubset.ods`]( skeletonDisplayEditSubset.ods )
 
+Comparisons to old versions of UBL are generated as DocBook files for inclusion in the hub document. These old versions are the final genericode models for the particular version being compared. They have to be retrieved from the previous distribution and renamed to have their stage added to the name. So, for UBL 2.3 cs01 the comparisons are to:
+- [`UBL-Entities-2.3-csd04.gc`]( UBL-Entities-2.3-csd04.gc )
+- [`UBL-Signature-Entities-2.3-csd04.gc`]( UBL-Signature-Entities-2.3-csd04.gc )
+- [`UBL-Entities-2.2.gc`]( UBL-Entities-2.2.gc )
+- [`UBL-Signature-Entities-2.2.gc`]( UBL-Signature-Entities-2.2.gc )
+
+Before the process runs, the spreadsheets on Google should reflect the new stage string in the spreadsheet name. Examples:
+- UBL 2.3 Library Elements Spreadsheet - CS01 master
+- UBL 2.3 Document Elements Spreadsheet - CS01 master
+
 Installed software requirements invoked from Ant script using `exec`:
 - `soffice` - LibreOffice, OpenOffice, or equivalent
 - `aspell` - spell checker
@@ -135,12 +145,6 @@ Subdirectories:
   - [`raw/xsd`]( raw/xsd ) - hand-authored XML Schema fragments
 - [`utilities`]( utilities ) - tools used to generate outputs
 
-Comparisons to old versions of UBL are generated as DocBook files for inclusion in the hub document. These old versions are the final genericode models for the particular version being compared. So, for UBL 2.3 csprd03 the comparisons are to:
-- [`UBL-Entities-2.3-csprd02.gc`]( UBL-Entities-2.3-csprd02.gc )
-- [`UBL-Signature-Entities-2.3-csprd02.gc`]( UBL-Signature-Entities-2.3-csprd02.gc )
-- [`UBL-Entities-2.2.gc`]( UBL-Entities-2.2.gc )
-- [`UBL-Signature-Entities-2.2.gc`]( UBL-Signature-Entities-2.2.gc )
-
 ## 6. Results
 
 Outputs:
@@ -149,13 +153,13 @@ Outputs:
   - `UBL-Library-Google.ods`
   - `UBL-Signature-Google.ods`
 - model check of naming and design rules against previous release of 2.3 and against 2.2
-  - `check-ubl-2.3-*-ubl-2.3-csprd02.html`
+  - `check-ubl-2.3-*-ubl-2.3-csd04.html`
   - `check-ubl-2.3-*-ubl-2.2.html`
 - model check of naming and design rules for the signature extension
   - `check-ubl-signature-2.3-*.html`
 - differences between versions of document models expressed as DocBook for inclusion in the hub document
-  - `old2newDocBook-UBL-2.3-*-UBL-2.3-csprd02-documents-ent.xml`
-  - `old2newDocBook-UBL-2.3-*-UBL-2.3-csprd02-library-ent.xml`
+  - `old2newDocBook-UBL-2.3-*-UBL-2.3-csd04-documents-ent.xml`
+  - `old2newDocBook-UBL-2.3-*-UBL-2.3-csd04-library-ent.xml`
   - `old2newDocBook-UBL-2.3-*-UBL-2.2-documents-ent.xml`
   - `old2newDocBook-UBL-2.3-*-UBL-2.2-library-ent.xml`
   - `old2newDocBook-UBL-Signature-documents-ent.xml`

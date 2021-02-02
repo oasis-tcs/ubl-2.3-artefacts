@@ -21,7 +21,7 @@
   <property name="abieExtensions" value="yes"/>
   <!--software timestamps-->
   <property name="gc2obdndr" value="20200604-1750z-modified"/>
-  <property name="ods2obdgc" value="20200412-1320z"/>
+  <property name="ods2obdgc" value="20200809-0140z"/>
   <property name="cvagcxsl"  value="20130416-0040z"/>
   <property name="cva2sch"   value="20130207-1940z"/>
   <property name="gc2odsxml" value="20170727-0220z"/>
@@ -708,6 +708,9 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
 <target name="-gc2ndr-check-only" unless="${okay}">
   <echo message='Checking "${source}" GC file against NDR and old "${compare}" to create "${report}"...'/>
   <echo message="Fail setting = ${fatal}"/>
+  <available property="oldGCavailable" file="${compare}"/>
+  <echo unless:set="oldGCavailable" file="${dir}/${UBLstage}-${UBLversion}/MISSING-COMPARISON-GC-FILE.txt"
+        message="${compare}"/>
   <touch file="${dir}/${words}"/>
   <property name="words-uri" location="${dir}/${words}"/>
   <property name="dict-uri" location="${dir}/spellcheck-UBL.txt"/>
@@ -728,6 +731,16 @@ file="${utilitydir}Crane-cva2sch-${cva2sch}/utility/iso_schematron_assembly.xsl"
      <arg value="--suppressXsltNamespaceCheck:on"/>
      <arg value="errors-are-fatal=${fatal}"/>
   </java>
+  <condition property="reportCheck">
+    <and>
+      <equals arg1="${fatal}" arg2="yes"/>
+      <isset property="returnCheck"/>
+      <not>
+        <equals arg1="${returnCheck}" arg2="0"/>
+      </not>
+    </and>
+  </condition>
+  <touch if:set="reportCheck" file="${dir}/${UBLstage}-${UBLversion}/NDR-CHECK-WARNING.txt"/>
   <echo message="Spell-checking the resulting word list into ${dir}/unexpectedWords.txt (run aspell -l EN -p ${dict-uri} check ${words-uri} if abend)..."/>
   <exec resultproperty="returnSpell" executable="sh">
     <arg value="-e"/>
